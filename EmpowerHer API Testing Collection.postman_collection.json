@@ -1,0 +1,2295 @@
+{
+	"info": {
+		"_postman_id": "6810a170-2427-459e-a477-2e4feeaf4d93",
+		"name": "EmpowerHer API Testing Collection",
+		"description": "A comprehensive collection of API requests for testing all routes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18206263"
+	},
+	"item": [
+		{
+			"name": "Static Pages",
+			"item": [
+				{
+					"name": "create content_static_page",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjYzODk1MzIsImV4cCI6MTcyNjM5MzEzMn0.j-ZJ7QCQcoeGbOEQeTKjT7wyraIrC6ONaU86wF3IJlY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"key\": \"home\",\n  \"image\": \"https://example.com/home.jpg\",\n  \"title\": \"Welcome to Empower Her\",\n  \"description\": \"Empowering women through education and collaboration.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/content_static_pages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"content_static_pages"
+							]
+						},
+						"description": "Add a new static page"
+					},
+					"response": []
+				},
+				{
+					"name": "content-static-page/:key",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjYzODk1MzIsImV4cCI6MTcyNjM5MzEzMn0.j-ZJ7QCQcoeGbOEQeTKjT7wyraIrC6ONaU86wF3IJlY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/content_static_pages/home",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"content_static_pages",
+								"home"
+							]
+						},
+						"description": "Retrieve details of a specific static page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "content-static-page/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjYzODk1MzIsImV4cCI6MTcyNjM5MzEzMn0.j-ZJ7QCQcoeGbOEQeTKjT7wyraIrC6ONaU86wF3IJlY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"key\": \"home\",\n  \"image\": \"https://example.com/home.jpg\",\n  \"title\": \"Welcome to Empower Her\",\n  \"description\": \"Empowering women through education and collaboration.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/content_static_pages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"content_static_pages"
+							]
+						},
+						"description": "Update the details of an existing static page"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Team",
+			"item": [
+				{
+					"name": "All Teams",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/team",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"team"
+							]
+						},
+						"description": "Retrieve a list of all team members"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Team",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"John Doe\",\n  \"position\": \"Developer\",\n  \"description\": \"John is a software developer with 5 years of experience.\",\n  \"image\":\"https://example.com/home.jpg\",\n  \"is_active\":false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/team",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"team"
+							]
+						},
+						"description": "Add a new team member"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Team By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/team/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"team",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific team member by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Team {id}",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \n  \"is_active\":true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/team/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"team",
+								"2"
+							]
+						},
+						"description": "Update the details of an existing team member"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Team {id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/team/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"team",
+								"1"
+							]
+						},
+						"description": "Delete a specific team member by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Involved Programs",
+			"item": [
+				{
+					"name": "All get_involved_programs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/get_involved_programs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"get_involved_programs"
+							]
+						},
+						"description": "Retrieve a list of all Get Involved programs"
+					},
+					"response": []
+				},
+				{
+					"name": "create get_involved_programs",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"icon\": \"https://example.com/icon.png\",\n  \"title\": \"Volunteer Program\",\n  \"description\": \"Join our efforts to make a difference.\",\n  \"is_active\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/get_involved_programs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"get_involved_programs"
+							]
+						},
+						"description": "Add a new Get Involved program"
+					},
+					"response": []
+				},
+				{
+					"name": "get by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/get_involved_programs/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"get_involved_programs",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific Get Involved program by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update get_involved_programs/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"icon\":\"https://example.com/icon.png\",\n  \"title\":\"Volunteer Program\",\n  \"description\":\"Join our efforts to make a differencew.\",\n  \"is_active\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/get_involved_programs/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"get_involved_programs",
+								"1"
+							]
+						},
+						"description": "Update the details of an existing Get Involved program"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete get_involved_programs/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/get_involved_programs/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"get_involved_programs",
+								"1"
+							]
+						},
+						"description": "Delete a specific Get Involved program by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Discover Her Content",
+			"item": [
+				{
+					"name": "get all discover_her_content",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/discover_her_content",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"discover_her_content"
+							]
+						},
+						"description": "Retrieve a list of all Discover Her content"
+					},
+					"response": []
+				},
+				{
+					"name": "create discover_her_content",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"category\": \"tools\",\n  \"header_file\": \"https://example.com/image.png\",\n  \"title\": \"Empowering Women in Tech\",\n  \"description\": \"An article discussing the rise of women in the tech industry.\",\n  \"is_active\": true,\n  \"date\": \"2023-09-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/discover_her_content",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"discover_her_content"
+							]
+						},
+						"description": "Add new Discover Her content"
+					},
+					"response": []
+				},
+				{
+					"name": "get discover_her_content by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/discover_her_content/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"discover_her_content",
+								"1"
+							]
+						},
+						"description": "Retrieve details of specific Discover Her content by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update discover_her_content by{id}",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"category\": \"articled\",\n  \"header_file\": \"https://example.com/image.png\",\n  \"title\": \"Empowering Women in Tech\",\n  \"description\": \"An article discussing the rise of women in the tech industry.\",\n  \"is_active\": true,\n  \"date\": \"2023-09-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/discover_her_content/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"discover_her_content",
+								"1"
+							]
+						},
+						"description": "Update the details of existing Discover Her content"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete discover_her_content/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/discover_her_content/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"discover_her_content",
+								"2"
+							]
+						},
+						"description": "Delete a specific Discover Her content by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pages",
+			"item": [
+				{
+					"name": "Get All pages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pages"
+							]
+						},
+						"description": "Retrieve a list of all pages"
+					},
+					"response": []
+				},
+				{
+					"name": "create pages",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"header_image\": \"https://example.com/hesader.png\",\n  \"title\": \"WESAASSAA\",\n  \"description\": \"Women Empowerment through Solar Access\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pages"
+							]
+						},
+						"description": "Add a new page"
+					},
+					"response": []
+				},
+				{
+					"name": "get pages by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pages/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pages",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "update page",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"header_image\": \"none\",\n  \"title\": \"WESA\",\n  \"description\": \"Women Empowerment through Solar Access\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/pages/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pages",
+								"1"
+							]
+						},
+						"description": "Update the details of an existing page"
+					},
+					"response": []
+				},
+				{
+					"name": "delete page by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/pages/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"pages",
+								"1"
+							]
+						},
+						"description": "Delete a specific page by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Page Sections",
+			"item": [
+				{
+					"name": "Get All page sections",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/page_sections",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"page_sections"
+							]
+						},
+						"description": "Retrieve a list of all page sections"
+					},
+					"response": []
+				},
+				{
+					"name": "create page sections",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"page_id\": 1,\n  \"title\": \"Event Objective\",\n  \"description\": \"The objective of the event is to empower women in the energy sector.\",\n  \"image\": \"https://example.com/section-image.png\",\n  \"position\": \"right\",\n  \"type\": \"content_box\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/page_sections",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"page_sections"
+							]
+						},
+						"description": "Add a new page section"
+					},
+					"response": []
+				},
+				{
+					"name": "get page sections by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/page_sections/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"page_sections",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page section by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "get all section of a single page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/page-sections-by-page_id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"page-sections-by-page_id",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page section by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "update page section {id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"page_id\": 2,\n  \"title\": \"Event Objective\",\n  \"description\": \"The objective of the event is to empower women in the energy sector.\",\n  \"image\": \"https://example.com/section-image.png\",\n  \"position\": \"left\",\n  \"type\": \"content_box\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/page_sections/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"page_sections",
+								"1"
+							]
+						},
+						"description": "Update the details of an existing page section"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete page sections by{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/page_sections/{{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"page_sections",
+								"{{id}}"
+							]
+						},
+						"description": "Delete a specific page section by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "Get All events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"events"
+							]
+						},
+						"description": "Retrieve a list of all events"
+					},
+					"response": []
+				},
+				{
+					"name": "create events",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"image\": \"https://example.com/event-image.png\",\n  \"title\": \"Empower Her Workshop\",\n  \"description\": \"A workshop to empower women in the energy sector.\",\n  \"date\": \"2024-09-15\",\n  \"time\": \"10:00 AM\",\n  \"location\": \"123 Main St, City\",\n  \"type\": \"on-site\",\n  \"category\": \"workshop\",\n  \"price\": 50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"events"
+							]
+						},
+						"description": "Add a new event"
+					},
+					"response": []
+				},
+				{
+					"name": "get event by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/events/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"events",
+								"2"
+							]
+						},
+						"description": "Retrieve details of a specific event by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "update event",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"image\": \"https://example.com/event-image.png\",\n  \"title\": \"Empower Her Workshop\",\n  \"description\": \"A workshop to empower women in the energy sector.\",\n  \"date\": \"2024-09-15\",\n  \"time\": \"10:00 AM\",\n  \"location\": \"123 Main St, City\",\n  \"type\": \"on-site\",\n  \"category\": \"workshop\",\n  \"price\": 56\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/events/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"events",
+								"1"
+							]
+						},
+						"description": "Update the details of an existing event"
+					},
+					"response": []
+				},
+				{
+					"name": "delete event",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/events/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"events",
+								"1"
+							]
+						},
+						"description": "Delete a specific event by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reserved Events",
+			"item": [
+				{
+					"name": "Get All  Reserved Events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/reserved_events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reserved_events"
+							]
+						},
+						"description": "Retrieve a list of all events"
+					},
+					"response": []
+				},
+				{
+					"name": "create Reserved events",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"user_id\": 1,\n  \"event_id\": 1,\n  \"coupon_used_id\": 1,\n  \"payment_data\": \"Payment receipt details\",\n  \"total_price\": 49.99\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/reserved_events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reserved_events"
+							]
+						},
+						"description": "Add a new event"
+					},
+					"response": []
+				},
+				{
+					"name": "get reserved event by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/reserved_events/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reserved_events",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific event by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "delete reserved event",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/reserved_events/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reserved_events",
+								"1"
+							]
+						},
+						"description": "Delete a specific event by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Coupons",
+			"item": [
+				{
+					"name": "Get All Coupons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/coupons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"coupons"
+							]
+						},
+						"description": "Retrieve a list of all coupons"
+					},
+					"response": []
+				},
+				{
+					"name": "Create A Coupons",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"10% Discount\",\n    \"code\": \"SAVE10\",\n    \"limit\": -1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/coupons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"coupons"
+							]
+						},
+						"description": "Add a new coupon"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Coupons By {id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/coupons/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"coupons",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific coupon by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Coupons By {id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"10% Discount\",\n    \"code\": \"SAVE10\",\n    \"limit\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/coupons/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"coupons",
+								"1"
+							]
+						},
+						"description": "Update the details of an existing coupon"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Coupons By {id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/coupons/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"coupons",
+								"1"
+							]
+						},
+						"description": "Delete a specific coupon by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Memberships",
+			"item": [
+				{
+					"name": "Get All memberships",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/memberships",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"memberships"
+							]
+						},
+						"description": "Retrieve a list of all memberships"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Memberships",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"title\": \"Premium Membership\",\n  \"description\": \"Access to all premium content and events.\",\n  \"type\": \"individual\",\n  \"price\": 150\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/memberships",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"memberships"
+							]
+						},
+						"description": "Add a new membership plan"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Memberships By{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/memberships/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"memberships",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific membership by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Memberships By {id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Premium Membership\",\n  \"description\": \"Access to all premium content and events.\",\n  \"type\": \"individual\",\n  \"price\": 170\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/memberships/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"memberships",
+								"1"
+							]
+						},
+						"description": "Update the details of an existing membership"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Memberships By{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/memberships/{{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"memberships",
+								"{{id}}"
+							]
+						},
+						"description": "Delete a specific membership by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "get all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzI2MzgzNTA0LCJleHAiOjE3MjYzODcxMDR9.WFA59PsAU5MsjQSfkvZO-8A-qQ_nnW40_JAl54VOGzE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Retrieve a list of all users"
+					},
+					"response": []
+				},
+				{
+					"name": "create users",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"Jane\",\n  \"last_name\": \"Doe\",\n  \"email\": \"jane.doe@example.com\",\n  \"newsletter_subscribed\": false,\n  \"membership_role_id\": \"basic\",\n  \"membership_updated_at\": \"2024-09-15T10:00:00Z\",\n  \"password\": \"$2y$12$DkpH9jssajdO\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Add a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "Register user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"fadel\",\n  \"last_name\": \"hammoud\",\n  \"email\": \"fadel.ahammoud@gmail.com\",\n  \"password\": \"Fadel777\",\n  \"confirm_password\":\"Fadel777\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"signup"
+							]
+						},
+						"description": "Add a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "SignIn user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \n  \"email\": \"fadel.ahammoud@gmail.com\",\n  \"password\": \"lama\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"signin"
+							]
+						},
+						"description": "Add a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "Verify OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"email\":\"fadel.ahammoud@gmail.com\",\n \"otp\":224208\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/verify-otp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"verify-otp"
+							]
+						},
+						"description": "Add a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "passowrd reset request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n  \"email\": \"fadel.ahammoud@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/password-reset/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"password-reset",
+								"request"
+							]
+						},
+						"description": "Add a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "password reset/ reset",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n  \"email\":\"fadel.ahammoud@gmail.com\",\n  \"otp\":796140,\n  \"new_password\":\"lama\",\n  \"confirm_password\":\"lama\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/password-reset/reset",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"password-reset",
+								"reset"
+							]
+						},
+						"description": "Add a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						},
+						"description": "Retrieve details of a specific user by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"Jane\",\n  \"last_name\": \"Doe\",\n  \"email\": \"jane.doe@example.com\",\n  \"newsletter_subscribed\": true,\n  \"membership_role_id\": \"basic\",\n  \"membership_updated_at\": \"2024-09-15T10:00:00Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						},
+						"description": "Update the details of an existing user"
+					},
+					"response": []
+				},
+				{
+					"name": "Accept user by admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzI2Mzg0MzUxLCJleHAiOjE3MjYzODc5NTF9.oS8VsG1pbPG5aoko8PHlEswsh9AkC_7_DCeOridkySk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"accept\": true\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/2/accept",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"2",
+								"accept"
+							]
+						},
+						"description": "Update the details of an existing user"
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/4427fc97-92d3-4fa1-a577-fa0595005788",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"4427fc97-92d3-4fa1-a577-fa0595005788"
+							]
+						},
+						"description": "Delete a specific user by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Tools",
+			"item": [
+				{
+					"name": "Get All Tools",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/user_tools",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user_tools"
+							]
+						},
+						"description": "Retrieve a list of all tools"
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Tool",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"user_id\": 2,\n  \"discover_her_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user_tools",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user_tools"
+							]
+						},
+						"description": "Add a new tool"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Tool By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/user_tools/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user_tools",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific tool by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User Tool By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/user_tools/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user_tools",
+								"1"
+							]
+						},
+						"description": "Delete a specific tool by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nomination Types",
+			"item": [
+				{
+					"name": "Get All Nomination_types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/nomination_types",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"nomination_types"
+							]
+						},
+						"description": "Retrieve a list of all nomination types"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Nomination_types",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Outstanding Leadership\",\n  \"is_active\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/nomination_types",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"nomination_types"
+							]
+						},
+						"description": "Add a new nomination type"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Nomination_types By{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/nomination_types/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"nomination_types",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific nomination type by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Nomination_types By {id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/nomination_types/{{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"nomination_types",
+								"{{id}}"
+							]
+						},
+						"description": "Delete a specific nomination type by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Partnership Types",
+			"item": [
+				{
+					"name": "Get All partnership_types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/partnership_types",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"partnership_types"
+							]
+						},
+						"description": "Retrieve a list of all partnership types"
+					},
+					"response": []
+				},
+				{
+					"name": "Create partnership_types",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Corporate Partnership\",\n  \"is_active\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/partnership_types",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"partnership_types"
+							]
+						},
+						"description": "Add a new partnership type"
+					},
+					"response": []
+				},
+				{
+					"name": "Get partnership_types/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/partnership_types/{{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"partnership_types",
+								"{{id}}"
+							]
+						},
+						"description": "Retrieve details of a specific partnership type by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete partnership_types/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/partnership_types/{{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"partnership_types",
+								"{{id}}"
+							]
+						},
+						"description": "Delete a specific partnership type by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Forms",
+			"item": [
+				{
+					"name": "Get forms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/forms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"forms"
+							]
+						},
+						"description": "Retrieve a list of all forms"
+					},
+					"response": []
+				},
+				{
+					"name": "Create forms",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"email\": \"johndoe@example.com\",\n  \"phone_number\": \"123-456-7890\",\n  \"content\": \"I would like to inquire about partnership opportunities.\",\n  \"category\": \"contact_us\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/forms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"forms"
+							]
+						},
+						"description": "Add a new form submission"
+					},
+					"response": []
+				},
+				{
+					"name": "Get forms By{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/forms/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"forms",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific form by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete forms By{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/forms/{{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"forms",
+								"{{id}}"
+							]
+						},
+						"description": "Delete a specific form submission by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Information Contacts",
+			"item": [
+				{
+					"name": "Get All information_contacts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/information_contacts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"information_contacts"
+							]
+						},
+						"description": "Retrieve a list of all information contacts"
+					},
+					"response": []
+				},
+				{
+					"name": "Create information_contacts",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"image\": \"https://example.com/image.jpg\",\n  \"title\": \"LinkedIn\",\n  \"description\": \"Connect with us on LinkedIn\",\n  \"value\": \"https://linkedin.com/company/empowerher\",\n  \"type\": \"social_link\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/information_contacts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"information_contacts"
+							]
+						},
+						"description": "Add a new information contact"
+					},
+					"response": []
+				},
+				{
+					"name": "Get information_contacts By{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/information_contacts/{{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"information_contacts",
+								"{{id}}"
+							]
+						},
+						"description": "Retrieve details of a specific information contact by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete information_contacts By{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/information_contacts/{{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"information_contacts",
+								"{{id}}"
+							]
+						},
+						"description": "Delete a specific information contact by ID"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
