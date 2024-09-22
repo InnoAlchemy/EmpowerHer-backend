@@ -1,8 +1,11 @@
 const jwt = require('jsonwebtoken');
+const db = require("../models");
+const User = db.users;
+const Role = db.role; 
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_default_secret_key';
 
-const authenticateJWT = (req, res, next) => {
+const authenticateJWT = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
@@ -16,15 +19,34 @@ const authenticateJWT = (req, res, next) => {
   }
 
   try {
-    // Verify the token
     const decoded = jwt.verify(token, JWT_SECRET);
+    const user = await User.findOne({ where: { id: decoded.id }, include: [Role] });
 
-    // Attach decoded user info to request object
-    req.user = decoded;
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
 
-    // Continue to the next middleware or route handler
+    // Format user data
+    req.user = {
+      id: user.id,
+      role_id: user.role_id,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      email: user.email,
+      newsletter_subscribed: user.newsletter_subscribed,
+      membership_role_id: user.membership_role_id,
+      membership_updated_at: user.membership_updated_at,
+      is_verified: user.is_verified,
+      is_accepted: user.is_accepted,
+      otp: user.otp,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+      role: user.role 
+    };
+
     next();
   } catch (error) {
+    console.error('Error verifying token:', error.message);
     if (error.name === 'TokenExpiredError') {
       return res.status(401).json({ message: 'Token expired. Please login again.' });
     }
@@ -34,7 +56,6 @@ const authenticateJWT = (req, res, next) => {
 };
 
 module.exports = authenticateJWT;
-
 /**
  * 
 This middleware function verifies JWT tokens for authentication.

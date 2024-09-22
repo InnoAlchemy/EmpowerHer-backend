@@ -15,7 +15,7 @@ exports.getAllEvents = async (req, res) => {
 
 // Add a new event
 exports.addEvent = async (req, res) => {
-  const { image, title, description, date, time, location, type, category, price } = req.body;
+  const { title, description, date, time, location, type, category, price } = req.body;
 
   // Validate type
   if (!allowedTypes.includes(type)) {
@@ -26,6 +26,16 @@ exports.addEvent = async (req, res) => {
   if (!allowedCategories.includes(category)) {
     return res.status(400).json({ message: "Invalid category value" });
   }
+
+  // Check for required image file
+  if (!req.file) {
+    return res.status(400).json({ message: "Image is required." });
+  }
+
+  // Construct the image URL based on the environment
+  const image = process.env.NODE_ENV === 'production' 
+    ? `https://empowerher/${req.file.path.replace(/\\/g, '/')}`
+    : `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`;
 
   try {
     const newEvent = await Event.create({
@@ -45,6 +55,7 @@ exports.addEvent = async (req, res) => {
   }
 };
 
+
 // Get event by ID
 exports.getEventById = async (req, res) => {
   const { id } = req.params;
@@ -62,7 +73,7 @@ exports.getEventById = async (req, res) => {
 // Update event details
 exports.updateEvent = async (req, res) => {
   const { id } = req.params;
-  const { image, title, description, date, time, location, type, category, price } = req.body;
+  const { title, description, date, time, location, type, category, price,is_accepted } = req.body;
 
   try {
     // Find the event
@@ -82,7 +93,11 @@ exports.updateEvent = async (req, res) => {
     }
 
     // Update only provided fields
-    event.image = image !== undefined ? image : event.image;
+    if (req.file) {
+      event.image = process.env.NODE_ENV === 'production' 
+        ? `https://empowerher/${req.file.path.replace(/\\/g, '/')}`
+        : `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`;
+    }
     event.title = title !== undefined ? title : event.title;
     event.description = description !== undefined ? description : event.description;
     event.date = date !== undefined ? date : event.date;
@@ -91,7 +106,7 @@ exports.updateEvent = async (req, res) => {
     event.type = type !== undefined ? type : event.type;
     event.category = category !== undefined ? category : event.category;
     event.price = price !== undefined ? price : event.price;
-
+    event.is_accepted = is_accepted !== undefined ? is_accepted : event.is_accepted;
     // Save updated event
     await event.save();
     res.status(200).json(event);
@@ -99,7 +114,6 @@ exports.updateEvent = async (req, res) => {
     res.status(500).json({ message: "Error updating event", error: error.message });
   }
 };
-
 
 // Delete an event
 exports.deleteEvent = async (req, res) => {
@@ -113,5 +127,26 @@ exports.deleteEvent = async (req, res) => {
     res.status(200).json({ message: "Event deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting event" });
+  }
+};
+
+// Accept event by Admin
+exports.acceptEvent = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { accept } = req.body; // true to accept, false to reject
+
+    const event = await Event.findByPk(id);
+    if (!event) {
+      return res.status(404).json({ message: 'Event not found.' });
+    }
+
+    event.is_accepted = accept;
+    await event.save();
+
+    const message = accept ? 'Event accepted successfully!' : 'Event denied successfully!';
+    res.status(200).json({ message });
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating event status', error: error.message });
   }
 };

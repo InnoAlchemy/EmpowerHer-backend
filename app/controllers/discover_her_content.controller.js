@@ -14,13 +14,22 @@ exports.getAllContent = async (req, res) => {
 
 // Add new content
 exports.addContent = async (req, res) => {
-  const { category, header_file, title, description, is_active, date } = req.body;
-
+  const { category, title, description, is_active, date } = req.body;
 
   // Validate category
   if (!allowedCategories.includes(category)) {
     return res.status(400).json({ message: "Invalid category value" });
   }
+
+  // Check for required file
+  if (!req.file) {
+    return res.status(400).json({ message: "Header file is required." });
+  }
+
+  // Construct the header_file URL based on the environment
+  const header_file = process.env.NODE_ENV === 'production' 
+    ? `https://empowerher/${req.file.path.replace(/\\/g, '/')}`
+    : `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`;
 
   try {
     // Create new content with validated input
@@ -39,7 +48,6 @@ exports.addContent = async (req, res) => {
     res.status(400).json({ message: "Invalid input", error: error.message });
   }
 };
-
 // Get content by ID
 exports.getContentById = async (req, res) => {
   const { id } = req.params;
@@ -54,6 +62,7 @@ exports.getContentById = async (req, res) => {
   }
 };
 
+// Update content details
 // Update content details
 exports.updateContent = async (req, res) => {
   const { id } = req.params; // Use the content ID from the request parameters
@@ -73,9 +82,13 @@ exports.updateContent = async (req, res) => {
       }
       content.category = req.body.category;
     }
-    if (req.body.header_file !== undefined) {
-      content.header_file = req.body.header_file;
+    
+    if (req.file) {
+      content.header_file = process.env.NODE_ENV === 'production' 
+        ? `https://empowerher/${req.file.path.replace(/\\/g, '/')}`
+        : `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`;
     }
+    
     if (req.body.title !== undefined) {
       content.title = req.body.title;
     }
@@ -99,7 +112,6 @@ exports.updateContent = async (req, res) => {
     res.status(500).json({ message: "Error updating content", error: error.message });
   }
 };
-
 
 // Delete content by ID
 exports.deleteContent = async (req, res) => {

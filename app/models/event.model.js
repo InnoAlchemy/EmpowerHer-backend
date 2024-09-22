@@ -7,11 +7,7 @@ module.exports = (sequelize, Sequelize) => {
           autoIncrement: true,
           primaryKey: true
         },
-        //id: {
-        //  type: Sequelize.STRING,
-        //  primaryKey: true,
-        //  defaultValue: Sequelize.UUIDV4, // Auto-generate UUIDs
-      //  },
+       
         image: {
           type: Sequelize.STRING,
           allowNull: false,
@@ -44,8 +40,12 @@ module.exports = (sequelize, Sequelize) => {
           allowNull: false,
         },
         price: {
-          type: Sequelize.FLOAT,
+          type: Sequelize.DOUBLE,
           allowNull: false,
+        },
+        is_accepted: {
+          type: Sequelize.BOOLEAN,
+          defaultValue: false, // By default, the user is not accepted
         },
       },
       {

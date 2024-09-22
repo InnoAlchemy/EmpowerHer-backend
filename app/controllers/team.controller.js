@@ -11,14 +11,37 @@ exports.getAllTeamMembers = async (req, res) => {
   }
 };
 
-// Add a new team member
+// Add a new team member with image upload
 exports.addTeamMember = async (req, res) => {
-  const {  title, position, description, image, is_active } = req.body;
   try {
-    const newMember = await Team.create({title, position, description, image, is_active });
+    const { title, position, description, is_active } = req.body;
+
+    // Check for required fields
+    if (!title || !position || !description || req.file === undefined) {
+      return res.status(400).json({ message: "All fields are required: title, position, description, and image." });
+    }
+
+        // Construct the image URL based on the environment
+        let image;
+        if (process.env.NODE_ENV === 'production') {
+          image = `https://empowerher/${req.file.path.replace(/\\/g, '/')}`; // Production URL
+        } else {
+          image = `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`; // Development URL
+        }
+    
+
+    // Create a new team member in the database
+    const newMember = await Team.create({
+      title,
+      position,
+      description,
+      image,
+      is_active: is_active !== undefined ? is_active : true // Default to true if not provided
+    });
+
     res.status(201).json(newMember);
   } catch (error) {
-    res.status(400).json({ message: "Invalid input" });
+    res.status(400).json({ message: "Invalid input", error: error.message });
   }
 };
 
@@ -47,7 +70,7 @@ exports.updateTeamMember = async (req, res) => {
       return res.status(404).json({ message: "Team member not found" });
     }
 
-    // Only update fields that are provided in the request body
+    // Update fields only if provided
     if (req.body.title !== undefined) {
       member.title = req.body.title;
     }
@@ -57,9 +80,20 @@ exports.updateTeamMember = async (req, res) => {
     if (req.body.description !== undefined) {
       member.description = req.body.description;
     }
-    if (req.body.image !== undefined) {
-      member.image = req.body.image;
+    
+    // Handle image upload
+    if (req.file) {
+      // Construct the image URL based on the environment
+      let image;
+      if (process.env.NODE_ENV === 'production') {
+        image = `https://empowerher/${req.file.path.replace(/\\/g, '/')}`; // Production URL
+      } else {
+        image = `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`; // Development URL
+      }
+      member.image = image; // Update the image URL
     }
+
+    // Update is_active status if provided
     if (req.body.is_active !== undefined) {
       member.is_active = req.body.is_active;
     }

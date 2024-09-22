@@ -17,18 +17,30 @@ exports.getStaticPageByKey = async (req, res) => {
 
 // Create static page content
 exports.createStaticPage = async (req, res) => {
-  const { key, image, title, description } = req.body;
+  const { key, title, description, button_link,button_text } = req.body;
+
+  // Check for required fields
+  if (!req.file) {
+    return res.status(400).json({ message: "Image is required." });
+  }
+
+  // Construct the image URL based on the environment
+  const image = process.env.NODE_ENV === 'production' 
+    ? `https://empowerher/${req.file.path.replace(/\\/g, '/')}`
+    : `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`;
+
   try {
-    const newPage = await StaticPage.create({ key, image, title, description });
+    const newPage = await StaticPage.create({ key, image, title, description,button_link,button_text });
     res.status(201).json(newPage);
   } catch (error) {
-    res.status(400).json({ message: "Invalid input" });
+    console.error("Error creating static page:", error);
+    res.status(400).json({ message: "Invalid input", error: error.message });
   }
 };
 
 // Update static page content
 exports.updateStaticPage = async (req, res) => {
-  const { key } = req.body; // Ensure key is passed in the body
+  const { key} = req.body; // Ensure key is passed in the body
   try {
     // Find the static page by key
     const page = await StaticPage.findOne({ where: { key } });
@@ -37,8 +49,10 @@ exports.updateStaticPage = async (req, res) => {
     }
 
     // Only update fields that are provided in the request body
-    if (req.body.image !== undefined) {
-      page.image = req.body.image;
+    if (req.file) {
+      page.image = process.env.NODE_ENV === 'production' 
+        ? `https://empowerher/${req.file.path.replace(/\\/g, '/')}`
+        : `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`;
     }
     if (req.body.title !== undefined) {
       page.title = req.body.title;
@@ -46,7 +60,12 @@ exports.updateStaticPage = async (req, res) => {
     if (req.body.description !== undefined) {
       page.description = req.body.description;
     }
-
+    if (button_text !== undefined) {  // Update button text if provided
+      page.button_text = button_text;
+    }
+    if (button_link !== undefined) {  // Update button link if provided
+      page.button_link = button_link;
+    }
     // Save the updated page
     await page.save();
     

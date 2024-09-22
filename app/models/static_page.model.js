@@ -19,6 +19,14 @@ module.exports = (sequelize, Sequelize) => {
           type: Sequelize.TEXT,
           allowNull: false,
         },
+        button_text: {          
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
+        button_link: {          
+          type: Sequelize.STRING,
+          allowNull: true,
+        },
       },
       {
         timestamps: true,

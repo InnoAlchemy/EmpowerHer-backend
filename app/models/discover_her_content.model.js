@@ -7,11 +7,7 @@ module.exports = (sequelize, Sequelize) => {
           autoIncrement: true,
           primaryKey: true
         },
-        //id: {
-        //  type: Sequelize.STRING,
-        //  primaryKey: true,
-        //  defaultValue: Sequelize.UUIDV4, // Auto-generate UUIDs
-      //  },
+       
         category: {
           type: Sequelize.ENUM("article", "video", "tools"),
           allowNull: false,

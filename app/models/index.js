@@ -34,11 +34,19 @@ db.get_involved_program=require("./get_involved_program.model")(sequelize, Seque
 db.partnership_types=require("./partnership_type.model")(sequelize, Sequelize);
 db.forms=require("./form.model")(sequelize, Sequelize);
 db.information_contact=require("./information_contact.model")(sequelize, Sequelize);
+db.role=require("./role.model")(sequelize, Sequelize);
+
+
 // Associations
 
 // User - UserTool association
 db.users.hasMany(db.user_tools, { foreignKey: "user_id", onDelete: "CASCADE" });
 db.user_tools.belongsTo(db.users, { foreignKey: "user_id" });
+
+// User - Role association (A user has one role)
+db.users.belongsTo(db.role, { foreignKey: "role_id", onDelete: "CASCADE" });
+db.role.hasMany(db.users, { foreignKey: "role_id", onDelete: "CASCADE" });
+
 
 // DiscoverHerContent - UserTool association
 db.discover_her_content.hasMany(db.user_tools, { foreignKey: "discover_her_id", onDelete: "CASCADE" });

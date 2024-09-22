@@ -7,11 +7,7 @@ module.exports = (sequelize, Sequelize) => {
           autoIncrement: true,
           primaryKey: true
         },
-        //id: {
-        //  type: Sequelize.STRING,
-        //  primaryKey: true,
-        //  defaultValue: Sequelize.UUIDV4, // Auto-generate UUIDs
-      //  },
+       
         header_image: {
           type: Sequelize.STRING,
           allowNull: false,

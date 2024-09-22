@@ -19,7 +19,7 @@ exports.getAllSections = async (req, res) => {
 
 // Add a new section to a page
 exports.addSection = async (req, res) => {
-  const { page_id, title, description, image, position, type } = req.body;
+  const { page_id, title, description, position, type } = req.body;
 
   // Validate position
   if (!allowedPositions.includes(position)) {
@@ -32,6 +32,14 @@ exports.addSection = async (req, res) => {
   }
 
   try {
+    // Construct the image URL based on the environment
+    let image = null;
+    if (req.file) {
+      image = process.env.NODE_ENV === 'production' 
+        ? `https://empowerher/${req.file.path.replace(/\\/g, '/')}`
+        : `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`;
+    }
+
     // Create new section with validated input
     const newSection = await PageSection.create({
       page_id,
@@ -66,9 +74,8 @@ exports.getSectionById = async (req, res) => {
 // Update a section by ID
 exports.updateSection = async (req, res) => {
   const { id } = req.params;
-  const { page_id, title, description, image, position, type } = req.body;
+  const { page_id, title, description, position, type } = req.body;
 
- 
   try {
     // Find the section by ID
     const section = await PageSection.findOne({ where: { id } });
@@ -92,8 +99,10 @@ exports.updateSection = async (req, res) => {
     if (description !== undefined) {
       section.description = description;
     }
-    if (image !== undefined) {
-      section.image = image;
+    if (req.file) {
+      section.image = process.env.NODE_ENV === 'production' 
+        ? `https://empowerher/${req.file.path.replace(/\\/g, '/')}`
+        : `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`;
     }
     if (position !== undefined) {
       if (!allowedPositions.includes(position)) {

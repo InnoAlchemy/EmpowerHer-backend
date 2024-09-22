@@ -13,12 +13,13 @@ exports.getAllCoupons = async (req, res) => {
 
 // Add a new coupon
 exports.addCoupon = async (req, res) => {
-  const { title, code, limit } = req.body;
+  const { title, code, limit, amount } = req.body;
   try {
     const newCoupon = await Coupon.create({
       title,
       code,
-      limit
+      limit,
+      amount
     });
     res.status(201).json(newCoupon);
   } catch (error) {
@@ -43,7 +44,7 @@ exports.getCouponById = async (req, res) => {
 // Update a coupon by ID
 exports.updateCoupon = async (req, res) => {
   const { id } = req.params;
-  const { title, code, limit } = req.body;
+  const { title, code, limit, amount } = req.body;
 
   try {
     // Find the coupon by ID
@@ -56,6 +57,7 @@ exports.updateCoupon = async (req, res) => {
     coupon.title = title !== undefined ? title : coupon.title;
     coupon.code = code !== undefined ? code : coupon.code;
     coupon.limit = limit !== undefined ? limit : coupon.limit;
+    coupon.amount = amount!== undefined ? limit : coupon.amount;
 
     // Save updated coupon
     await coupon.save();

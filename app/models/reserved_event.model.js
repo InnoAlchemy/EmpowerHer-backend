@@ -7,11 +7,7 @@ module.exports = (sequelize, Sequelize) => {
           autoIncrement: true,
           primaryKey: true
         },
-        //id: {
-        //  type: Sequelize.STRING,
-        //  primaryKey: true,
-        //  defaultValue: Sequelize.UUIDV4, // Auto-generate UUIDs
-      //  },
+       
         user_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
@@ -29,7 +25,7 @@ module.exports = (sequelize, Sequelize) => {
           allowNull: false,
         },
         total_price: {
-          type: Sequelize.FLOAT,
+          type: Sequelize.DOUBLE,
           allowNull: false,
         },
       },

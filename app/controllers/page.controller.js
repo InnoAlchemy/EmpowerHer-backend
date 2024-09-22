@@ -13,14 +13,27 @@ exports.getAllPages = async (req, res) => {
 
 // Add a new page
 exports.addPage = async (req, res) => {
-  const { header_image, title, description } = req.body;
+  const { title, description } = req.body;
+
+  // Check for required fields
+  if (!req.file) {
+    return res.status(400).json({ message: "Header image is required." });
+  }
+
+  // Construct the header_image URL based on the environment
+  const header_image = process.env.NODE_ENV === 'production' 
+    ? `https://empowerher/${req.file.path.replace(/\\/g, '/')}`
+    : `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`;
+
   try {
     const newPage = await Page.create({ header_image, title, description });
     res.status(201).json(newPage);
   } catch (error) {
-    res.status(400).json({ message: "Invalid input" });
+    console.error("Error adding page:", error);
+    res.status(400).json({ message: "Invalid input", error: error.message });
   }
 };
+
 
 // Get a page by ID
 exports.getPageById = async (req, res) => {
@@ -39,8 +52,8 @@ exports.getPageById = async (req, res) => {
 // Update page details
 exports.updatePage = async (req, res) => {
   const { id } = req.params;
-  const { header_image, title, description } = req.body;
-  
+  const { title, description } = req.body;
+
   try {
     const page = await Page.findOne({ where: { id } });
     if (!page) {
@@ -48,8 +61,10 @@ exports.updatePage = async (req, res) => {
     }
 
     // Update only fields that are present in the request body
-    if (header_image !== undefined) {
-      page.header_image = header_image;
+    if (req.file) {
+      page.header_image = process.env.NODE_ENV === 'production' 
+        ? `https://empowerher/${req.file.path.replace(/\\/g, '/')}`
+        : `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`;
     }
     if (title !== undefined) {
       page.title = title;
@@ -66,6 +81,7 @@ exports.updatePage = async (req, res) => {
     res.status(500).json({ message: "Error updating page", error: error.message });
   }
 };
+
 
 
 // Delete a page by ID

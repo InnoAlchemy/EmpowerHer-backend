@@ -10,6 +10,8 @@ app.use(cors());
 
 // Parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static('uploads'));
+
 
 const db = require("./app/models");
 
@@ -49,6 +51,10 @@ require("./app/routes/partnership_types.routes")(app);
 require("./app/routes/static_page.routes")(app);
 require("./app/routes/team.routes")(app);
 require("./app/routes/user_tools.routes")(app);
+require("./app/routes/role.routes")(app);
+
+
+
 
 // Set port and listen for requests
 const PORT = process.env.PORT || 8080; // Default to 8080 if PORT is not set

@@ -7,11 +7,12 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
         primaryKey: true
       },
-      //id: {
-      //  type: Sequelize.STRING,
-      //  primaryKey: true,
-      //  defaultValue: Sequelize.UUIDV4, // Auto-generate UUIDs
-    //  },
+      role_id: {
+        type: Sequelize.INTEGER,
+        foreignKey: true,
+        allowNull: false,
+        defaultValue: 1,
+      },
       first_name: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -42,19 +43,13 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
 
-      //newly added
-      role: {
-        type: Sequelize.ENUM("admin", "user"),
-        allowNull: false,
-        defaultValue: "user",
-      },
       is_verified: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false, // By default, the user is not verified
+        defaultValue: false,
       },
       is_accepted: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false, // By default, the user is not accepted
+        defaultValue: false, 
       },
       otp: {
         type: Sequelize.INTEGER,

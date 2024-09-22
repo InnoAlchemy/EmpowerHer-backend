@@ -1,8 +1,10 @@
 
 module.exports = (app) => {
   const usersController = require("../controllers/user.controller");
+  const AuthController = require("../controllers/authentication.controller");
   const authenticateJWT = require('../middleware/Jwt_middleware'); 
   const Admin= require('../middleware/Admin_middleware');
+  const hasPermission = require('../middleware/Role_Permissions_middleware');
   var router = require("express").Router();
   
  // Get all users
@@ -17,26 +19,29 @@ router.get('/users/:id', usersController.getUserById);
 // Update user details by ID
 router.put('/users/:id',authenticateJWT,Admin, usersController.updateUser);
 
+// Accept user account by admin (after OTP verification)
+router.put('/users/accept/:id',authenticateJWT,Admin, usersController.acceptUserAccount);
+
 // Delete user by ID
 router.delete('/users/:id',authenticateJWT,Admin, usersController.deleteUser);
 
 // User Signup
-router.post('/signup', usersController.Signup);
+router.post('/auth/register', AuthController.Signup);
 
 // User Signin
-router.post('/signin', usersController.Signin);
+router.post('/auth/login', AuthController.Signin);
+
+// Request OTP
+router.post('/auth/request-otp', AuthController.requestOTP);
 
 // Verify OTP
-router.post('/verify-otp', usersController.verifyOTP);
-
-// Accept user account by admin (after OTP verification)
-router.put('/users/:id/accept',authenticateJWT,Admin, usersController.acceptUserAccount);
+router.post('/auth/verify-otp', AuthController.verifyOTP);
  
 // Request OTP for Password Reset
-router.post('/password-reset/request', usersController.requestPasswordReset); 
+router.post('/auth/forgot-password', AuthController.requestPasswordReset); 
 
  // Reset Password
-router.post('/password-reset/reset', usersController.resetPassword);
+router.post('/auth/reset-password', AuthController.resetPassword);
 
   app.use("/api", router);
 };
