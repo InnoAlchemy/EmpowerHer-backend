@@ -18,7 +18,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjYzODk1MzIsImV4cCI6MTcyNjM5MzEzMn0.j-ZJ7QCQcoeGbOEQeTKjT7wyraIrC6ONaU86wF3IJlY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI2OTEzNzIxLCJleHAiOjE3MjY5MTczMjF9.YLIsJE7V5etkVvwW2rF9moMRCRfvIk7Msd7FR1pt0E4",
 									"type": "string"
 								}
 							]
@@ -27,18 +27,44 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
+								"value": "multipart/form-data",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"key\": \"home\",\n  \"image\": \"https://example.com/home.jpg\",\n  \"title\": \"Welcome to Empower Her\",\n  \"description\": \"Empowering women through education and collaboration.\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "home7",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/USER/Pictures/f6.jpg"
+								},
+								{
+									"key": "title",
+									"value": "Welcome to Empower Her",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Empowering women through education and collaboration.",
+									"type": "text"
+								},
+								{
+									"key": "button_link",
+									"value": "BUTTON",
+									"type": "text"
+								},
+								{
+									"key": "button_text",
+									"value": "https://example.com/home.jpg",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/content_static_pages",
@@ -58,19 +84,33 @@
 				},
 				{
 					"name": "content-static-page/:key",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjYzODk1MzIsImV4cCI6MTcyNjM5MzEzMn0.j-ZJ7QCQcoeGbOEQeTKjT7wyraIrC6ONaU86wF3IJlY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI2OTEzNzIxLCJleHAiOjE3MjY5MTczMjF9.YLIsJE7V5etkVvwW2rF9moMRCRfvIk7Msd7FR1pt0E4",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
 						"url": {
 							"raw": "http://localhost:8080/api/content_static_pages/home",
 							"protocol": "http",
@@ -96,7 +136,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6InVzZXIiLCJpYXQiOjE3MjYzODk1MzIsImV4cCI6MTcyNjM5MzEzMn0.j-ZJ7QCQcoeGbOEQeTKjT7wyraIrC6ONaU86wF3IJlY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzI2OTEzODk5LCJleHAiOjE3MjY5MTc0OTl9.P8tStrIZTQ31xcvpNDZpp7-SGrp0arClpMhQ2i1Wunc",
 									"type": "string"
 								}
 							]
@@ -105,18 +145,44 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
+								"value": "multipart/form-data",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"key\": \"home\",\n  \"image\": \"https://example.com/home.jpg\",\n  \"title\": \"Welcome to Empower Her\",\n  \"description\": \"Empowering women through education and collaboration.\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "button_link",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "button_text",
+									"value": "",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/content_static_pages",
@@ -167,18 +233,40 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
+								"value": "multipart/form-data",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"title\": \"John Doe\",\n  \"position\": \"Developer\",\n  \"description\": \"John is a software developer with 5 years of experience.\",\n  \"image\":\"https://example.com/home.jpg\",\n  \"is_active\":false\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "ronaldo",
+									"type": "text"
+								},
+								{
+									"key": "position",
+									"value": "webdev",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "at saudi league",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/USER/Pictures/cr7.jpg"
+								},
+								{
+									"key": "is_active",
+									"value": "true",
+									"type": "text",
+									"disabled": true
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/team",
@@ -225,18 +313,42 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
+								"value": "multipart/form-data",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \n  \"is_active\":true\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "hello",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "position",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/USER/Pictures/f0.jpg"
+								},
+								{
+									"key": "is_active",
+									"value": "true",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/team/2",
@@ -261,7 +373,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/team/1",
+							"raw": "http://localhost:8080/api/team/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -270,7 +382,140 @@
 							"path": [
 								"api",
 								"team",
+								"4"
+							]
+						},
+						"description": "Delete a specific team member by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "All Roles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"roles"
+							]
+						},
+						"description": "Retrieve a list of all team members"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Role",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Admin\",\r\n  \"permissions\": {\r\n    \"CREATE\": true,\r\n    \"READ\": true,\r\n    \"UPDATE\": true,\r\n    \"DELETE\": true\r\n  }\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"roles"
+							]
+						},
+						"description": "Add a new team member"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Role By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/roles/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"roles",
 								"1"
+							]
+						},
+						"description": "Retrieve details of a specific team member by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Role {id}",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role_name\":\"user\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/roles/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"roles",
+								"2"
+							]
+						},
+						"description": "Update the details of an existing team member"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Role {id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/roles/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"roles",
+								"4"
 							]
 						},
 						"description": "Delete a specific team member by ID"
@@ -453,18 +698,44 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
+								"value": "multipart/form-data",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"category\": \"tools\",\n  \"header_file\": \"https://example.com/image.png\",\n  \"title\": \"Empowering Women in Tech\",\n  \"description\": \"An article discussing the rise of women in the tech industry.\",\n  \"is_active\": true,\n  \"date\": \"2023-09-01\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "category",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "header_file",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "title",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "is_active",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/discover_her_content",
@@ -511,18 +782,44 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
+								"value": "multipart/form-data",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n \"category\": \"articled\",\n  \"header_file\": \"https://example.com/image.png\",\n  \"title\": \"Empowering Women in Tech\",\n  \"description\": \"An article discussing the rise of women in the tech industry.\",\n  \"is_active\": true,\n  \"date\": \"2023-09-01\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "category",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "header_file",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "title",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "is_active",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/discover_her_content/1",
@@ -596,18 +893,29 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
+								"value": "multipart/form-data",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"header_image\": \"https://example.com/hesader.png\",\n  \"title\": \"WESAASSAA\",\n  \"description\": \"Women Empowerment through Solar Access\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "header_image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "title",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/pages",
@@ -654,18 +962,29 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
+								"value": "multipart/form-data",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"header_image\": \"none\",\n  \"title\": \"WESA\",\n  \"description\": \"Women Empowerment through Solar Access\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "header_image",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/pages/1",
@@ -739,18 +1058,44 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
+								"value": "multipart/form-data",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n \"page_id\": 1,\n  \"title\": \"Event Objective\",\n  \"description\": \"The objective of the event is to empower women in the energy sector.\",\n  \"image\": \"https://example.com/section-image.png\",\n  \"position\": \"right\",\n  \"type\": \"content_box\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "page_id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "position",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/page_sections",
@@ -796,7 +1141,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/page-sections-by-page_id/1",
+							"raw": "http://localhost:8080/api/page-sections-by-page_id/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -805,7 +1150,7 @@
 							"path": [
 								"api",
 								"page-sections-by-page_id",
-								"1"
+								"2"
 							]
 						},
 						"description": "Retrieve details of a specific page section by ID"
@@ -818,13 +1163,39 @@
 						"method": "PUT",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"page_id\": 2,\n  \"title\": \"Event Objective\",\n  \"description\": \"The objective of the event is to empower women in the energy sector.\",\n  \"image\": \"https://example.com/section-image.png\",\n  \"position\": \"left\",\n  \"type\": \"content_box\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "page_id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "position",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/page_sections/1",
@@ -898,18 +1269,59 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
+								"value": "multipart/form-data",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n \"image\": \"https://example.com/event-image.png\",\n  \"title\": \"Empower Her Workshop\",\n  \"description\": \"A workshop to empower women in the energy sector.\",\n  \"date\": \"2024-09-15\",\n  \"time\": \"10:00 AM\",\n  \"location\": \"123 Main St, City\",\n  \"type\": \"on-site\",\n  \"category\": \"workshop\",\n  \"price\": 50\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/USER/Pictures/faraya.jpg"
+								},
+								{
+									"key": "title",
+									"value": "Empower Her Worksho",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "A workshop to empower women in the energy sector.",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2024-09-15",
+									"type": "text"
+								},
+								{
+									"key": "time",
+									"value": "10:00 AM",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "23 Main St, City",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "on-site",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "workshop",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "60.99",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/events",
@@ -956,21 +1368,69 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
+								"value": "multipart/form-data",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n \"image\": \"https://example.com/event-image.png\",\n  \"title\": \"Empower Her Workshop\",\n  \"description\": \"A workshop to empower women in the energy sector.\",\n  \"date\": \"2024-09-15\",\n  \"time\": \"10:00 AM\",\n  \"location\": \"123 Main St, City\",\n  \"type\": \"on-site\",\n  \"category\": \"workshop\",\n  \"price\": 56\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "date",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "time",
+									"value": "11:00 PM",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": "70",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/events/1",
+							"raw": "http://localhost:8080/api/events/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -979,7 +1439,7 @@
 							"path": [
 								"api",
 								"events",
-								"1"
+								"2"
 							]
 						},
 						"description": "Update the details of an existing event"
@@ -1047,7 +1507,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"user_id\": 1,\n  \"event_id\": 1,\n  \"coupon_used_id\": 1,\n  \"payment_data\": \"Payment receipt details\",\n  \"total_price\": 49.99\n}",
+							"raw": "{\n \"user_id\": 1,\n  \"event_id\": 2,\n  \"coupon_used_id\": 2,\n  \"payment_data\": \"Payment receipt details\",\n  \"total_price\": 99.99\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1147,7 +1607,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"title\": \"10% Discount\",\n    \"code\": \"SAVE10\",\n    \"limit\": -1\n}",
+							"raw": "{\n    \"title\": \"17% Discount\",\n    \"code\": \"SAVE17\",\n    \"limit\": -1,\n    \"amount\":3\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1199,7 +1659,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"title\": \"10% Discount\",\n    \"code\": \"SAVE10\",\n    \"limit\": 1\n}",
+							"raw": "{\n  \"title\": \"10% Discount\",\n    \"code\": \"SAVE10\",\n    \"limit\": 1,\n    \"amount\":1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1207,7 +1667,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/coupons/1",
+							"raw": "http://localhost:8080/api/coupons/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1216,7 +1676,7 @@
 							"path": [
 								"api",
 								"coupons",
-								"1"
+								"2"
 							]
 						},
 						"description": "Update the details of an existing coupon"
@@ -1229,7 +1689,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/coupons/1",
+							"raw": "http://localhost:8080/api/coupons/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1238,7 +1698,7 @@
 							"path": [
 								"api",
 								"coupons",
-								"1"
+								"2"
 							]
 						},
 						"description": "Delete a specific coupon by ID"
@@ -1389,7 +1849,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzI2MzgzNTA0LCJleHAiOjE3MjYzODcxMDR9.WFA59PsAU5MsjQSfkvZO-8A-qQ_nnW40_JAl54VOGzE",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI3MDAwMzY1LCJleHAiOjE3MjcwODY3NjV9.YLwXScXY5ID8XXIZK80lbSwvQfrxFk7fZBYXOQqtN5Q",
 									"type": "string"
 								}
 							]
@@ -1425,7 +1885,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"first_name\": \"Jane\",\n  \"last_name\": \"Doe\",\n  \"email\": \"jane.doe@example.com\",\n  \"newsletter_subscribed\": false,\n  \"membership_role_id\": \"basic\",\n  \"membership_updated_at\": \"2024-09-15T10:00:00Z\",\n  \"password\": \"$2y$12$DkpH9jssajdO\"\n}",
+							"raw": "{\n  \"first_name\": \"Raul\",\n  \"last_name\": \"hmd\",\n  \"email\": \"fadel.ahammoud@gmail.com\",\n  \"newsletter_subscribed\": false,\n  \"membership_role_id\": \"basic\",\n  \"membership_updated_at\": \"2024-09-17T10:00:00Z\",\n  \"password\": \"Raul777\",\n  \"role_id\":1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1449,194 +1909,12 @@
 					"response": []
 				},
 				{
-					"name": "Register user",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"first_name\": \"fadel\",\n  \"last_name\": \"hammoud\",\n  \"email\": \"fadel.ahammoud@gmail.com\",\n  \"password\": \"Fadel777\",\n  \"confirm_password\":\"Fadel777\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/signup",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"signup"
-							]
-						},
-						"description": "Add a new user"
-					},
-					"response": []
-				},
-				{
-					"name": "SignIn user",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \n  \"email\": \"fadel.ahammoud@gmail.com\",\n  \"password\": \"lama\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/signin",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"signin"
-							]
-						},
-						"description": "Add a new user"
-					},
-					"response": []
-				},
-				{
-					"name": "Verify OTP",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n \"email\":\"fadel.ahammoud@gmail.com\",\n \"otp\":224208\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/verify-otp",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"verify-otp"
-							]
-						},
-						"description": "Add a new user"
-					},
-					"response": []
-				},
-				{
-					"name": "passowrd reset request",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\n  \"email\": \"fadel.ahammoud@gmail.com\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/password-reset/request",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"password-reset",
-								"request"
-							]
-						},
-						"description": "Add a new user"
-					},
-					"response": []
-				},
-				{
-					"name": "password reset/ reset",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{ \n  \"email\":\"fadel.ahammoud@gmail.com\",\n  \"otp\":796140,\n  \"new_password\":\"lama\",\n  \"confirm_password\":\"lama\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/password-reset/reset",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"password-reset",
-								"reset"
-							]
-						},
-						"description": "Add a new user"
-					},
-					"response": []
-				},
-				{
 					"name": "get user by id",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/users/",
+							"raw": "http://localhost:8080/api/users/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1645,7 +1923,7 @@
 							"path": [
 								"api",
 								"users",
-								""
+								"1"
 							]
 						},
 						"description": "Retrieve details of a specific user by ID"
@@ -1665,7 +1943,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"first_name\": \"Jane\",\n  \"last_name\": \"Doe\",\n  \"email\": \"jane.doe@example.com\",\n  \"newsletter_subscribed\": true,\n  \"membership_role_id\": \"basic\",\n  \"membership_updated_at\": \"2024-09-15T10:00:00Z\"\n}",
+							"raw": "{\n  \"first_name\": \"Jane\",\n  \"last_name\": \"Doe\",\n  \"email\": \"jane.doe@example.com\",\n  \"newsletter_subscribed\": false,\n  \"membership_role_id\": \"basic\",\n  \"membership_updated_at\": \"2024-09-15T10:00:00Z\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1673,7 +1951,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/users/1",
+							"raw": "http://localhost:8080/api/users/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1682,7 +1960,7 @@
 							"path": [
 								"api",
 								"users",
-								"1"
+								"5"
 							]
 						},
 						"description": "Update the details of an existing user"
@@ -1697,7 +1975,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzI2Mzg0MzUxLCJleHAiOjE3MjYzODc5NTF9.oS8VsG1pbPG5aoko8PHlEswsh9AkC_7_DCeOridkySk",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI2OTEwMzI4LCJleHAiOjE3MjY5MTM5Mjh9.0N0CX5LpjcMLvTNBaobSYF6h6JDcXFqewIgkN6mo5lU",
 									"type": "string"
 								}
 							]
@@ -1712,15 +1990,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"accept\": true\n}\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n  \"accept\": true\n}\n"
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/users/2/accept",
+							"raw": "http://localhost:8080/api/users/accept/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1729,8 +2002,8 @@
 							"path": [
 								"api",
 								"users",
-								"2",
-								"accept"
+								"accept",
+								"3"
 							]
 						},
 						"description": "Update the details of an existing user"
@@ -1740,10 +2013,20 @@
 				{
 					"name": "delete user",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI2OTA5NjM4LCJleHAiOjE3MjY5MTMyMzh9.CDnu-g2rLi7xOIv5IQTxnWr48zdrZBm4D8wKWQsB228",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/users/4427fc97-92d3-4fa1-a577-fa0595005788",
+							"raw": "http://localhost:8080/api/users/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1752,10 +2035,237 @@
 							"path": [
 								"api",
 								"users",
-								"4427fc97-92d3-4fa1-a577-fa0595005788"
+								"2"
 							]
 						},
 						"description": "Delete a specific user by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"fadel\",\n  \"last_name\": \"hammoud\",\n  \"email\": \"fadel.ahammoud@gmail.com\",\n  \"password\": \"Fadel777\",\n  \"confirm_password\":\"Fadel777\",\n  \"role_id\":2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Add a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "SignIn user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \n  \"email\": \"fadel.ahammoud@gmail.com\",\n  \"password\": \"Raul777\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Add a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "request OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n  \"email\": \"fadel.ahammoud@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/request-otp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"request-otp"
+							]
+						},
+						"description": "Add a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "Verify OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"email\":\"fadel.ahammoud@gmail.com\",\n \"otp\": 149484\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/verify-otp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"verify-otp"
+							]
+						},
+						"description": "Add a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "forgot password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n  \"email\": \"fadel.ahammoud@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/forgot-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"forgot-password"
+							]
+						},
+						"description": "Add a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "reset password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n  \"email\":\"fadel.ahammoud@gmail.com\",\n  \"otp\":796140,\n  \"new_password\":\"lama\",\n  \"confirm_password\":\"lama\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/reset-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"reset-password"
+							]
+						},
+						"description": "Add a new user"
 					},
 					"response": []
 				}
@@ -2216,18 +2726,40 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
+								"value": "multipart/form-data",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"image\": \"https://example.com/image.jpg\",\n  \"title\": \"LinkedIn\",\n  \"description\": \"Connect with us on LinkedIn\",\n  \"value\": \"https://linkedin.com/company/empowerher\",\n  \"type\": \"social_link\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "LinkedIn2",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "connect with us on LinkedIn",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "value",
+									"value": "https://linkedin.com/company/empowerher",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "social_link",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/USER/Pictures/f02.jpg"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/information_contacts",
