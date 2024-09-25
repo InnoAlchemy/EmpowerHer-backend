@@ -92,3 +92,42 @@ exports.deleteMembership = async (req, res) => {
     res.status(500).json({ message: "Error deleting membership" });
   }
 };
+
+// Get total number of memberships and percentage of each type
+exports.getMembershipStats = async (req, res) => {
+  try {
+    // Get the total number of memberships
+    const totalMemberships = await Membership.count();
+
+    if (totalMemberships === 0) {
+      return res.status(200).json({
+        message: "No memberships found",
+        totalMemberships: 0,
+        basic: "0%",
+        individual: "0%",
+        corporate: "0%"
+      });
+    }
+
+    // Get the count for each membership type
+    const basicCount = await Membership.count({ where: { type: 'basic' } });
+    const individualCount = await Membership.count({ where: { type: 'individual' } });
+    const corporateCount = await Membership.count({ where: { type: 'corporate' } });
+
+    // Calculate percentages
+    const basicPercentage = ((basicCount / totalMemberships) * 100).toFixed(2);
+    const individualPercentage = ((individualCount / totalMemberships) * 100).toFixed(2);
+    const corporatePercentage = ((corporateCount / totalMemberships) * 100).toFixed(2);
+
+    // Return the result
+    res.status(200).json({
+      totalMemberships,
+      basic: `${basicPercentage}%`,
+      individual: `${individualPercentage}%`,
+      corporate: `${corporatePercentage}%`
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: "Error retrieving membership stats", error: error.message });
+  }
+};

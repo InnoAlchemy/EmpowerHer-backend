@@ -150,3 +150,29 @@ exports.acceptEvent = async (req, res) => {
     res.status(500).json({ message: 'Error updating event status', error: error.message });
   }
 };
+
+// Get total number of pending events
+exports.getPendingEvents = async (req, res) => {
+  try {
+    const pendingEvents = await Event.findAll({
+      where: { is_accepted: false },
+      attributes: ['title', 'date', 'time'], 
+    });
+
+    const totalPending = pendingEvents.length;
+
+    // Format response data
+    const response = {
+      total: totalPending,
+      events: pendingEvents.map(event => ({
+        name: event.title,
+        date_time: `${event.date} ${event.time}`, // Combine date and time
+        requested_by: 'user',
+      })),
+    };
+
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ message: "Error retrieving pending events", error: error.message });
+  }
+};

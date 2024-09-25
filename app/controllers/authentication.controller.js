@@ -2,6 +2,7 @@ const db = require("../models");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = db.users;
+const moment = require('moment');
 const Op = db.Sequelize.Op;
 const crypto = require('crypto'); // For generating random OTPs
 const transporter = require('../config/email.config');
@@ -297,7 +298,5 @@ exports.verifyOTP = async (req, res) => {
     res.status(500).json({ message: 'Error verifying OTP', error: error.message });
   }
 };
-
-
 
 

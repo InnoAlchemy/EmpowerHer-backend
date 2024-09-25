@@ -1,7 +1,9 @@
 const db = require("../models");
+const { Sequelize } = db;
 const bcrypt = require('bcrypt');
 const User = db.users;
 const Op = db.Sequelize.Op;
+const calculateComparisonPercentage = require('../Helper-Functions/helper_functions');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto'); // For generating random OTPs
 const transporter = require('../config/email.config');
@@ -245,3 +247,167 @@ exports.deleteUser = async (req, res) => {
     res.status(500).json({ message: "Error deleting user", error });
   }
 };
+
+// Get the total number of active users and provide monthly comparison
+exports.getActiveUsersComparison = async (req, res) => {
+  try {
+    // Get the total number of active users (accepted users)
+    const totalActiveUsers = await User.count({
+      where: { is_accepted: true }
+    });
+
+    // Get active users for the current month
+    const currentMonth = new Date();
+    const firstDayOfCurrentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1);
+
+    const activeUsersCurrentMonth = await User.count({
+      where: {
+        is_accepted: true,
+        updatedAt: { // Assuming 'updatedAt' is the field to check for user acceptance
+          [Op.gte]: firstDayOfCurrentMonth
+        }
+      }
+    });
+
+    // Get active users for the previous month
+    const firstDayOfLastMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1);
+    const lastDayOfLastMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 0);
+
+    const activeUsersLastMonth = await User.count({
+      where: {
+        is_accepted: true,
+        updatedAt: {
+          [Op.between]: [firstDayOfLastMonth, lastDayOfLastMonth]
+        }
+      }
+    });
+
+    // Calculate percentage change
+    let percentageChange = 0;
+
+    if (activeUsersLastMonth === 0 && activeUsersCurrentMonth > 0) {
+      percentageChange = "+100.00%"; // Set to +100% if there's an increase from 0
+    } else if (activeUsersLastMonth > 0) {
+      const change = ((activeUsersCurrentMonth - activeUsersLastMonth) / activeUsersLastMonth) * 100;
+      const formattedChange = change.toFixed(2); // Round to 2 decimals
+      percentageChange = (change > 0 ? `+${formattedChange}` : `${formattedChange}`) + "%";
+    }
+
+    // Format response
+    res.status(200).json({
+      TotalOfActiveUsers: totalActiveUsers,
+      activeUsersCurrentMonth: activeUsersCurrentMonth,
+      activeUsersLastMonth: activeUsersLastMonth,
+      percentageChange: percentageChange
+    });
+  } catch (error) {
+    console.error('Error fetching active users comparison:', error);
+    res.status(500).json({ message: "Error fetching active users comparison", error });
+  }
+};
+
+
+// Get the total number of pending users and provide monthly comparison
+exports.getPendingUsersComparison = async (req, res) => {
+  try {
+    // Get the total number of pending users (users who are not accepted)
+    const totalPendingUsers = await User.count({
+      where: { is_accepted: false }
+    });
+
+    // Get pending users for the current month
+    const currentMonth = new Date();
+    const firstDayOfCurrentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1);
+
+    const pendingUsersCurrentMonth = await User.findAll({
+      where: {
+        is_accepted: false,
+        createdAt: {
+          [Op.gte]: firstDayOfCurrentMonth
+        }
+      },
+      attributes: [[Sequelize.fn('concat', Sequelize.col('first_name'), ' ', Sequelize.col('last_name')), 'name'], 'email']
+    });
+
+    // Get pending users for the previous month
+    const firstDayOfLastMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1);
+    const lastDayOfLastMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 0);
+
+    const pendingUsersLastMonth = await User.count({
+      where: {
+        is_accepted: false,
+        createdAt: {
+          [Op.between]: [firstDayOfLastMonth, lastDayOfLastMonth]
+        }
+      }
+    });
+
+    // Calculate percentage change
+    let percentageChange = 0;
+
+    if (pendingUsersLastMonth === 0 && pendingUsersCurrentMonth.length > 0) {
+      percentageChange = "+100.00%"; // Set to +100% if there's an increase from 0
+    } else if (pendingUsersLastMonth > 0) {
+      const change = ((pendingUsersCurrentMonth.length - pendingUsersLastMonth) / pendingUsersLastMonth) * 100;
+      const formattedChange = change.toFixed(2); // Round to 2 decimals
+      percentageChange = (change > 0 ? `+${formattedChange}` : `${formattedChange}`) + "%";
+    }
+
+    // Format response
+    res.status(200).json({
+      TotalOfPendingUsers: totalPendingUsers,
+      pendingUsersCurrentMonth: pendingUsersCurrentMonth.length,
+      pendingUsersCurrentMonthDetails: pendingUsersCurrentMonth.map(user => ({ name: user.dataValues.name, email: user.dataValues.email })),
+      pendingUsersLastMonth: pendingUsersLastMonth,
+      percentageChange: percentageChange
+    });
+  } catch (error) {
+    console.error('Error fetching pending users comparison:', error);
+    res.status(500).json({ message: "Error fetching pending users comparison", error });
+  }
+};
+// Get total number of new registrations and percentage difference
+exports.getRegistrationStats = async (req, res) =>  {
+  try {
+    // Fetch all users from the database
+    const users = await User.findAll();
+
+    if (users.length === 0) {
+      return res.status(404).json({ message: 'No users found.' });
+    }
+
+    // Prepare the response object for all users
+    const response = users.map((user) => {
+      // Assume `user` contains user data including name, createdAt date, etc.
+      const formattedDate = new Date(user.createdAt).toLocaleString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      return {
+        "name": user.first_name + ' ' + user.last_name, // Concatenate first name and last name
+        "Date Registered": formattedDate,
+      };
+    });
+
+    // Calculate total number of users
+    const totalUsers = users.length;
+
+    // Calculate percentage comparison between current month and previous month
+    const comparison = await calculateComparisonPercentage();
+
+    // Send the final response
+    res.status(200).json({
+      "total": totalUsers,
+      "percentage of comparison between current month and previous month": comparison,
+      "users": response, // Array of user info
+    });
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ message: 'Error fetching users', error: error.message });
+  }
+};
+

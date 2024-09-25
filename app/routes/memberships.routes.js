@@ -17,6 +17,9 @@ module.exports = (app) => {
   
     // Delete a membership by ID
     router.delete('/memberships/:id', membershipController.deleteMembership);
+
+     // Get total of memberships and percentage for each type
+     router.get('/memberships-stats', membershipController.getMembershipStats);
   
     app.use("/api", router);
   };

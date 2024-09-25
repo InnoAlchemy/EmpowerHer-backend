@@ -43,5 +43,14 @@ router.post('/auth/forgot-password', AuthController.requestPasswordReset);
  // Reset Password
 router.post('/auth/reset-password', AuthController.resetPassword);
 
-  app.use("/api", router);
+// Get the total number of active users and a monthly comparison percentage
+router.get('/active-users/monthly-comparison', usersController.getActiveUsersComparison);
+
+// Get the total number of pending users and a monthly comparison percentage
+router.get('/pending-users/monthly-comparison', usersController.getPendingUsersComparison);
+
+// get new signups and compare them monthly
+router.get('/newly-registered-users-total-comparison', usersController.getRegistrationStats);
+
+app.use("/api", router);
 };
