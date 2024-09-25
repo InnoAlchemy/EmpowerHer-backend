@@ -134,17 +134,17 @@ exports.deleteEvent = async (req, res) => {
 exports.acceptEvent = async (req, res) => {
   try {
     const { id } = req.params;
-    const { accept } = req.body; // true to accept, false to reject
+    const { is_accepted } = req.body; // true to accept, false to reject
 
     const event = await Event.findByPk(id);
     if (!event) {
       return res.status(404).json({ message: 'Event not found.' });
     }
 
-    event.is_accepted = accept;
+    event.is_accepted = is_accepted;
     await event.save();
 
-    const message = accept ? 'Event accepted successfully!' : 'Event denied successfully!';
+    const message = is_accepted ? 'Event accepted successfully!' : 'Event denied successfully!';
     res.status(200).json({ message });
   } catch (error) {
     res.status(500).json({ message: 'Error updating event status', error: error.message });

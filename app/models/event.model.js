@@ -45,7 +45,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         is_accepted: {
           type: Sequelize.BOOLEAN,
-          defaultValue: false, // By default, the user is not accepted
+          defaultValue: false, // By default, the Event is not accepted
         },
       },
       {

@@ -1,6 +1,7 @@
 module.exports = (app) => {
     const eventsController = require("../controllers/events.controller");
     const upload = require('../middleware/uploadMiddleware');
+    const authenticateJWT = require('../middleware/Jwt_middleware'); 
     const Admin = require('../middleware/Admin_middleware');
     var router = require("express").Router();
   
@@ -17,7 +18,7 @@ module.exports = (app) => {
     router.put('/events/:id',upload.single('image'), eventsController.updateEvent);
 
     // Accept/Reject event by Admin
-    router.put('/events/:id/accept',  Admin, eventsController.acceptEvent);
+    router.put('/events/accept/:id',authenticateJWT, Admin, eventsController.acceptEvent);
   
     // Delete an event by ID
     router.delete('/events/:id', eventsController.deleteEvent);

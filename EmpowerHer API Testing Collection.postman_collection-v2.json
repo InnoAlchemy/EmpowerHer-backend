@@ -93,7 +93,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI2OTEzNzIxLCJleHAiOjE3MjY5MTczMjF9.YLIsJE7V5etkVvwW2rF9moMRCRfvIk7Msd7FR1pt0E4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzI2OTEzODk5LCJleHAiOjE3MjY5MTc0OTl9.P8tStrIZTQ31xcvpNDZpp7-SGrp0arClpMhQ2i1Wunc",
 									"type": "string"
 								}
 							]
@@ -1279,7 +1279,7 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/USER/Pictures/faraya.jpg"
+									"src": "/C:/Users/USER/Pictures/fifa.jpg"
 								},
 								{
 									"key": "title",
@@ -1430,7 +1430,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/events/2",
+							"raw": "http://localhost:8080/api/events/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1439,7 +1439,50 @@
 							"path": [
 								"api",
 								"events",
-								"2"
+								"1"
+							]
+						},
+						"description": "Update the details of an existing event"
+					},
+					"response": []
+				},
+				{
+					"name": "Accept Event",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI3MDAwMzY1LCJleHAiOjE3MjcwODY3NjV9.YLwXScXY5ID8XXIZK80lbSwvQfrxFk7fZBYXOQqtN5Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"is_accepted\":true\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/events/accept/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"events",
+								"accept",
+								"1"
 							]
 						},
 						"description": "Update the details of an existing event"
@@ -2097,7 +2140,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \n  \"email\": \"fadel.ahammoud@gmail.com\",\n  \"password\": \"Raul777\"\n}",
+							"raw": "{\n  \n  \"email\": \"fadel2.ahammoud@gmail.com\",\n  \"password\": \"Fadel777\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
