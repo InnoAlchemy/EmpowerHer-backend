@@ -52,6 +52,7 @@ require("./app/routes/static_page.routes")(app);
 require("./app/routes/team.routes")(app);
 require("./app/routes/user_tools.routes")(app);
 require("./app/routes/role.routes")(app);
+require("./app/routes/tickets.routes")(app);
 
 
 

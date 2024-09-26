@@ -1,12 +1,21 @@
 const db = require("../models");
 const Event = db.events;
-  // Allowed enum values for validation
-  const allowedTypes = ["online", "on-site", "both"];
-  const allowedCategories = ["event", "workshop"];
+const User=db.users;
+
+ // Allowed enum values for validation
+ const allowedTypes = ["online", "on-site", "both"];
+ const allowedCategories = ["event", "workshop"];
+
+
 // Get all events
 exports.getAllEvents = async (req, res) => {
   try {
-    const events = await Event.findAll();
+    const events = await Event.findAll({
+      include: [{
+        model: User, 
+       
+      }]
+    });
     res.status(200).json(events);
   } catch (error) {
     res.status(500).json({ message: "Error retrieving events" });
@@ -15,8 +24,12 @@ exports.getAllEvents = async (req, res) => {
 
 // Add a new event
 exports.addEvent = async (req, res) => {
-  const { title, description, date, time, location, type, category, price } = req.body;
+  const { user_id,title, description, date, time, location, type, category, price } = req.body;
 
+   // Validate user_id
+   if (!user_id) {
+    return res.status(400).json({ message: "User ID is required" });
+  }
   // Validate type
   if (!allowedTypes.includes(type)) {
     return res.status(400).json({ message: "Invalid type value" });
@@ -39,6 +52,7 @@ exports.addEvent = async (req, res) => {
 
   try {
     const newEvent = await Event.create({
+      user_id,
       image,
       title,
       description,
@@ -60,7 +74,10 @@ exports.addEvent = async (req, res) => {
 exports.getEventById = async (req, res) => {
   const { id } = req.params;
   try {
-    const event = await Event.findOne({ where: { id } });
+    const event = await Event.findOne({ where: { id }, include: [{
+      model: User, 
+     
+    }] });
     if (!event) {
       return res.status(404).json({ message: "Event not found" });
     }
@@ -73,7 +90,7 @@ exports.getEventById = async (req, res) => {
 // Update event details
 exports.updateEvent = async (req, res) => {
   const { id } = req.params;
-  const { title, description, date, time, location, type, category, price,is_accepted } = req.body;
+  const {user_id, title, description, date, time, location, type, category, price,is_accepted } = req.body;
 
   try {
     // Find the event
@@ -98,6 +115,7 @@ exports.updateEvent = async (req, res) => {
         ? `https://empowerher/${req.file.path.replace(/\\/g, '/')}`
         : `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`;
     }
+    event.user_id= user_id !== undefined ? user_id : event.user_id;
     event.title = title !== undefined ? title : event.title;
     event.description = description !== undefined ? description : event.description;
     event.date = date !== undefined ? date : event.date;
@@ -152,11 +170,16 @@ exports.acceptEvent = async (req, res) => {
 };
 
 // Get total number of pending events
+// Get total number of pending events
 exports.getPendingEvents = async (req, res) => {
   try {
     const pendingEvents = await Event.findAll({
       where: { is_accepted: false },
-      attributes: ['title', 'date', 'time'], 
+      attributes: ['title', 'date', 'time'], // Fetch event-specific fields
+      include: [{
+        model: User,
+        attributes: ['first_name', 'last_name'] // Fetch user's first and last names
+      }]
     });
 
     const totalPending = pendingEvents.length;
@@ -164,11 +187,14 @@ exports.getPendingEvents = async (req, res) => {
     // Format response data
     const response = {
       total: totalPending,
-      events: pendingEvents.map(event => ({
-        name: event.title,
-        date_time: `${event.date} ${event.time}`, // Combine date and time
-        requested_by: 'user',
-      })),
+      events: pendingEvents.map(event => {
+        const requestedBy = event.user ? `${event.user.first_name} ${event.user.last_name}` : 'Unknown User';
+        return {
+          name: event.title,
+          date_time: `${event.date} ${event.time}`,  // Combine date and time
+          requested_by: requestedBy  // Full name of the user
+        };
+      }),
     };
 
     res.status(200).json(response);
@@ -176,3 +202,4 @@ exports.getPendingEvents = async (req, res) => {
     res.status(500).json({ message: "Error retrieving pending events", error: error.message });
   }
 };
+

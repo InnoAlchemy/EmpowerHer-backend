@@ -27,7 +27,7 @@ exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.findAll({
       include: [{
-        model: db.role,  // Assuming you have a Role model defined
+        model: db.role,  
        
       }]
     });

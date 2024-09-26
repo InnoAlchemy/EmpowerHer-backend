@@ -35,7 +35,7 @@ db.partnership_types=require("./partnership_type.model")(sequelize, Sequelize);
 db.forms=require("./form.model")(sequelize, Sequelize);
 db.information_contact=require("./information_contact.model")(sequelize, Sequelize);
 db.role=require("./role.model")(sequelize, Sequelize);
-
+db.tickets=require("./tickets.model")(sequelize, Sequelize);
 
 // Associations
 
@@ -47,6 +47,9 @@ db.user_tools.belongsTo(db.users, { foreignKey: "user_id" });
 db.users.belongsTo(db.role, { foreignKey: "role_id", onDelete: "CASCADE" });
 db.role.hasMany(db.users, { foreignKey: "role_id", onDelete: "CASCADE" });
 
+// User - Event association
+db.users.hasMany(db.events, { foreignKey: "user_id", onDelete: "CASCADE" });
+db.events.belongsTo(db.users, { foreignKey: "user_id" });
 
 // DiscoverHerContent - UserTool association
 db.discover_her_content.hasMany(db.user_tools, { foreignKey: "discover_her_id", onDelete: "CASCADE" });
@@ -67,6 +70,14 @@ db.reserved_events.belongsTo(db.users, { foreignKey: "user_id" });
 // Coupon - ReservedEvent association
 db.coupons.hasMany(db.reserved_events, { foreignKey: "coupon_used_id", onDelete: "CASCADE" });
 db.reserved_events.belongsTo(db.coupons, { foreignKey: "coupon_used_id" });
+
+// Event - Ticket association
+db.events.hasMany(db.tickets, { foreignKey: "event_id", onDelete: "CASCADE" });
+db.tickets.belongsTo(db.events, { foreignKey: "event_id" });
+
+// ReservedEvent - Ticket association (a reserved event may use one or more tickets)
+db.reserved_events.hasMany(db.tickets, { foreignKey: "event_id", onDelete: "CASCADE" });
+db.tickets.belongsTo(db.reserved_events, { foreignKey: "event_id" });
 
 
 module.exports = db;
