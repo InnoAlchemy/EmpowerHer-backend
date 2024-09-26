@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
 const db = require("../models");
 const User = db.users;
-const Role = db.role; 
+const Role = db.role;
+const Permission = db.permission;  // Include Permission model
+const RolePermission = db.role_permission;  // Include RolePermission model
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_default_secret_key';
 
@@ -20,28 +22,35 @@ const authenticateJWT = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
-    const user = await User.findOne({ where: { id: decoded.id }, include: [Role] });
+
+    // Fetch user with role and permissions
+    const user = await User.findOne({
+      where: { id: decoded.id },
+      include: [
+        {
+          model: Role,
+          include: [
+            {
+              model: Permission,  // Include permissions through role_permission
+              through: { model: RolePermission }
+            }
+          ]
+        }
+      ]
+    });
 
     if (!user) {
       return res.status(404).json({ message: 'User not found.' });
     }
 
-    // Format user data
+    // Attach user and role info to the request
     req.user = {
       id: user.id,
-      role_id: user.role_id,
       first_name: user.first_name,
       last_name: user.last_name,
       email: user.email,
-      newsletter_subscribed: user.newsletter_subscribed,
-      membership_role_id: user.membership_role_id,
-      membership_updated_at: user.membership_updated_at,
-      is_verified: user.is_verified,
-      is_accepted: user.is_accepted,
-      otp: user.otp,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
-      role: user.role 
+      role: user.role,  // Include role with permissions
+      permissions: user.role.permissions  // Attach permissions for later use
     };
 
     next();
@@ -56,6 +65,7 @@ const authenticateJWT = async (req, res, next) => {
 };
 
 module.exports = authenticateJWT;
+
 /**
  * 
 This middleware function verifies JWT tokens for authentication.

@@ -1,29 +1,22 @@
 const db = require("../models");
 const User = db.users;
 const Role = db.role;
+const Permission = db.permission;  // Include Permission model
 
 const hasPermission = (requiredAction) => {
   return async (req, res, next) => {
-    const userId = req.user.id;  // req.user is populated by JWT middleware
+    const user = req.user;  // User is populated by JWT middleware
+
+    if (!user || !user.role || !user.role.permissions) {
+      return res.status(403).json({ message: 'Access denied. No permissions found.' });
+    }
 
     try {
-      const user = await User.findByPk(userId, {
-        include: Role  // Include the role associated with the user
-      });
-
-      if (!user) {
-        return res.status(403).json({ message: 'Access denied' });
-      }
-
-
-      // Parse the permissions field
-      const permissions = JSON.parse(user.role.permissions);
-
-      // Check if the user's role contains the required permission
-      const userHasPermission = permissions[requiredAction];
+      // Check if the user's role has the required permission
+      const userHasPermission = user.role.permissions.some(permission => permission.name === requiredAction);
 
       if (userHasPermission) {
-        next();  // User has the required permission
+        next();  // User has the required permission, allow access
       } else {
         return res.status(403).json({ message: 'Access denied. You do not have permission to perform this action.' });
       }
@@ -33,6 +26,5 @@ const hasPermission = (requiredAction) => {
     }
   };
 };
-
 
 module.exports = hasPermission;

@@ -2,6 +2,9 @@ const db = require("../models");
 const { Sequelize } = db;
 const bcrypt = require('bcrypt');
 const User = db.users;
+const Role=db.role;
+const Permission = db.permission;  // Include the Permission model
+const RolePermission = db.role_permission;  // Include the RolePermission model
 const Op = db.Sequelize.Op;
 const calculateComparisonPercentage = require('../Helper-Functions/helper_functions');
 const jwt = require('jsonwebtoken');
@@ -27,7 +30,13 @@ exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.findAll({
       include: [{
-        model: db.role,  
+        model: Role,
+          include: [
+          {
+            model: Permission,  // Include associated permissions
+            through: { model: RolePermission },  // Include the RolePermission junction table
+          },
+        ],
        
       }]
     });
@@ -115,7 +124,13 @@ exports.getUserById = async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id,{
       include: [{
-        model: db.role,  // Assuming you have a Role model defined
+        model: Role,
+          include: [
+          {
+            model: Permission,  // Include associated permissions
+            through: { model: RolePermission },  // Include the RolePermission junction table
+          },
+        ],
        
       }]
     });

@@ -1,3 +1,4 @@
+// role.model.js
 module.exports = (sequelize, Sequelize) => {
   const Role = sequelize.define(
     "role",
@@ -11,11 +12,6 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
-      },
-      permissions: {
-        type: Sequelize.JSON, // Store permissions in JSON format
-        allowNull: false,
-        defaultValue: [],
       },
     },
     {

@@ -8,7 +8,7 @@ module.exports = (app) => {
   var router = require("express").Router();
   
  // Get all users
-router.get('/users', usersController.getAllUsers);
+router.get('/users',authenticateJWT,hasPermission('read_user'), usersController.getAllUsers);
 
 // Add a new user
 router.post('/users', usersController.addUser);

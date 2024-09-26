@@ -35,6 +35,8 @@ db.partnership_types=require("./partnership_type.model")(sequelize, Sequelize);
 db.forms=require("./form.model")(sequelize, Sequelize);
 db.information_contact=require("./information_contact.model")(sequelize, Sequelize);
 db.role=require("./role.model")(sequelize, Sequelize);
+db.permission=require("./permission.model")(sequelize, Sequelize);
+db.role_permission=require("./role_permission.model.js")(sequelize, Sequelize);
 db.tickets=require("./tickets.model")(sequelize, Sequelize);
 
 // Associations
@@ -46,6 +48,15 @@ db.user_tools.belongsTo(db.users, { foreignKey: "user_id" });
 // User - Role association (A user has one role)
 db.users.belongsTo(db.role, { foreignKey: "role_id", onDelete: "CASCADE" });
 db.role.hasMany(db.users, { foreignKey: "role_id", onDelete: "CASCADE" });
+
+// Role - Permission Many-to-Many association via RolePermission
+db.role.belongsToMany(db.permission, { through: db.role_permission, foreignKey: 'role_id' });
+db.permission.belongsToMany(db.role, { through: db.role_permission, foreignKey: 'permission_id' });
+
+// RolePermission belongs to both Role and Permission
+db.role_permission.belongsTo(db.role, { foreignKey: 'role_id' });
+db.role_permission.belongsTo(db.permission, { foreignKey: 'permission_id' });
+
 
 // User - Event association
 db.users.hasMany(db.events, { foreignKey: "user_id", onDelete: "CASCADE" });

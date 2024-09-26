@@ -1,20 +1,38 @@
 const db = require("../models");
 const Role = db.role;
+const Permission = db.permission;  // Include the Permission model
+const RolePermission = db.role_permission;  // Include the RolePermission model
 
-// Get all roles
+// Get all roles with their permissions
 exports.getAllRoles = async (req, res) => {
   try {
-    const roles = await Role.findAll();
+    const roles = await Role.findAll({
+      include: [
+        {
+          model: Permission,  // Include associated permissions
+          through: { model: RolePermission },  // Include the RolePermission junction table
+        },
+      ],
+    });
     res.status(200).json(roles);
   } catch (error) {
     res.status(500).json({ message: "Error fetching roles", error });
   }
 };
 
-// Get role by ID
+
+// Get role by ID with its permissions
 exports.getRoleById = async (req, res) => {
   try {
-    const role = await Role.findByPk(req.params.id);
+    const role = await Role.findByPk(req.params.id, {
+      include: [
+        {
+          model: Permission,  // Include associated permissions
+          through: { model: RolePermission },  // Include the RolePermission junction table
+        },
+      ],
+    });
+
     if (role) {
       res.status(200).json(role);
     } else {
@@ -28,7 +46,7 @@ exports.getRoleById = async (req, res) => {
 // Create a new role
 exports.createRole = async (req, res) => {
   try {
-    const { name, permissions } = req.body;
+    const { name } = req.body;
 
     // Validate input
     if (!name) {
@@ -37,7 +55,7 @@ exports.createRole = async (req, res) => {
 
     const newRole = await Role.create({
       name,
-      permissions: permissions || []
+      
     });
 
     res.status(201).json(newRole);
@@ -51,7 +69,7 @@ exports.createRole = async (req, res) => {
 exports.updateRole = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, permissions } = req.body;
+    const { name, } = req.body;
 
     // Find the role by ID
     const role = await Role.findByPk(id);
@@ -61,7 +79,7 @@ exports.updateRole = async (req, res) => {
 
     // Update only the fields that are provided
     if (name !== undefined) role.name = name;
-    if (permissions !== undefined) role.permissions = permissions;
+    
 
     await role.save();
     res.status(200).json(role);

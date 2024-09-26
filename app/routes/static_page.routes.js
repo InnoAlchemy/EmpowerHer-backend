@@ -6,13 +6,13 @@ module.exports = (app) => {
     var router = require("express").Router();
   
     // Get static page content by key
-    router.get('/content_static_pages/:key',authenticateJWT,hasPermission('READ'), staticPagesController.getStaticPageByKey);
+    router.get('/content_static_pages/:key',authenticateJWT, staticPagesController.getStaticPageByKey);
   
     // Create static page content
-    router.post('/content_static_pages',authenticateJWT,upload.single('image'), hasPermission('CREATE'), staticPagesController.createStaticPage);
+    router.post('/content_static_pages',authenticateJWT,upload.single('image'), staticPagesController.createStaticPage);
   
     // Update static page content
-    router.put('/content_static_pages',authenticateJWT,upload.single('image'), hasPermission('UPDATE'), staticPagesController.updateStaticPage);
+    router.put('/content_static_pages',authenticateJWT,upload.single('image'), staticPagesController.updateStaticPage);
   
     app.use("/api", router);
   };
