@@ -18,23 +18,29 @@ module.exports = (sequelize, Sequelize) => {
         },
         ticket_id: {
           type: Sequelize.INTEGER,
-          allowNull: false,  
+          allowNull: false, 
+          defaultValue: 1, 
         },
         coupon_used_id: {
           type: Sequelize.INTEGER,
           allowNull: true,  // Nullable since coupon may not be used
         },
-        ticket_quantity: {
-          type: Sequelize.INTEGER, // Number of tickets reserved
-          allowNull: false,
-        },
+       
         payment_data: {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        total_price: {
+        ticket_quantity: {
+          type: Sequelize.INTEGER, // Number of tickets reserved
+          allowNull: false,
+        },
+        total_price: {//  = price(event model) * ticket_quantity
           type: Sequelize.DOUBLE,
           allowNull: false,
+        },
+        is_paid: {
+          type: Sequelize.BOOLEAN,
+          defaultValue: false,
         },
       },
       {

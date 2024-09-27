@@ -57,38 +57,36 @@ db.permission.belongsToMany(db.role, { through: db.role_permission, foreignKey: 
 db.role_permission.belongsTo(db.role, { foreignKey: 'role_id' });
 db.role_permission.belongsTo(db.permission, { foreignKey: 'permission_id' });
 
-
-// User - Event association
+// User - Event association (User creates many events)
 db.users.hasMany(db.events, { foreignKey: "user_id", onDelete: "CASCADE" });
 db.events.belongsTo(db.users, { foreignKey: "user_id" });
 
-// DiscoverHerContent - UserTool association
-db.discover_her_content.hasMany(db.user_tools, { foreignKey: "discover_her_id", onDelete: "CASCADE" });
-db.user_tools.belongsTo(db.discover_her_content, { foreignKey: "discover_her_id" });
+// Event - Ticket association (An event has many tickets)
+db.events.hasMany(db.tickets, { foreignKey: "event_id", onDelete: "CASCADE" });
+db.tickets.belongsTo(db.events, { foreignKey: "event_id" });
+
+// Event - ReservedEvent association (An event has many reservations)
+db.events.hasMany(db.reserved_events, { foreignKey: "event_id", onDelete: "CASCADE" });
+db.reserved_events.belongsTo(db.events, { foreignKey: "event_id" });
+
+// User - ReservedEvent association (A user makes many reservations)
+db.users.hasMany(db.reserved_events, { foreignKey: "user_id", onDelete: "CASCADE" });
+db.reserved_events.belongsTo(db.users, { foreignKey: "user_id" });
+
+// ReservedEvent - Ticket association (A reserved event may reserve one or more tickets)
+db.reserved_events.hasMany(db.tickets, { foreignKey: "reserved_event_id", onDelete: "CASCADE" });
+db.tickets.belongsTo(db.reserved_events, { foreignKey: "reserved_event_id" });
+
+// Coupon - ReservedEvent association (Optional coupon usage in a reservation)
+db.coupons.hasMany(db.reserved_events, { foreignKey: "coupon_used_id", onDelete: "CASCADE" });
+db.reserved_events.belongsTo(db.coupons, { foreignKey: "coupon_used_id" });
 
 // Page - PageSection association
 db.page.hasMany(db.page_sections, { foreignKey: "page_id", onDelete: "CASCADE" });
 db.page_sections.belongsTo(db.page, { foreignKey: "page_id" });
 
-// Event - ReservedEvent association
-db.events.hasMany(db.reserved_events, { foreignKey: "event_id", onDelete: "CASCADE" });
-db.reserved_events.belongsTo(db.events, { foreignKey: "event_id" });
-
-// User - ReservedEvent association
-db.users.hasMany(db.reserved_events, { foreignKey: "user_id", onDelete: "CASCADE" });
-db.reserved_events.belongsTo(db.users, { foreignKey: "user_id" });
-
-// Coupon - ReservedEvent association
-db.coupons.hasMany(db.reserved_events, { foreignKey: "coupon_used_id", onDelete: "CASCADE" });
-db.reserved_events.belongsTo(db.coupons, { foreignKey: "coupon_used_id" });
-
-// Event - Ticket association
-db.events.hasMany(db.tickets, { foreignKey: "event_id", onDelete: "CASCADE" });
-db.tickets.belongsTo(db.events, { foreignKey: "event_id" });
-
-// ReservedEvent - Ticket association (a reserved event may use one or more tickets)
-db.reserved_events.hasMany(db.tickets, { foreignKey: "event_id", onDelete: "CASCADE" });
-db.tickets.belongsTo(db.reserved_events, { foreignKey: "event_id" });
-
+// DiscoverHerContent - UserTool association
+db.discover_her_content.hasMany(db.user_tools, { foreignKey: "discover_her_id", onDelete: "CASCADE" });
+db.user_tools.belongsTo(db.discover_her_content, { foreignKey: "discover_her_id" });
 
 module.exports = db;

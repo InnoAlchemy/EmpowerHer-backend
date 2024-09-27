@@ -1,6 +1,7 @@
 const db = require("../models");
 const Ticket = db.tickets;
 const Event = db.events;
+const QRCode = require('qrcode');  // Import QR code generation library
 
 // Get all tickets
 exports.getAllTickets = async (req, res) => {
@@ -16,7 +17,7 @@ exports.getAllTickets = async (req, res) => {
 
 // Create a ticket for an event
 exports.createTicket = async (req, res) => {
-  const { event_id, tickets_availability } = req.body;
+  const { event_id,amount} = req.body;//limit
 
   try {
     // Check if the event exists
@@ -25,14 +26,21 @@ exports.createTicket = async (req, res) => {
       return res.status(404).json({ message: "Event not found" });
     }
 
-    // Create the ticket
+    // Generate a unique QR code for the ticket
+    const qrCode = await QRCode.toDataURL(`ticket-${event_id}-${Date.now()}`);
+
+    // Create the ticket and associate it with the event
     const newTicket = await Ticket.create({
       event_id,
-      tickets_availability,
+      amount,
+      qrcode: qrCode,  // Save the unique QR code
+     // amount: amount || 1,  // Set default amount to 1 if not provided
+     // limit: limit || 1,    // Set default limit to 1 if not provided
     });
 
     res.status(201).json(newTicket);
   } catch (error) {
+    console.error(error);  // Log the error for debugging
     res.status(400).json({ message: "Error creating ticket" });
   }
 };
@@ -56,7 +64,7 @@ exports.getTicketById = async (req, res) => {
 // Update ticket usage status (mark as used)
 exports.updateTicketUsage = async (req, res) => {
   const { id } = req.params;
-  const { is_used } = req.body;
+  const { is_used ,amount} = req.body;
 
   try {
     const ticket = await Ticket.findByPk(id);
@@ -65,6 +73,7 @@ exports.updateTicketUsage = async (req, res) => {
     }
 
     ticket.is_used = is_used;
+    ticket.amount = amount;
     await ticket.save();
 
     res.status(200).json(ticket);

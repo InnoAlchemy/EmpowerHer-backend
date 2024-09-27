@@ -16,11 +16,23 @@ module.exports = (sequelize, Sequelize) => {
           type: Sequelize.BOOLEAN,
           defaultValue: false,
         },
-        tickets_availability: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          defaultValue: 1, // default to 0 tickets available
-        },
+       qrcode:{
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
+       },
+       amount: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 1,
+      },
+      /*
+       limit: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 1, 
+      },*/
+     
       },
       {
         timestamps: true,

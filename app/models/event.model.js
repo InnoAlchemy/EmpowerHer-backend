@@ -42,6 +42,11 @@ module.exports = (sequelize, Sequelize) => {
           type: Sequelize.ENUM("event", "workshop"),
           allowNull: false,
         },
+        status: {
+          type: Sequelize.ENUM("upcoming", "soon","on"),
+          allowNull: false,
+          defaultValue: "upcoming",
+        },
         price: {
           type: Sequelize.DOUBLE,
           allowNull: false,

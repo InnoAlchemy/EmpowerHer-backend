@@ -23,8 +23,14 @@ module.exports = (app) => {
     // Delete an event by ID
     router.delete('/events/:id', eventsController.deleteEvent);
   
-   // Get All pending Events
-   router.get('/pending-events', eventsController.getPendingEvents);
+    // Get All pending Events
+    router.get('/pending-events', eventsController.getPendingEvents);
+
+    // Get All pending Events
+    router.get('/recent-events', eventsController.getMonthlyEventStats);
+
+    // Get Total Revenue
+    router.get('/total-revenue', eventsController.getTotalRevenue);
   
     app.use("/api", router);
   };

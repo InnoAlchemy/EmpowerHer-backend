@@ -1,7 +1,10 @@
 const db = require("../models");
 const Event = db.events;
+const ReservedEvent= db.reserved_events;
 const User=db.users;
-
+const Op = db.Sequelize.Op;
+const formatTimeTo12Hour = require('../Helper-Functions/formatTime-12hours');
+const calculateComparisonPercentage = require('../Helper-Functions/helper_functions');
  // Allowed enum values for validation
  const allowedTypes = ["online", "on-site", "both"];
  const allowedCategories = ["event", "workshop"];
@@ -24,7 +27,7 @@ exports.getAllEvents = async (req, res) => {
 
 // Add a new event
 exports.addEvent = async (req, res) => {
-  const { user_id,title, description, date, time, location, type, category, price } = req.body;
+  const { user_id,title, description, date, time, location, type, category, price,status } = req.body;
 
    // Validate user_id
    if (!user_id) {
@@ -61,6 +64,7 @@ exports.addEvent = async (req, res) => {
       location,
       type,
       category,
+      status,
       price,
     });
     res.status(201).json(newEvent);
@@ -90,7 +94,7 @@ exports.getEventById = async (req, res) => {
 // Update event details
 exports.updateEvent = async (req, res) => {
   const { id } = req.params;
-  const {user_id, title, description, date, time, location, type, category, price,is_accepted } = req.body;
+  const {user_id, title, description, date, time, location, type, category, price,status,is_accepted } = req.body;
 
   try {
     // Find the event
@@ -124,6 +128,7 @@ exports.updateEvent = async (req, res) => {
     event.type = type !== undefined ? type : event.type;
     event.category = category !== undefined ? category : event.category;
     event.price = price !== undefined ? price : event.price;
+    event.status = status !== undefined ? status : event.status;
     event.is_accepted = is_accepted !== undefined ? is_accepted : event.is_accepted;
     // Save updated event
     await event.save();
@@ -170,7 +175,6 @@ exports.acceptEvent = async (req, res) => {
 };
 
 // Get total number of pending events
-// Get total number of pending events
 exports.getPendingEvents = async (req, res) => {
   try {
     const pendingEvents = await Event.findAll({
@@ -203,3 +207,139 @@ exports.getPendingEvents = async (req, res) => {
   }
 };
 
+// Get monthly event statistics(recent events)
+
+exports.getMonthlyEventStats = async (req, res) => {
+  const currentMonthStart = new Date();
+  currentMonthStart.setDate(1);
+  const currentMonthEnd = new Date();
+  currentMonthEnd.setMonth(currentMonthEnd.getMonth() + 1);
+  currentMonthEnd.setDate(1);
+
+  const lastMonthStart = new Date(currentMonthStart);
+  lastMonthStart.setMonth(currentMonthStart.getMonth() - 1);
+  lastMonthStart.setDate(1);
+  const lastMonthEnd = new Date(currentMonthStart);
+
+  try {
+    // Get total events for the current month
+    const currentMonthEvents = await Event.findAll({
+      where: {
+        date: {
+          [Op.gte]: currentMonthStart,
+          [Op.lt]: currentMonthEnd,
+        },
+      },
+    });
+
+    const totalCurrentMonth = currentMonthEvents.length;
+
+    // Get total events for the last month
+    const lastMonthEvents = await Event.findAll({
+      where: {
+        date: {
+          [Op.gte]: lastMonthStart,
+          [Op.lt]: lastMonthEnd,
+        },
+      },
+    });
+
+    const totalLastMonth = lastMonthEvents.length;
+
+    // Prepare comparison message
+    let comparisonMessage = "";
+    const difference = totalCurrentMonth - totalLastMonth;
+    if (difference > 0) {
+      comparisonMessage = `${difference} more`;
+    } else if (difference < 0) {
+      comparisonMessage = `${Math.abs(difference)} less`;
+    } else {
+      comparisonMessage = "no change";
+    }
+
+    // Prepare detailed event data
+    const eventsDetails = await Promise.all(currentMonthEvents.map(async (event) => {
+      // Fetch reserved events for the current event
+      const reservedCount = await ReservedEvent.count({
+        where: { event_id: event.id }
+      });
+
+      // Total tickets sold
+      const totalTicketsSold = await ReservedEvent.sum('ticket_quantity', {
+        where: { event_id: event.id }
+      }) || 0;
+
+      // Total revenue generated from reserved events
+      const totalRevenue = await ReservedEvent.sum('total_price', {
+        where: { event_id: event.id }
+      }) || 0;
+
+      return {
+        title: event.title,
+        date_and_time: `${event.date} ${formatTimeTo12Hour(event.time)}`, // Format time here
+        location: event.location,
+        number_of_registrations: reservedCount,
+        total_tickets_sold: totalTicketsSold,
+        revenue_generated: `$${totalRevenue.toFixed(2)}`
+      };
+    }));
+
+    // Respond with the results
+    res.status(200).json({
+      total: totalCurrentMonth,
+      comparison: comparisonMessage,
+      events: eventsDetails,
+    });
+  } catch (error) {
+    console.error(error); // Log error for debugging
+    res.status(500).json({ message: "Error retrieving monthly event statistics" });
+  }
+};
+
+// Get total revenue and compare with last month
+exports.getTotalRevenue = async (req, res) => {
+  const currentMonthStart = new Date();
+  currentMonthStart.setDate(1); // First day of current month
+
+  const currentMonthEnd = new Date(currentMonthStart);
+  currentMonthEnd.setMonth(currentMonthEnd.getMonth() + 1); // First day of next month
+
+  const lastMonthStart = new Date(currentMonthStart);
+  lastMonthStart.setMonth(currentMonthStart.getMonth() - 1); // First day of last month
+  const lastMonthEnd = new Date(currentMonthStart); // First day of current month (end of last month)
+
+  try {
+    // Calculate total revenue for the current month
+    const currentMonthRevenue = await ReservedEvent.sum('total_price', {
+      where: {
+        createdAt: {
+          [Op.gte]: currentMonthStart,
+          [Op.lt]: currentMonthEnd,
+        },
+      },
+    }) || 0;
+
+    // Calculate total revenue for the previous month
+    const lastMonthRevenue = await ReservedEvent.sum('total_price', {
+      where: {
+        createdAt: {
+          [Op.gte]: lastMonthStart,
+          [Op.lt]: lastMonthEnd,
+        },
+      },
+    }) || 0;
+
+    // Calculate the comparison percentage using the helper function
+    const percentageChange = await calculateComparisonPercentage(currentMonthRevenue, lastMonthRevenue);
+
+    // Respond with total revenue and comparison percentage
+    res.status(200).json({
+      total_revenue: `$${currentMonthRevenue.toFixed(2)}`,
+      comparison: percentageChange
+    });
+
+  } catch (error) {
+    console.error(error); // Log error for debugging
+    res.status(500).json({ message: "Error calculating total revenue", error: error.message });
+  }
+};
