@@ -173,7 +173,7 @@ exports.getRecentTransactions = async (req, res) => {
 };
 
 // Get total tickets sold, total tickets remaining, and their percentages
-exports.getTotalTicketsWithPercentage = async (req, res) => {
+exports.getTotalTicketsWithPercentageAndTotal = async (req, res) => {
   try {
     // Calculate total tickets sold (sum of ticket_quantity from reserved events)
     const totalTicketsSold = await ReservedEvent.sum('ticket_quantity') || 0;
@@ -196,8 +196,9 @@ exports.getTotalTicketsWithPercentage = async (req, res) => {
       percentageRemaining = ((totalTicketsRemaining / totalTicketsAvailable) * 100).toFixed(2);
     }
 
-    // Return the total tickets sold, remaining, and their percentages
+    // Return the total tickets sold, remaining, and their percentages, including the total number of tickets
     res.status(200).json({
+      total_tickets: totalTicketsAvailable, // Total tickets available
       total_tickets_sold: totalTicketsSold,
       total_tickets_remaining: totalTicketsRemaining,
       percentage_sold: `${percentageSold}%`,

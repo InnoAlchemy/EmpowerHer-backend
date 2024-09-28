@@ -3,6 +3,9 @@ const Event = db.events;
 const ReservedEvent= db.reserved_events;
 const User=db.users;
 const Op = db.Sequelize.Op;
+const Ticket = db.tickets; // Assuming your Sequelize models are setup properly
+const QRCode = require('qrcode'); // QR code generation library
+
 const formatTimeTo12Hour = require('../Helper-Functions/formatTime-12hours');
 const calculateComparisonPercentage = require('../Helper-Functions/helper_functions');
  // Allowed enum values for validation
@@ -27,12 +30,15 @@ exports.getAllEvents = async (req, res) => {
 
 // Add a new event
 exports.addEvent = async (req, res) => {
-  const { user_id,title, description, date, time, location, type, category, price,status } = req.body;
+  const {
+    user_id, title, description, date, start_time, end_time, location, type, category, price, status, ticket_amount
+  } = req.body;
 
-   // Validate user_id
-   if (!user_id) {
+  // Validate user_id
+  if (!user_id) {
     return res.status(400).json({ message: "User ID is required" });
   }
+
   // Validate type
   if (!allowedTypes.includes(type)) {
     return res.status(400).json({ message: "Invalid type value" });
@@ -48,31 +54,118 @@ exports.addEvent = async (req, res) => {
     return res.status(400).json({ message: "Image is required." });
   }
 
-  // Construct the image URL based on the environment
-  const image = process.env.NODE_ENV === 'production' 
+  const image = process.env.NODE_ENV === 'production'
     ? `https://empowerher/${req.file.path.replace(/\\/g, '/')}`
     : `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`;
 
   try {
+    // Convert start_time and end_time to 12-hour format
+    const formattedStartTime = formatTimeTo12Hour(start_time);
+    const formattedEndTime = formatTimeTo12Hour(end_time);
+
+    // Create the event
     const newEvent = await Event.create({
       user_id,
       image,
       title,
       description,
       date,
-      time,
+      start_time: formattedStartTime,
+      end_time: formattedEndTime,
       location,
       type,
       category,
       status,
       price,
     });
+
+    // Create tickets for the event if ticket_amount is provided
+    if (ticket_amount && ticket_amount > 0) {
+      const ticketsToCreate = [];
+
+      for (let i = 0; i < ticket_amount; i++) {
+        // Generate a unique QR code for each ticket
+        const qrCode = await QRCode.toDataURL(`ticket-${newEvent.id}-${Date.now()}-${i}`);
+
+        ticketsToCreate.push({
+          event_id: newEvent.id,
+          qrcode: qrCode,
+          amount: 1 // Assuming each ticket has an amount of 1
+        });
+      }
+
+      // Create all tickets in bulk
+      await Ticket.bulkCreate(ticketsToCreate);
+    }
+
+    res.status(201).json(newEvent);
+  } catch (error) {
+    console.error(error);  // Log the error for debugging
+    res.status(400).json({ message: "Error creating event or tickets", error: error.message });
+  }
+};
+/*exports.addEvent = async (req, res) => {
+  const { user_id, title, description, date, start_time, end_time, location, type, category, price, status, Languages } = req.body;
+
+  // Validate user_id
+  if (!user_id) {
+    return res.status(400).json({ message: "User ID is required" });
+  }
+
+  // Validate type
+  if (!allowedTypes.includes(type)) {
+    return res.status(400).json({ message: "Invalid type value" });
+  }
+
+  // Validate category
+  if (!allowedCategories.includes(category)) {
+    return res.status(400).json({ message: "Invalid category value" });
+  }
+
+  // Validate languages
+  const allowedLanguages = ["english", "french", "arabic"];
+  if (!allowedLanguages.includes(Languages)) {
+    return res.status(400).json({ message: "Invalid language value" });
+  }
+
+  // Check for required image file
+  if (!req.file) {
+    return res.status(400).json({ message: "Image is required." });
+  }
+
+  // Construct the image URL based on the environment
+  const image = process.env.NODE_ENV === 'production' 
+    ? `https://empowerher/${req.file.path.replace(/\\/g, '/')}` 
+    : `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`;
+
+  try {
+     // Convert start_time and end_time to 12-hour format
+     const formattedStartTime = formatTimeTo12Hour(start_time);
+     const formattedEndTime = formatTimeTo12Hour(end_time);
+ 
+    const newEvent = await Event.create({
+      user_id,
+      image,
+      title,
+      description,
+      date,
+      start_time: formattedStartTime,
+      end_time: formattedEndTime,
+      location,
+      type,
+      category,
+      status,
+      Languages,
+      price,
+      is_accepted: false 
+    });
+
     res.status(201).json(newEvent);
   } catch (error) {
     res.status(400).json({ message: "Invalid input", error: error.message });
   }
 };
-
+*/
 
 // Get event by ID
 exports.getEventById = async (req, res) => {
@@ -94,7 +187,9 @@ exports.getEventById = async (req, res) => {
 // Update event details
 exports.updateEvent = async (req, res) => {
   const { id } = req.params;
-  const {user_id, title, description, date, time, location, type, category, price,status,is_accepted } = req.body;
+  const {
+    user_id, title, description, date, start_time, end_time, location, type, category, price, status,Languages, is_accepted
+  } = req.body;
 
   try {
     // Find the event
@@ -113,24 +208,30 @@ exports.updateEvent = async (req, res) => {
       return res.status(400).json({ message: "Invalid category value" });
     }
 
-    // Update only provided fields
+    // Convert start_time and end_time to 12-hour format if provided
+    const formattedStartTime = start_time ? formatTimeTo12Hour(start_time) : event.start_time;
+    const formattedEndTime = end_time ? formatTimeTo12Hour(end_time) : event.end_time;
+
     if (req.file) {
-      event.image = process.env.NODE_ENV === 'production' 
+      event.image = process.env.NODE_ENV === 'production'
         ? `https://empowerher/${req.file.path.replace(/\\/g, '/')}`
         : `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`;
     }
-    event.user_id= user_id !== undefined ? user_id : event.user_id;
+
+    event.user_id = user_id !== undefined ? user_id : event.user_id;
     event.title = title !== undefined ? title : event.title;
     event.description = description !== undefined ? description : event.description;
     event.date = date !== undefined ? date : event.date;
-    event.time = time !== undefined ? time : event.time;
+    event.start_time = formattedStartTime;
+    event.end_time = formattedEndTime;
     event.location = location !== undefined ? location : event.location;
     event.type = type !== undefined ? type : event.type;
     event.category = category !== undefined ? category : event.category;
     event.price = price !== undefined ? price : event.price;
     event.status = status !== undefined ? status : event.status;
+    event.Languages = Languages!== undefined? Languages : event.Languages;
     event.is_accepted = is_accepted !== undefined ? is_accepted : event.is_accepted;
-    // Save updated event
+
     await event.save();
     res.status(200).json(event);
   } catch (error) {
@@ -179,7 +280,7 @@ exports.getPendingEvents = async (req, res) => {
   try {
     const pendingEvents = await Event.findAll({
       where: { is_accepted: false },
-      attributes: ['title', 'date', 'time'], // Fetch event-specific fields
+      attributes: ['title', 'date', 'start_time'], // Fetch event-specific fields
       include: [{
         model: User,
         attributes: ['first_name', 'last_name'] // Fetch user's first and last names
@@ -195,7 +296,7 @@ exports.getPendingEvents = async (req, res) => {
         const requestedBy = event.user ? `${event.user.first_name} ${event.user.last_name}` : 'Unknown User';
         return {
           name: event.title,
-          date_time: `${event.date} ${event.time}`,  // Combine date and time
+          date_time: `${event.date} ${event.start_time}`,  // Combine date and time
           requested_by: requestedBy  // Full name of the user
         };
       }),
@@ -276,11 +377,12 @@ exports.getMonthlyEventStats = async (req, res) => {
 
       return {
         title: event.title,
-        date_and_time: `${event.date} ${formatTimeTo12Hour(event.time)}`, // Format time here
+        date_and_time: `${event.date} ${formatTimeTo12Hour(event.start_time)}`, // Format time here
         location: event.location,
         number_of_registrations: reservedCount,
         total_tickets_sold: totalTicketsSold,
-        revenue_generated: `$${totalRevenue.toFixed(2)}`
+        revenue_generated: `$${totalRevenue.toFixed(2)}`,
+        deatils:event.description
       };
     }));
 

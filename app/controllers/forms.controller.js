@@ -13,7 +13,7 @@ exports.getAllForms = async (req, res) => {
 
 // Submit a new form
 exports.submitForm = async (req, res) => {
-  const { first_name, last_name, email, phone_number, content, category } = req.body;
+  const { first_name, last_name, email, phone_number, content, category,organization,status,type, } = req.body;
   try {
     const newForm = await Form.create({
       first_name,
@@ -21,7 +21,11 @@ exports.submitForm = async (req, res) => {
       email,
       phone_number,
       content,
-      category
+      category,
+      organization,
+      status,
+      type,
+      
     });
     res.status(201).json(newForm);
   } catch (error) {

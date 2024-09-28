@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const roleController = require("../controllers/role.controller");
-  const authenticateJWT = require("../middleware/Jwt_middleware"); // Assuming JWT middleware for auth
-  const Admin = require('../middleware/Admin_middleware'); // Assuming admin middleware for role management
+  const authenticateJWT = require("../middleware/Jwt_middleware"); 
+  const Admin = require('../middleware/Admin_middleware'); 
 
   const router = require("express").Router();
 

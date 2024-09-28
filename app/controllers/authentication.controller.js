@@ -24,7 +24,7 @@ const validatePassword = (password) => {
 // Sign Up Method
 exports.Signup = async (req, res) => {
   try {
-    const { first_name, last_name, email, password, confirm_password, role_id } = req.body;
+    const { first_name, last_name, email, password, confirm_password,status, role_id } = req.body;
 
     if (!validateEmail(email)) {
       return res.status(400).json({ message: 'Invalid email format.' });
@@ -57,6 +57,7 @@ exports.Signup = async (req, res) => {
       email,
       password: hashedPassword,
       role_id,
+      status,
       is_verified: false,
       is_accepted: false,
       otp,

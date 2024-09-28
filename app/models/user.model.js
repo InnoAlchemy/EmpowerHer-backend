@@ -42,7 +42,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
       },
-
+      status:{
+      type: Sequelize.ENUM('active', 'inactive', 'idle'),
+      defaultValue: 'inactive' 
+      },
       is_verified: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,

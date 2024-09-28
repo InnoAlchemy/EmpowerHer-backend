@@ -16,7 +16,8 @@ var router = require("express").Router();
  // Cancel a reserved event
  router.delete('/reserved_events/:id', reservedEventsController.cancelReservedEvent);
 
- router.get('/tickets-sold-remaining-count-percentage', reservedEventsController.getTotalTicketsWithPercentage);
+ // Get the total number of tickets sold and remaining count and percentage
+ router.get('/tickets-sold-remaining-count-percentage', reservedEventsController.getTotalTicketsWithPercentageAndTotal);
 
  app.use("/api", router);
 };

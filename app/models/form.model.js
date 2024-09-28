@@ -30,8 +30,23 @@ module.exports = (sequelize, Sequelize) => {
             },
             category: {
                 type: Sequelize.STRING,
-                allowNull: false
-            }
+                allowNull: true
+            },
+            organization: {
+                type: Sequelize.STRING,
+                allowNull: true
+            },
+            status: {
+                type: Sequelize.ENUM("new", "inprogress", "responded","closed"),
+                allowNull: false,
+                defaultValue:'new'
+              },
+            type: {
+                type: Sequelize.ENUM("sponsorship"),
+                allowNull: true,
+                defaultValue:'sponsorship'
+              },
+              
         },
         {
             timestamps: false

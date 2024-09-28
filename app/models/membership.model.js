@@ -21,6 +21,14 @@ module.exports = (sequelize, Sequelize) => {
           allowNull: false,
           defaultValue:'basic'
         },
+        start_date: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
+        expiry_date: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
         price: {
           type: Sequelize.DOUBLE,
           allowNull: false,

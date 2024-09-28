@@ -32,9 +32,8 @@ exports.createTicket = async (req, res) => {
     // Create the ticket and associate it with the event
     const newTicket = await Ticket.create({
       event_id,
-      amount,
       qrcode: qrCode,  // Save the unique QR code
-     // amount: amount || 1,  // Set default amount to 1 if not provided
+      amount: amount || 1, 
      // limit: limit || 1,    // Set default limit to 1 if not provided
     });
 

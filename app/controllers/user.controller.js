@@ -37,7 +37,6 @@ exports.getAllUsers = async (req, res) => {
             through: { model: RolePermission },  // Include the RolePermission junction table
           },
         ],
-       
       }]
     });
     res.status(200).json(users);
@@ -49,7 +48,7 @@ exports.getAllUsers = async (req, res) => {
 // Add a new user
 exports.addUser = async (req, res) => {
   try {
-    const { first_name, last_name, email, newsletter_subscribed, membership_role_id, membership_updated_at, password ,role_id} = req.body;
+    const { first_name, last_name, email, newsletter_subscribed, membership_role_id, membership_updated_at, password, status, role_id } = req.body;
 
     // Validate input fields
     if (!first_name || !last_name || !email || !password) {
@@ -73,8 +72,8 @@ exports.addUser = async (req, res) => {
     // Hash the password before saving it
     const hashedPassword = await bcrypt.hash(password, 10);
 
-       // Generate OTP
-       const otp = crypto.randomInt(100000, 999999).toString(); // Generate 6-digit OTP
+    // Generate OTP
+    const otp = crypto.randomInt(100000, 999999).toString(); // Generate 6-digit OTP
 
     // Create the new user
     const newUser = await User.create({
@@ -86,33 +85,36 @@ exports.addUser = async (req, res) => {
       membership_role_id,
       membership_updated_at,
       otp,
-      password: hashedPassword // Store hashed password
+      status,
+      password: hashedPassword, // Store hashed password
     });
-     // Generate a JWT token (but user still needs to verify OTP)
-     const token = jwt.sign({ id: newUser.id, role: newUser.role },JWT_SECRET, {
-      expiresIn: "24h", // Token expires in 1 hour
+
+    // Generate a JWT token (but user still needs to verify OTP)
+    const token = jwt.sign({ id: newUser.id, role: newUser.role }, JWT_SECRET, {
+      expiresIn: '24h', // Token expires in 24 hours
     });
- // Send OTP via email (simulated)
- const mailOptions = {
-  from: process.env.EMAIL_USER,
-  to: newUser.email,
-  subject: 'Your OTP for Account Verification',
-  text: `Hello ${newUser.first_name},\n\nYour OTP for verifying your account is: ${otp}.\n\nBest regards,\nYour Team`,
-};
-transporter.sendMail(mailOptions, (error, info) => {
-  if (error) {
-    console.error('Error sending OTP email:', error);
-    return res.status(500).json({ message: 'User created, but error sending OTP email.' });
-  }
 
-  // Respond with token and message to verify OTP
-  res.status(201).json({
-    message: 'User created! Please check your email for the OTP to verify your account.',
-    token, // JWT token
-  });
-});
+    // Send OTP via email (simulated)
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: newUser.email,
+      subject: 'Your OTP for Account Verification',
+      text: `Hello ${newUser.first_name},\n\nYour OTP for verifying your account is: ${otp}.\n\nBest regards,\nYour Team`,
+    };
 
-    res.status(201).json(newUser);
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error('Error sending OTP email:', error);
+        return res.status(500).json({ message: 'User created, but error sending OTP email.', error: error.message });
+      }
+
+      // Respond with token and message to verify OTP
+      return res.status(201).json({
+        message: 'User created! Please check your email for the OTP to verify your account.',
+        token, // JWT token
+      });
+    });
+
   } catch (error) {
     console.error('Error adding user:', error);
     res.status(500).json({ message: 'Error adding user', error: error.message });
@@ -160,6 +162,7 @@ exports.updateUser = async (req, res) => {
       role,
       is_verified,
       is_accepted,
+      status,
       otp
     } = req.body;
 
@@ -194,6 +197,7 @@ exports.updateUser = async (req, res) => {
     if (newsletter_subscribed !== undefined) user.newsletter_subscribed = newsletter_subscribed;
     if (membership_role_id !== undefined) user.membership_role_id = membership_role_id;
     if (membership_updated_at !== undefined) user.membership_updated_at = membership_updated_at;
+    if(status!==undefined) user.status = status;
     if (password !== undefined) {
       // Hash the new password before saving
       user.password = await bcrypt.hash(password, 10);
@@ -236,11 +240,19 @@ exports.acceptUserAccount = async (req, res) => {
 
     // Update the user's acceptance status based on admin action
     user.is_accepted = accept;
+
+    // If the user is accepted, update their status to 'active'
+    if (accept === true) {
+      user.status = 'active';
+    }
+
+    // Save the updated user details
     await user.save();
 
     const message = accept
-      ? 'User account accepted successfully!'
+      ? 'User account accepted and status updated to active!'
       : 'User account denied successfully!';
+      
     res.status(200).json({ message });
   } catch (error) {
     console.error('Error updating user account:', error);

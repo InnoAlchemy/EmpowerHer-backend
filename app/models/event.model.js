@@ -27,7 +27,11 @@ module.exports = (sequelize, Sequelize) => {
           type: Sequelize.DATEONLY,
           allowNull: false,
         },
-        time: {
+        start_time: {
+          type: Sequelize.TIME,
+          allowNull: false,
+        },
+        end_time: {
           type: Sequelize.TIME,
           allowNull: false,
         },
@@ -43,9 +47,14 @@ module.exports = (sequelize, Sequelize) => {
           allowNull: false,
         },
         status: {
-          type: Sequelize.ENUM("upcoming", "soon","on"),
+          type: Sequelize.ENUM("upcoming", "cancelled","ongoing"),
           allowNull: false,
           defaultValue: "upcoming",
+        },
+        Languages: {
+          type: Sequelize.ENUM("english","french","arabic"),
+          allowNull: false,
+          defaultValue: "english",
         },
         price: {
           type: Sequelize.DOUBLE,
