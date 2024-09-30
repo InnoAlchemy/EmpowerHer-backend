@@ -5,7 +5,7 @@ const User=db.users;
 const Op = db.Sequelize.Op;
 const Ticket = db.tickets; // Assuming your Sequelize models are setup properly
 const QRCode = require('qrcode'); // QR code generation library
-
+const { v4: uuidv4 } = require('uuid');
 const formatTimeTo12Hour = require('../Helper-Functions/formatTime-12hours');
 const calculateComparisonPercentage = require('../Helper-Functions/helper_functions');
  // Allowed enum values for validation
@@ -79,31 +79,35 @@ exports.addEvent = async (req, res) => {
       price,
     });
 
+    // Array to hold all created tickets
+    const tickets = [];
+
     // Create tickets for the event if ticket_amount is provided
     if (ticket_amount && ticket_amount > 0) {
-      const ticketsToCreate = [];
-
       for (let i = 0; i < ticket_amount; i++) {
-        // Generate a unique QR code for each ticket
-        const qrCode = await QRCode.toDataURL(`ticket-${newEvent.id}-${Date.now()}-${i}`);
-
-        ticketsToCreate.push({
+        // Generate a unique ticket identifier and QR code
+        const ticketIdentifier = `ticket-${newEvent.id}-${uuidv4()}`;
+      
+        // Create each ticket and associate it with the event
+        const newTicket = await Ticket.create({
           event_id: newEvent.id,
-          qrcode: qrCode,
-          amount: 1 // Assuming each ticket has an amount of 1
+          qrcode: ticketIdentifier,  // Store the QR code as the ticket's QR code
+          amount: 1        // Assuming each ticket has an amount of 1
         });
-      }
 
-      // Create all tickets in bulk
-      await Ticket.bulkCreate(ticketsToCreate);
+        // Add each created ticket to the tickets array
+        tickets.push(newTicket);
+      }
     }
 
-    res.status(201).json(newEvent);
+    // Return the newly created event and tickets as the response
+    res.status(201).json({ event: newEvent, tickets });
   } catch (error) {
     console.error(error);  // Log the error for debugging
     res.status(400).json({ message: "Error creating event or tickets", error: error.message });
   }
 };
+
 /*exports.addEvent = async (req, res) => {
   const { user_id, title, description, date, start_time, end_time, location, type, category, price, status, Languages } = req.body;
 

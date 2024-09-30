@@ -18,7 +18,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI2OTEzNzIxLCJleHAiOjE3MjY5MTczMjF9.YLIsJE7V5etkVvwW2rF9moMRCRfvIk7Msd7FR1pt0E4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI3NjgyNTg2LCJleHAiOjE3Mjc3Njg5ODZ9.3CDIWcCnn9E2-xfT7QP5A0TS7K4wX4_LX9P6LC6pbkU",
 									"type": "string"
 								}
 							]
@@ -42,7 +42,7 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/USER/Pictures/f6.jpg"
+									"src": "/C:/Users/USER/Pictures/messaging.png"
 								},
 								{
 									"key": "title",
@@ -263,8 +263,7 @@
 								{
 									"key": "is_active",
 									"value": "true",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								}
 							]
 						},
@@ -428,7 +427,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Admin\"\r\n  \r\n}\r\n"
+							"raw": "{\r\n  \"name\": \"Operator\"\r\n  \r\n}\r\n"
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/roles",
@@ -973,32 +972,32 @@
 							"formdata": [
 								{
 									"key": "category",
-									"value": "",
+									"value": "article",
 									"type": "text"
 								},
 								{
 									"key": "header_file",
 									"type": "file",
-									"src": []
+									"src": "/C:/Users/USER/Pictures/cedar.jpg"
 								},
 								{
 									"key": "title",
-									"value": "",
+									"value": "Empowering Women in Tech",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "",
+									"value": "An article discussing the rise of women in the tech industry",
 									"type": "text"
 								},
 								{
 									"key": "is_active",
-									"value": "",
+									"value": "true",
 									"type": "text"
 								},
 								{
 									"key": "date",
-									"value": "",
+									"value": "2023-09-01",
 									"type": "text"
 								}
 							]
@@ -1169,16 +1168,16 @@
 								{
 									"key": "header_image",
 									"type": "file",
-									"src": []
+									"src": "/C:/Users/USER/Pictures/faraya.jpg"
 								},
 								{
 									"key": "title",
-									"value": "",
+									"value": "WESA",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "",
+									"value": "this is the wesa home page",
 									"type": "text"
 								}
 							]
@@ -1333,32 +1332,32 @@
 							"formdata": [
 								{
 									"key": "page_id",
-									"value": "",
+									"value": "1",
 									"type": "text"
 								},
 								{
 									"key": "title",
-									"value": "",
+									"value": "Event Objective",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "",
+									"value": "The objective of the event is to empower women in the energy sector",
 									"type": "text"
 								},
 								{
 									"key": "image",
 									"type": "file",
-									"src": []
+									"src": "/C:/Users/USER/Downloads/BB_221d622d-0a22-40aa-9e3c-f633d40f8171.mp4"
 								},
 								{
 									"key": "position",
-									"value": "",
+									"value": "left",
 									"type": "text"
 								},
 								{
 									"key": "type",
-									"value": "",
+									"value": "content_box",
 									"type": "text"
 								}
 							]
@@ -1629,7 +1628,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI3NTI5NzM1LCJleHAiOjE3Mjc2MTYxMzV9.kWeOu2vYvqZKYr_hwKSkhj3GYrPgrX8z9NxI2Vv0sNI",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI3NjgyNTg2LCJleHAiOjE3Mjc3Njg5ODZ9.3CDIWcCnn9E2-xfT7QP5A0TS7K4wX4_LX9P6LC6pbkU",
 									"type": "string"
 								}
 							]
@@ -1653,7 +1652,7 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/USER/Pictures/hk.jpg"
+									"src": "/C:/Users/USER/Pictures/f6.jpg"
 								},
 								{
 									"key": "title",
@@ -1702,7 +1701,7 @@
 								},
 								{
 									"key": "ticket_amount",
-									"value": "100",
+									"value": "10",
 									"type": "text"
 								}
 							]
@@ -2082,7 +2081,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \n  \"event_id\": 2\n\n}",
+							"raw": "{\n  \n  \"event_id\": 1,\n   \"amount\":3\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2196,7 +2195,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/tickets/1",
+							"raw": "http://localhost:8080/api/tickets/10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2205,7 +2204,7 @@
 							"path": [
 								"api",
 								"tickets",
-								"1"
+								"10"
 							]
 						},
 						"description": "Retrieve details of a specific event by ID"
@@ -2267,7 +2266,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"17% Discount\",\n    \"code\": \"SAVE17\",\n    \"limit\": -1,\n    \"amount\":3\n}",
+							"raw": "{\n    \"title\": \"17% Discount\",\n    \"code\": \"SAVE17\",\n    \"limit\": -1,\n    \"amount\":1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3084,7 +3083,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n   \"user_id\": 2,\n  \"discover_her_id\": 1\n}",
+							"raw": "{\n   \"user_id\": 1,\n  \"discover_her_id\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3517,8 +3516,7 @@
 								{
 									"key": "description",
 									"value": "connect with us on LinkedIn",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								},
 								{
 									"key": "value",
@@ -3533,7 +3531,7 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/USER/Pictures/f02.jpg"
+									"src": "/C:/Users/USER/Pictures/flag1.jpg"
 								}
 							]
 						},

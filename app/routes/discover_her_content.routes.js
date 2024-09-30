@@ -7,13 +7,13 @@ module.exports = (app) => {
     router.get('/discover_her_content', discoverHerController.getAllContent);
   
     // Add new content
-    router.post('/discover_her_content',upload.single('image'), discoverHerController.addContent);
+    router.post('/discover_her_content',upload.single('header_file'), discoverHerController.addContent);
   
     // Get content by ID
     router.get('/discover_her_content/:id', discoverHerController.getContentById);
   
     // Update content details
-    router.put('/discover_her_content/:id',upload.single('image'), discoverHerController.updateContent);
+    router.put('/discover_her_content/:id',upload.single('header_file'), discoverHerController.updateContent);
   
     // Delete content by ID
     router.delete('/discover_her_content/:id', discoverHerController.deleteContent);

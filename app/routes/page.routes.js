@@ -7,13 +7,13 @@ module.exports = (app) => {
     router.get('/pages', pagesController.getAllPages);
   
     // Add a new page
-    router.post('/pages',upload.single('image'), pagesController.addPage);
+    router.post('/pages',upload.single('header_image'), pagesController.addPage);
   
     // Get a page by ID
     router.get('/pages/:id', pagesController.getPageById);
   
     // Update a page by ID
-    router.put('/pages/:id',upload.single('image'), pagesController.updatePage);
+    router.put('/pages/:id',upload.single('header_image'), pagesController.updatePage);
   
     // Delete a page by ID
     router.delete('/pages/:id', pagesController.deletePage);

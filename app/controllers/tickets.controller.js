@@ -2,7 +2,7 @@ const db = require("../models");
 const Ticket = db.tickets;
 const Event = db.events;
 const QRCode = require('qrcode');  // Import QR code generation library
-
+const { v4: uuidv4 } = require('uuid');
 // Get all tickets
 exports.getAllTickets = async (req, res) => {
   try {
@@ -16,8 +16,8 @@ exports.getAllTickets = async (req, res) => {
 };
 
 // Create a ticket for an event
-exports.createTicket = async (req, res) => {
-  const { event_id,amount} = req.body;//limit
+/*exports.createTicket = async (req, res) => {
+  const { event_id, amount } = req.body;
 
   try {
     // Check if the event exists
@@ -26,15 +26,14 @@ exports.createTicket = async (req, res) => {
       return res.status(404).json({ message: "Event not found" });
     }
 
-    // Generate a unique QR code for the ticket
-    const qrCode = await QRCode.toDataURL(`ticket-${event_id}-${Date.now()}`);
+    // Generate a unique short identifier for the ticket
+    const ticketIdentifier = `ticket-${event_id}-${uuidv4()}`;
 
     // Create the ticket and associate it with the event
     const newTicket = await Ticket.create({
       event_id,
-      qrcode: qrCode,  // Save the unique QR code
-      amount: amount || 1, 
-     // limit: limit || 1,    // Set default limit to 1 if not provided
+      qrcode: ticketIdentifier,  // Save the unique short identifier
+      amount: amount || 1,
     });
 
     res.status(201).json(newTicket);
@@ -42,8 +41,44 @@ exports.createTicket = async (req, res) => {
     console.error(error);  // Log the error for debugging
     res.status(400).json({ message: "Error creating ticket" });
   }
-};
+};*/
+// Create multiple tickets for an event
+exports.createTicket = async (req, res) => {
+  const { event_id, amount } = req.body;  // 'amount' specifies the number of tickets
 
+  try {
+    // Check if the event exists
+    const event = await Event.findByPk(event_id);
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+
+    // Array to hold all created tickets
+    const tickets = [];
+
+    // Loop through the specified amount to create multiple tickets
+    for (let i = 0; i < amount; i++) {
+      // Generate a unique short identifier for each ticket
+      const ticketIdentifier = `ticket-${event_id}-${uuidv4()}`;
+
+      // Create the ticket and associate it with the event
+      const newTicket = await Ticket.create({
+        event_id,
+        qrcode: ticketIdentifier,  // Save the unique short identifier
+        amount: 1,                 // Each ticket has an individual amount of 1
+      });
+
+      // Add each created ticket to the tickets array
+      tickets.push(newTicket);
+    }
+
+    // Return all the created tickets as the response
+    res.status(201).json(tickets);
+  } catch (error) {
+    console.error(error);  // Log the error for debugging
+    res.status(400).json({ message: "Error creating tickets" });
+  }
+};
 // Get a ticket by ID
 exports.getTicketById = async (req, res) => {
   const { id } = req.params;
@@ -54,7 +89,11 @@ exports.getTicketById = async (req, res) => {
       return res.status(404).json({ message: "Ticket not found" });
     }
 
-    res.status(200).json(ticket);
+    // Generate the QR code from the short identifier
+    const qrCode = await QRCode.toDataURL(ticket.qrcode);
+
+    // Send the QR code back with the ticket details
+    res.status(200).json({ ...ticket.toJSON(), qrCode });
   } catch (error) {
     res.status(500).json({ message: "Error retrieving ticket" });
   }
