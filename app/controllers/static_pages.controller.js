@@ -1,6 +1,26 @@
 const db = require("../models");
 const StaticPage = db.static_page;
 
+// Get all static pages
+exports.getAllStaticPages = async (req, res) => {
+  try {
+    // Retrieve all static pages from the database
+    const pages = await StaticPage.findAll();
+    
+    // Check if there are any static pages
+    if (pages.length === 0) {
+      return res.status(404).json({ message: "No static pages found" });
+    }
+
+    // Return the list of static pages
+    res.status(200).json(pages);
+  } catch (error) {
+    console.error('Error retrieving static pages:', error);
+    res.status(500).json({ message: "Error retrieving static pages", error: error.message });
+  }
+};
+
+
 // Get static page content by key
 exports.getStaticPageByKey = async (req, res) => {
   const key = req.params.key;

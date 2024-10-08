@@ -4,6 +4,9 @@ module.exports = (app) => {
     const authenticateJWT = require('../middleware/Jwt_middleware'); 
     const hasPermission = require('../middleware/Role_Permissions_middleware');
     var router = require("express").Router();
+
+     // Get All static pages
+     router.get('/content_static_pages/',authenticateJWT, staticPagesController.getAllStaticPages);
   
     // Get static page content by key
     router.get('/content_static_pages/:key',authenticateJWT, staticPagesController.getStaticPageByKey);
