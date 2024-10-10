@@ -58,12 +58,16 @@ exports.createStaticPage = async (req, res) => {
   }
 };
 
-// Update static page content
+
+// Update static page content by ID
 exports.updateStaticPage = async (req, res) => {
-  const { key} = req.body; // Ensure key is passed in the body
+  const { id } = req.params; // Get the static page ID from the request parameters
+  const { key,title, description, button_link, button_text } = req.body; // Fields to be updated
+
   try {
-    // Find the static page by key
-    const page = await StaticPage.findOne({ where: { key } });
+    // Find the static page by ID
+    const page = await StaticPage.findOne({ where: { id } });
+    
     if (!page) {
       return res.status(404).json({ message: "Static page not found" });
     }
@@ -71,21 +75,30 @@ exports.updateStaticPage = async (req, res) => {
     // Only update fields that are provided in the request body
     if (req.file) {
       page.image = process.env.NODE_ENV === 'production' 
-        ? `https://empowerher/${req.file.path.replace(/\\/g, '/')}`
+        ? `https://empowerher/${req.file.path.replace(/\\/g, '/')}` 
         : `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`;
     }
-    if (req.body.title !== undefined) {
-      page.title = req.body.title;
+
+    if(key!==undefined){
+      page.key = key;
     }
-    if (req.body.description !== undefined) {
-      page.description = req.body.description;
+
+    if (title !== undefined) {
+      page.title = title;
     }
-    if (button_text !== undefined) {  // Update button text if provided
+
+    if (description !== undefined) {
+      page.description = description;
+    }
+
+    if (button_text !== undefined) {
       page.button_text = button_text;
     }
-    if (button_link !== undefined) {  // Update button link if provided
+
+    if (button_link !== undefined) {
       page.button_link = button_link;
     }
+
     // Save the updated page
     await page.save();
     

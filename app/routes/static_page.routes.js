@@ -15,7 +15,7 @@ module.exports = (app) => {
     router.post('/content_static_pages',authenticateJWT,upload.single('image'), staticPagesController.createStaticPage);
   
     // Update static page content
-    router.put('/content_static_pages',authenticateJWT,upload.single('image'), staticPagesController.updateStaticPage);
+    router.put('/content_static_pages/:id',authenticateJWT,upload.single('image'), staticPagesController.updateStaticPage);
   
     app.use("/api", router);
   };

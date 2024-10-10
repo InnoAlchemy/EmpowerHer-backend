@@ -55,6 +55,7 @@ require("./app/routes/role.routes")(app);
 require("./app/routes/permission.routes")(app);
 require("./app/routes/role_permissions.routes")(app);
 require("./app/routes/tickets.routes")(app);
+require("./app/routes/combined_api_data_for_pages.routes")(app);
 
 
 
