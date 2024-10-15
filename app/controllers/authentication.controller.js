@@ -172,7 +172,7 @@ exports.requestPasswordReset = async (req, res) => {
         return res.status(500).json({ message: 'Error sending OTP email.' });
       }
 
-      res.status(200).json({ message: 'OTP sent successfully! Please check your email.' });
+      res.status(200).json({ message: 'OTP sent successfully! Please check your email.', otp });
     });
   } catch (error) {
     console.error('Error requesting password reset:', error);

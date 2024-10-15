@@ -18,7 +18,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI3NjgyNTg2LCJleHAiOjE3Mjc3Njg5ODZ9.3CDIWcCnn9E2-xfT7QP5A0TS7K4wX4_LX9P6LC6pbkU",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI4NTYzNDkyLCJleHAiOjE3Mjg2NDk4OTJ9.x7eig24QewWg0TePFhN1te5OlP3xIudPwxCZp8ulGes",
 									"type": "string"
 								}
 							]
@@ -36,32 +36,32 @@
 							"formdata": [
 								{
 									"key": "key",
-									"value": "home7",
+									"value": "home_header",
 									"type": "text"
 								},
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/USER/Pictures/messaging.png"
+									"src": "/C:/Users/USER/Downloads/image 1.png"
 								},
 								{
 									"key": "title",
-									"value": "Welcome to Empower Her",
+									"value": "Be Part of the  Movement to Empower Women Worldwide!",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "Empowering women through education and collaboration.",
+									"value": "no",
 									"type": "text"
 								},
 								{
 									"key": "button_link",
-									"value": "BUTTON",
+									"value": "/become-a-member",
 									"type": "text"
 								},
 								{
 									"key": "button_text",
-									"value": "https://example.com/home.jpg",
+									"value": "Become A Member",
 									"type": "text"
 								}
 							]
@@ -93,7 +93,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzI2OTEzODk5LCJleHAiOjE3MjY5MTc0OTl9.P8tStrIZTQ31xcvpNDZpp7-SGrp0arClpMhQ2i1Wunc",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI4NTYzNDkyLCJleHAiOjE3Mjg2NDk4OTJ9.x7eig24QewWg0TePFhN1te5OlP3xIudPwxCZp8ulGes",
 									"type": "string"
 								}
 							]
@@ -129,6 +129,51 @@
 					"response": []
 				},
 				{
+					"name": "Get All static-pages",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI4NTYzNDkyLCJleHAiOjE3Mjg2NDk4OTJ9.x7eig24QewWg0TePFhN1te5OlP3xIudPwxCZp8ulGes",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/content_static_pages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"content_static_pages"
+							]
+						},
+						"description": "Retrieve details of a specific static page by ID"
+					},
+					"response": []
+				},
+				{
 					"name": "content-static-page/:id",
 					"request": {
 						"auth": {
@@ -136,7 +181,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzI2OTEzODk5LCJleHAiOjE3MjY5MTc0OTl9.P8tStrIZTQ31xcvpNDZpp7-SGrp0arClpMhQ2i1Wunc",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI4NTYzNDkyLCJleHAiOjE3Mjg2NDk4OTJ9.x7eig24QewWg0TePFhN1te5OlP3xIudPwxCZp8ulGes",
 									"type": "string"
 								}
 							]
@@ -154,38 +199,43 @@
 							"formdata": [
 								{
 									"key": "key",
-									"value": "",
-									"type": "text"
+									"value": "home_about_us",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "image",
-									"value": "",
-									"type": "text"
+									"type": "file",
+									"src": "/C:/Users/USER/Downloads/Frame 21.png",
+									"disabled": true
 								},
 								{
 									"key": "title",
-									"value": "",
-									"type": "text"
+									"value": "About Us",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "description",
-									"value": "",
+									"value": "Get to Know Us: Our Story and Team\nWelcome to EmpowerHer. Energy, where we are dedicated to unlocking the power and potential of women across industries. Our platform is committed to supporting women in sectors where they are traditionally underrepresented compared to men, \nincluding STEM, leadership and executive positions, finance and  investment banking, construction, and skilled trades.  Born from a passionate desire to foster growth, empowerment, and advancement for women, EmpowerHer. Energy is a beacon of inspiration and support for women professionals, entrepreneurs, and enthusiasts alike. \nWhat to expect?\nWith a rallying cry to redefine possibilities and shatter  barriers, EmpowerHer.Energy embarks on a mission to illuminate these sectors with the brilliance and resilience of empowered women. This isn't just a platform; it is a movement—a journey of transformation where each empowered woman becomes a catalyst for a brighter, more inclusive energy future and where we teach men to live with empowered women.",
 									"type": "text"
 								},
 								{
 									"key": "button_link",
-									"value": "",
-									"type": "text"
+									"value": "/find-out-more",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "button_text",
-									"value": "",
-									"type": "text"
+									"value": "Find Out More",
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/content_static_pages",
+							"raw": "http://localhost:8080/api/content_static_pages/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -193,7 +243,8 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"content_static_pages"
+								"content_static_pages",
+								"2"
 							]
 						},
 						"description": "Update the details of an existing static page"
@@ -242,23 +293,23 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "ronaldo",
+									"value": "ramos",
 									"type": "text"
 								},
 								{
 									"key": "position",
-									"value": "webdev",
+									"value": "elmatador",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "at saudi league",
+									"value": "free agent",
 									"type": "text"
 								},
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/USER/Pictures/cr7.jpg"
+									"src": "/C:/Users/USER/Pictures/w6.jpg"
 								},
 								{
 									"key": "is_active",
@@ -385,6 +436,33 @@
 							]
 						},
 						"description": "Delete a specific team member by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Combined Data for Each Page",
+			"item": [
+				{
+					"name": "Get Data For Home Page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/combined_api_data_for_pages/home",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"combined_api_data_for_pages",
+								"home"
+							]
+						},
+						"description": "Retrieve details of a specific team member by ID"
 					},
 					"response": []
 				}
@@ -978,16 +1056,16 @@
 								{
 									"key": "header_file",
 									"type": "file",
-									"src": "/C:/Users/USER/Pictures/cedar.jpg"
+									"src": "/C:/Users/USER/Downloads/During.png"
 								},
 								{
 									"key": "title",
-									"value": "Empowering Women in Tech",
+									"value": "Leading the Charge: Adiba El Masri’s\nJourney in Sustainable Architecture and\nEnergy Innovation",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "An article discussing the rise of women in the tech industry",
+									"value": "Adiba El Masri is an accomplished architect and\nsustainability advocate with a strong focus on\nenergy efficiency in the built environment.\nHer journey in the energy sector was inspired...",
 									"type": "text"
 								},
 								{
@@ -997,7 +1075,7 @@
 								},
 								{
 									"key": "date",
-									"value": "2023-09-01",
+									"value": "2024-10-09",
 									"type": "text"
 								}
 							]
@@ -1514,7 +1592,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI3NTI5NzM1LCJleHAiOjE3Mjc2MTYxMzV9.kWeOu2vYvqZKYr_hwKSkhj3GYrPgrX8z9NxI2Vv0sNI",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI4NTYzNDkyLCJleHAiOjE3Mjg2NDk4OTJ9.x7eig24QewWg0TePFhN1te5OlP3xIudPwxCZp8ulGes",
 									"type": "string"
 								}
 							]
@@ -1628,7 +1706,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI3NjgyNTg2LCJleHAiOjE3Mjc3Njg5ODZ9.3CDIWcCnn9E2-xfT7QP5A0TS7K4wX4_LX9P6LC6pbkU",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI4NTYzNDkyLCJleHAiOjE3Mjg2NDk4OTJ9.x7eig24QewWg0TePFhN1te5OlP3xIudPwxCZp8ulGes",
 									"type": "string"
 								}
 							]
@@ -1652,21 +1730,21 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/USER/Pictures/f6.jpg"
+									"src": "/C:/Users/USER/Downloads/upcoming.png"
 								},
 								{
 									"key": "title",
-									"value": "trying automatic ticket creation",
+									"value": "MEET & GREET",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "Alha ystur yarab nasrak",
+									"value": "Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nsed do eiusmod tempor\nincididunt ut labore et\ndolore",
 									"type": "text"
 								},
 								{
 									"key": "date",
-									"value": "2024-09-17",
+									"value": "2024-10-25",
 									"type": "text"
 								},
 								{
@@ -1676,7 +1754,7 @@
 								},
 								{
 									"key": "end_time",
-									"value": "16:00 PM",
+									"value": "18:00 PM",
 									"type": "text"
 								},
 								{
@@ -1747,6 +1825,16 @@
 				{
 					"name": "update event",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI4NTYzNDkyLCJleHAiOjE3Mjg2NDk4OTJ9.x7eig24QewWg0TePFhN1te5OlP3xIudPwxCZp8ulGes",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [
 							{
@@ -1783,8 +1871,8 @@
 									"disabled": true
 								},
 								{
-									"key": "time",
-									"value": "11:00 PM",
+									"key": "start_time",
+									"value": "9:00",
 									"type": "text"
 								},
 								{
@@ -1808,6 +1896,12 @@
 								{
 									"key": "price",
 									"value": "70",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "end_time",
+									"value": "16:00",
 									"type": "text"
 								}
 							]
@@ -2835,7 +2929,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"first_name\": \"Raul\",\n  \"last_name\": \"Gon\",\n  \"email\": \"fadel.ahammoud@gmail.com\",\n  \"password\": \"Raul777\",\n  \"confirm_password\":\"Raul777\",\n  \"role_id\":1\n}",
+							"raw": "{\n  \"first_name\": \"Raul\",\n  \"last_name\": \"Gon\",\n  \"email\": \"fadel.ahammoud@gmail.com\",\n  \"password\": \"Raul777\",\n  \"confirm_password\":\"Raul777\"\n  //\"role_id\":1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3510,17 +3604,17 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "LinkedIn2",
+									"value": "Intsagram",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "connect with us on LinkedIn",
+									"value": "connect with via phone number on Instagram",
 									"type": "text"
 								},
 								{
 									"key": "value",
-									"value": "https://linkedin.com/company/empowerher",
+									"value": "https://Instagram.com/company/empowerher",
 									"type": "text"
 								},
 								{
@@ -3531,7 +3625,8 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/USER/Pictures/flag1.jpg"
+									"src": "/C:/Users/USER/Pictures/flag1.jpg",
+									"disabled": true
 								}
 							]
 						},
