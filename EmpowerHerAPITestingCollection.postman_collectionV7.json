@@ -181,7 +181,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI4NTYzNDkyLCJleHAiOjE3Mjg2NDk4OTJ9.x7eig24QewWg0TePFhN1te5OlP3xIudPwxCZp8ulGes",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI5MDczMDEzLCJleHAiOjE3MjkxNTk0MTN9.XSccffqexDMGT5oIYO_ljeGVW5z_ymLYlHgBczBJx1g",
 									"type": "string"
 								}
 							]
@@ -206,36 +206,35 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/USER/Downloads/Frame 21.png",
+									"src": "/C:/Users/USER/Downloads/get-involved.png",
 									"disabled": true
 								},
 								{
 									"key": "title",
-									"value": "About Us",
+									"value": "Get Involved",
 									"type": "text",
 									"disabled": true
 								},
 								{
 									"key": "description",
-									"value": "Get to Know Us: Our Story and Team\nWelcome to EmpowerHer. Energy, where we are dedicated to unlocking the power and potential of women across industries. Our platform is committed to supporting women in sectors where they are traditionally underrepresented compared to men, \nincluding STEM, leadership and executive positions, finance and  investment banking, construction, and skilled trades.  Born from a passionate desire to foster growth, empowerment, and advancement for women, EmpowerHer. Energy is a beacon of inspiration and support for women professionals, entrepreneurs, and enthusiasts alike. \nWhat to expect?\nWith a rallying cry to redefine possibilities and shatter  barriers, EmpowerHer.Energy embarks on a mission to illuminate these sectors with the brilliance and resilience of empowered women. This isn't just a platform; it is a movement—a journey of transformation where each empowered woman becomes a catalyst for a brighter, more inclusive energy future and where we teach men to live with empowered women.",
-									"type": "text"
+									"value": "Together, women and men collaborate to break down\nbarriers, challenge stereotypes, and build a more equitable\nfuture for all. EmpowerHer.Energy serves as a catalyst for\nchange, inspiring individuals of all genders to come together,\nsupport one another, and create a world where everyone has\nthe opportunity to succeed.",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "button_link",
-									"value": "/find-out-more",
-									"type": "text",
-									"disabled": true
+									"value": "/our-activities",
+									"type": "text"
 								},
 								{
 									"key": "button_text",
-									"value": "Find Out More",
-									"type": "text",
-									"disabled": true
+									"value": "Our Activities",
+									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/content_static_pages/2",
+							"raw": "http://localhost:8080/api/content_static_pages/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -244,7 +243,7 @@
 							"path": [
 								"api",
 								"content_static_pages",
-								"2"
+								"4"
 							]
 						},
 						"description": "Update the details of an existing static page"
@@ -460,6 +459,28 @@
 								"api",
 								"combined_api_data_for_pages",
 								"home"
+							]
+						},
+						"description": "Retrieve details of a specific team member by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Data For Get Involved Page Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/combined_api_data_for_pages/get-involved",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"combined_api_data_for_pages",
+								"get-involved"
 							]
 						},
 						"description": "Retrieve details of a specific team member by ID"
@@ -898,18 +919,34 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
+								"value": "multipart/form-data",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"icon\": \"https://example.com/icon.png\",\n  \"title\": \"Volunteer Program\",\n  \"description\": \"Join our efforts to make a difference.\",\n  \"is_active\": false\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Leadership Development",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Taking part in leadership\ndevelopment programs empowers\nindividuals to enhance their\nleadership skills, build confidence,\nand prepare for leadership roles\nwithin their organizations.",
+									"type": "text"
+								},
+								{
+									"key": "is_active",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "icon",
+									"type": "file",
+									"src": "/C:/Users/USER/Downloads/development.png"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/get_involved_programs",
@@ -2512,7 +2549,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"title\": \"Baisc Membership\",\n  \"description\": \"Access to all premium content and events.\",\n  \"type\": \"individual\",\n  \"price\": 150,\n  \"start_date\":\"2024-09-17\",\n  \"expiry_date\":\"2024-10-17\"\n}",
+							"raw": "{\n    \"title\": \"Enterprise\",\n    \"description\": \"Benefits:Access for an unlimited number of employees.All Corporate Membership benefits.Dedicated account manager.Annual diversity and inclusion audit and consultation\",\n    \"type\": \"corporate\",\n    \"price\": 1500,\n    \"start_date\": \"2024-11-17\",\n    \"expiry_date\": \"2024-12-17\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2541,7 +2578,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/memberships/1",
+							"raw": "http://localhost:8080/api/memberships/6",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2550,7 +2587,7 @@
 							"path": [
 								"api",
 								"memberships",
-								"1"
+								"6"
 							]
 						},
 						"description": "Retrieve details of a specific membership by ID"
@@ -2564,7 +2601,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n // \"title\": \"Premium Membership\",\n // \"description\": \"Access to all premium content and events.\",\n // \"type\": \"individual\",\n  \"price\": 170\n}",
+							"raw": "{\n    // \"title\": \"Premium Membership\",\n   // \"description\": \"Benefits:Access to newsletters and updates.Invitations to free events and webinars.Access to online resources and articles.\",\n   // \"type\": \"individual\",\n    \"price\": 50\n   // \"start_date\": \"2024-09-17\",\n    //\"expiry_date\": \"2024-12-17\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2966,7 +3003,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \n  \"email\": \"fadel.ahammoud@gmail.com\",\n  \"password\": \"Raul777\"\n}",
+							"raw": "{\n  \n  \"email\": \"fadel.ahammoud@gmail.com\",\n  \"password\": \"Rola777\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

@@ -22,14 +22,12 @@ exports.addMembership = async (req, res) => {
   }
 
   try {
-    // Ensure the price includes a '$' symbol, first convert price to a string
-    const formattedPrice = typeof price === 'string' && price.startsWith('$') ? price : `$${price}`;
-
+  
     const newMembership = await Membership.create({
       title,
       description,
       type,
-      price: formattedPrice,  // Store the formatted price
+      price,  
       start_date,
       expiry_date,
     });
@@ -71,6 +69,7 @@ exports.updateMembership = async (req, res) => {
     membership.description = description !== undefined ? description : membership.description;
     membership.start_date = start_date !== undefined ? start_date : membership.start_date;
     membership.expiry_date = expiry_date !== undefined ? expiry_date : membership.expiry_date;
+    membership.price= price !== undefined ? price : membership.price;
 
     if (type !== undefined) {
       if (!validTypes.includes(type)) {
@@ -79,12 +78,7 @@ exports.updateMembership = async (req, res) => {
       membership.type = type;
     }
 
-    // Ensure the price includes a '$' symbol if provided
-    if (price !== undefined) {
-      const formattedPrice = typeof price === 'string' && price.startsWith('$') ? price : `$${price}`;
-      membership.price = formattedPrice;
-    }
-
+   
     await membership.save();
     res.status(200).json(membership);
   } catch (error) {

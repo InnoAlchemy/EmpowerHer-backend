@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2024 at 02:20 PM
+-- Generation Time: Oct 17, 2024 at 12:07 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -155,7 +155,15 @@ CREATE TABLE `get_involved_programs` (
 --
 
 INSERT INTO `get_involved_programs` (`id`, `icon`, `title`, `description`, `is_active`, `createdAt`, `updatedAt`) VALUES
-(1, 'https://example.com/icon.png', 'Volunteer Program', 'Join our efforts to make a difference.', 0, '2024-09-30 08:25:44', '2024-09-30 08:25:44');
+(1, 'https://example.com/icon.png', 'Volunteer Program', 'Join our efforts to make a difference.', 0, '2024-09-30 08:25:44', '2024-09-30 08:25:44'),
+(2, 'http://localhost:8080/uploads/icon-1729153743587-997376079.png', 'Membership', 'Joining the EmpowerHer.Energy  community as a member provides access to exclusive resources, events, and networking opportunities tailored to empower women in the energy, finance, leadership, real estate, and construction sectors.', 1, '2024-10-17 08:29:03', '2024-10-17 08:29:03'),
+(3, 'http://localhost:8080/uploads/icon-1729153807738-997531583.png', 'Mentorship Programs', 'Participating in mentorship\nprograms allows individuals to\nconnect with experienced\nprofessionals who can provide\nguidance, support, and valuable\ninsights to help navigate their\ncareer paths.', 1, '2024-10-17 08:30:07', '2024-10-17 08:30:07'),
+(4, 'http://localhost:8080/uploads/icon-1729153941247-757259817.png', 'Volunteering', 'Volunteering for\nEmpowerHer.Energy events,\nprograms, or initiatives provides\nopportunities to give back to \nthe community, make a positive\nimpact, and support the mission\nof empowering women in\nvarious industries.', 1, '2024-10-17 08:32:21', '2024-10-17 08:32:21'),
+(5, 'http://localhost:8080/uploads/icon-1729154011040-136094583.png', 'Content Contribution', 'Contributing articles, blog posts, or\nthought leadership pieces to the\nEmpowerHer.Energy platform\nallows individuals to share their\ninsights, experiences, and expertise\nwith the wider community, inspiring\nand empowering others in the\nprocess.', 1, '2024-10-17 08:33:31', '2024-10-17 08:33:31'),
+(6, 'http://localhost:8080/uploads/icon-1729154117976-551388673.png', 'Advocacy and Outreach', 'Getting involved in advocacy and\noutreach initiatives enables\nindividuals to contribute to the\npromotion of gender equality and\ninclusion within their workplaces\nand communities.', 1, '2024-10-17 08:35:17', '2024-10-17 08:35:17'),
+(7, 'http://localhost:8080/uploads/icon-1729154187130-351519461.png', 'Educational Workshops', 'Engaging in educational workshops\nand seminars offered by\nEmpowerHer.Energy allows\nindividuals to enhance their skills,\ngain valuable knowledge, and stay\nupdated on industry trends and\nbest practices.', 1, '2024-10-17 08:36:27', '2024-10-17 08:36:27'),
+(8, 'http://localhost:8080/uploads/icon-1729154240999-860465173.png', 'Networking Events', 'Attending networking events\nhosted by EmpowerHer.Energy\nprovides opportunities to connect\nwith like-minded individuals, build\nprofessional relationships, and\nexpand one\'s network within the\nindustry.', 1, '2024-10-17 08:37:21', '2024-10-17 08:37:21'),
+(9, 'http://localhost:8080/uploads/icon-1729154298425-47349994.png', 'Leadership Development', 'Taking part in leadership\ndevelopment programs empowers\nindividuals to enhance their\nleadership skills, build confidence,\nand prepare for leadership roles\nwithin their organizations.', 1, '2024-10-17 08:38:18', '2024-10-17 08:38:18');
 
 -- --------------------------------------------------------
 
@@ -207,7 +215,12 @@ CREATE TABLE `memberships` (
 --
 
 INSERT INTO `memberships` (`id`, `title`, `description`, `type`, `start_date`, `expiry_date`, `price`, `createdAt`, `updatedAt`) VALUES
-(1, 'Baisc Membership', 'Access to all premium content and events.', 'individual', '2024-09-17 00:00:00', '2024-10-17 00:00:00', 0, '2024-09-30 08:24:30', '2024-09-30 08:24:30');
+(1, 'Baisc Membership', 'Benefits:Access to newsletters and updates.Invitations to free events and webinars.Access to online resources and articles.', 'individual', '2024-09-17 00:00:00', '2024-12-17 00:00:00', 50, '2024-09-30 08:24:30', '2024-10-17 07:36:30'),
+(2, 'Premium Membership', 'Benefits: All Basic Membership benefits.Discounts on workshops and conferences.Access to mentorship programs.Exclusive networking opportunities.', 'individual', '2024-10-10 00:00:00', '2024-12-10 00:00:00', 150, '2024-10-17 06:57:58', '2024-10-17 07:36:23'),
+(3, 'Professional Membership', 'Benefits:Exclusive networking opportunities.Access to advanced training and certification programs.Profile feature on the EmpowerHer.Energy website.Priority access to speaking opportunities at events.', 'individual', '2024-11-20 00:00:00', '2024-12-20 00:00:00', 350, '2024-10-17 07:00:32', '2024-10-17 07:36:14'),
+(4, 'Small Business', 'Benefits:Access for up to 5 employees.Company listing in the directory.Company listing in the directory.Access to diversity and inclusion training for employees.', 'corporate', '2024-11-20 00:00:00', '2024-12-20 00:00:00', 500, '2024-10-17 07:06:58', '2024-10-17 07:34:30'),
+(5, 'Corporate', 'Benefits:All Small Business Membership benefits.Access for up to 15 employees.Access to advanced training and certification programs.Profile feature on the EmpowerHer Energy website.Priority access to speaking opportunities at events', 'corporate', '2024-11-15 00:00:00', '2024-12-15 00:00:00', 1500, '2024-10-17 07:13:04', '2024-10-17 07:34:22'),
+(6, 'Enterprise', 'Benefits:Access for an unlimited number of employees.All Corporate Membership benefits.Dedicated account manager.Annual diversity and inclusion audit and consultation', 'corporate', '2024-11-17 00:00:00', '2024-12-17 00:00:00', 4000, '2024-10-17 07:14:35', '2024-10-17 07:33:58');
 
 -- --------------------------------------------------------
 
@@ -438,7 +451,7 @@ CREATE TABLE `static_pages` (
 INSERT INTO `static_pages` (`id`, `key`, `image`, `title`, `description`, `button_text`, `button_link`, `createdAt`, `updatedAt`) VALUES
 (2, 'home_about_us', 'http://localhost:8080/uploads/image-1728566413701-975478481.png', 'About Us', 'Get to Know Us: Our Story and Team\nWelcome to EmpowerHer. Energy, where we are dedicated to unlocking the power and potential of women across industries. Our platform is committed to supporting women in sectors where they are traditionally underrepresented compared to men, \nincluding STEM, leadership and executive positions, finance and  investment banking, construction, and skilled trades.  Born from a passionate desire to foster growth, empowerment, and advancement for women, EmpowerHer. Energy is a beacon of inspiration and support for women professionals, entrepreneurs, and enthusiasts alike. \nWhat to expect?\nWith a rallying cry to redefine possibilities and shatter  barriers, EmpowerHer.Energy embarks on a mission to illuminate these sectors with the brilliance and resilience of empowered women. This isn\'t just a platform; it is a movement—a journey of transformation where each empowered woman becomes a catalyst for a brighter, more inclusive energy future and where we teach men to live with empowered women.', 'Find Out More', '/find-out-more', '2024-10-08 11:12:32', '2024-10-10 14:37:51'),
 (3, 'Programs & Initiatives', 'http://localhost:8080/uploads/image-1728386465323-970047489.png', 'Welcome to Empower Her', 'Empowering women through education and collaboration.', 'Programs & Initiatives', '/programs-initatives', '2024-10-08 11:21:05', '2024-10-08 11:21:05'),
-(4, 'Get Involved', 'http://localhost:8080/uploads/image-1728386525273-897995602.png', 'Welcome to Empower Her', 'Empowering women through education and collaboration.', 'Get Involved', '/get-involved', '2024-10-08 11:22:05', '2024-10-08 11:22:05'),
+(4, 'Get Involved', 'http://localhost:8080/uploads/image-1729073032819-226735083.png', 'Get Involved', 'Together, women and men collaborate to break down\nbarriers, challenge stereotypes, and build a more equitable\nfuture for all. EmpowerHer.Energy serves as a catalyst for\nchange, inspiring individuals of all genders to come together,\nsupport one another, and create a world where everyone has\nthe opportunity to succeed.', 'Our Activities', '/our-activities', '2024-10-08 11:22:05', '2024-10-16 10:43:56'),
 (5, 'Discover Her', 'http://localhost:8080/uploads/image-1728386563689-212817928.png', 'Welcome to Empower Her', 'Empowering women through education and collaboration.', 'Discover Her', '/discover-her', '2024-10-08 11:22:43', '2024-10-08 11:22:43'),
 (6, 'Contact Us', 'http://localhost:8080/uploads/image-1728386603174-983749170.png', 'Welcome to Empower Her', 'Empowering women through education and collaboration.', 'Contact Us', '/contact-us', '2024-10-08 11:23:23', '2024-10-08 11:23:23'),
 (7, 'home_header', 'http://localhost:8080/uploads/image-1728566660505-55084170.png', 'Be Part of the  Movement to Empower Women Worldwide!', 'no', 'Become A Member', '/become-a-member', '2024-10-10 13:24:20', '2024-10-10 13:24:20');
@@ -763,7 +776,7 @@ ALTER TABLE `forms`
 -- AUTO_INCREMENT for table `get_involved_programs`
 --
 ALTER TABLE `get_involved_programs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `information_contacts`
@@ -775,7 +788,7 @@ ALTER TABLE `information_contacts`
 -- AUTO_INCREMENT for table `memberships`
 --
 ALTER TABLE `memberships`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `nomination_types`

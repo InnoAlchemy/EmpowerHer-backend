@@ -3,7 +3,9 @@ const StaticPage = db.static_page;
 const TeamMember = db.team_member;
 const DiscoverHerContent = db.discover_her_content;
 const Event = db.events;
-const { Op } = require("sequelize"); // Sequelize operators
+const Membership = db.memberships;
+const GetInvolvedProgram = db.get_involved_program;
+const { Op } = require("sequelize"); 
 
 // Get all data for the homepage
 exports.getHomePageData = async (req, res) => {
@@ -78,36 +80,81 @@ exports.getHomePageData = async (req, res) => {
   }
 };
 exports.getGetInvolvedPageData = async (req, res) => {
-    try {
-      // Fetch all static pages where key contains 'get involved'
-      const staticPages = await StaticPage.findAll({
-        where: {
-          key: {
-            [Op.like]: '%Get Involved%', // Fetch any key that contains 'get involved'
-          },
+  try {
+    // Fetch all static pages where key contains 'get involved'
+    const staticPages = await StaticPage.findAll({
+      where: {
+        key: {
+          [Op.like]: '%Get Involved%', // Fetch any key that contains 'get involved'
         },
-      });
-  
-       
-      // Combine the data into one response
-      const responseData = {
-        staticPages: staticPages.map(page => ({
-          key:page.key,
-          title:page.title,
-          image: page.image,
-          description: page.description,
-          button_link: page.button_link,
-          button_text: page.button_text,
+      },
+    });
+
+    // Fetch 3 memberships with type 'individual'
+    const individualMemberships = await Membership.findAll({
+      where: { type: 'individual' },
+      limit: 3,
+      order: [['price', 'ASC']], // Optional: order by price ascending
+    });
+
+    // Fetch 3 memberships with type 'corporate'
+    const corporateMemberships = await Membership.findAll({
+      where: { type: 'corporate' },
+      limit: 3,
+      order: [['price', 'ASC']], // Optional: order by price ascending
+    });
+
+    // Fetch 8 active get_involved_programs
+    const programs_initiatives = await GetInvolvedProgram.findAll({
+      where: { is_active: true },
+      limit: 8,
+      order: [['createdAt', 'ASC']], 
+    });
+
+    // Combine the data into one response
+    const responseData = {
+      staticPages: staticPages.map(page => ({
+        key: page.key,
+        title: page.title,
+        image: page.image,
+        description: page.description,
+        button_link: page.button_link,
+        button_text: page.button_text,
+      })),
+      memberships: {
+        individual: individualMemberships.map(membership => ({
+          title: membership.title,
+          description: membership.description,
+          type: membership.type,
+          start_date: membership.start_date,
+          expiry_date: membership.expiry_date,
+          price: membership.price,
         })),
-        
-      };
-  
-      // Send the response data
-      res.status(200).json(responseData);
-    } catch (error) {
-      res.status(500).json({
-        message: "Error retrieving get involved page data",
-        error: error.message,
-      });
-    }
-  };
+        corporate: corporateMemberships.map(membership => ({ 
+          title: membership.title,
+          description: membership.description,
+          type: membership.type,
+          start_date: membership.start_date,
+          expiry_date: membership.expiry_date,
+          price: membership.price,
+        })),
+      },
+      programsInitiatives: programs_initiatives.map(program => ({
+      
+        icon: program.icon,
+        title: program.title,
+        description: program.description,
+        is_active: program.is_active,
+      
+      })),
+    };
+
+    // Send the response data
+    res.status(200).json(responseData);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error retrieving get involved page data",
+      error: error.message,
+    });
+  }
+};
