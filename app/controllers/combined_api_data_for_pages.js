@@ -158,3 +158,38 @@ exports.getGetInvolvedPageData = async (req, res) => {
     });
   }
 };
+
+exports.getContactUsPageData = async (req, res) => {
+  try {
+    // Fetch all static pages where key contains 'contact us'
+    const staticPages = await StaticPage.findAll({
+      where: {
+        key: {
+          [Op.like]: '%Contact Us%', // Fetch any key that contains 'contact us'
+        },
+      },
+    });
+
+    
+
+    // Combine the data into one response
+    const responseData = {
+      staticPages: staticPages.map(page => ({
+        key: page.key,
+        title: page.title,
+        image: page.image,
+        description: page.description,
+        button_link: page.button_link,
+        button_text: page.button_text,
+      })),
+    };
+
+    // Send the response data
+    res.status(200).json(responseData);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error retrieving get involved page data",
+      error: error.message,
+    });
+  }
+};
