@@ -5,6 +5,7 @@ const DiscoverHerContent = db.discover_her_content;
 const Event = db.events;
 const Membership = db.memberships;
 const GetInvolvedProgram = db.get_involved_program;
+const InformationContact = db.information_contact;
 const { Op } = require("sequelize"); 
 
 // Get all data for the homepage
@@ -171,6 +172,15 @@ exports.getContactUsPageData = async (req, res) => {
     });
 
     
+const TalkToOurTeam = await InformationContact.findAll({
+  where: { title: 'Talk to Our Team' },
+  limit: 1,
+});
+
+const ContactCustomerSupport = await InformationContact.findAll({
+  where: { title: 'Contact Customer Support' },
+  limit: 1,
+});
 
     // Combine the data into one response
     const responseData = {
@@ -182,8 +192,26 @@ exports.getContactUsPageData = async (req, res) => {
         button_link: page.button_link,
         button_text: page.button_text,
       })),
+      InformationContact: {
+        OurTeam: TalkToOurTeam.map(talk => ({
+          title: talk.title,
+          description: talk.description,
+          type: talk.type,
+          image: talk.image,
+          value: talk.value
+   
+        })),
+        CustomerSupport: ContactCustomerSupport.map(support => ({ 
+          title: support.title,
+          description: support.description,
+          type: support.type,
+          image: support.image,
+          value: support.value
+        })),
+      },
     };
 
+    
     // Send the response data
     res.status(200).json(responseData);
   } catch (error) {

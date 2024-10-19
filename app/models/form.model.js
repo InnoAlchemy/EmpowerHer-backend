@@ -22,15 +22,16 @@ module.exports = (sequelize, Sequelize) => {
             },
             phone_number: {
                 type: Sequelize.STRING,
-                allowNull: false
+                allowNull: true
             },
             content: {
                 type: Sequelize.TEXT,
                 allowNull: false
             },
             category: {
-                type: Sequelize.STRING,
-                allowNull: true
+                type: Sequelize.ENUM("contact_us", "nomination_type", "partnership_type"),
+                allowNull: false,
+                defaultValue:'contact_us'
             },
             organization: {
                 type: Sequelize.STRING,
@@ -41,11 +42,7 @@ module.exports = (sequelize, Sequelize) => {
                 allowNull: false,
                 defaultValue:'new'
               },
-            type: {
-                type: Sequelize.ENUM("sponsorship"),
-                allowNull: true,
-                defaultValue:'sponsorship'
-              },
+            
               
         },
         {
