@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2024 at 12:07 PM
+-- Generation Time: Oct 19, 2024 at 12:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -121,18 +121,23 @@ CREATE TABLE `forms` (
   `email` varchar(255) NOT NULL,
   `phone_number` varchar(255) NOT NULL,
   `content` text NOT NULL,
-  `category` varchar(255) DEFAULT NULL,
+  `category` enum('contact_us','nomination_type','partnership_type') NOT NULL DEFAULT 'contact_us',
   `organization` varchar(255) DEFAULT NULL,
-  `status` enum('new','inprogress','responded','closed') NOT NULL DEFAULT 'new',
-  `type` enum('sponsorship') DEFAULT 'sponsorship'
+  `status` enum('new','inprogress','responded','closed') NOT NULL DEFAULT 'new'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `forms`
 --
 
-INSERT INTO `forms` (`id`, `first_name`, `last_name`, `email`, `phone_number`, `content`, `category`, `organization`, `status`, `type`) VALUES
-(1, 'John', 'Doe', 'johndoe@example.com', '123-456-7890', 'I would like to inquire about partnership opportunities.', 'contact_us', NULL, 'new', 'sponsorship');
+INSERT INTO `forms` (`id`, `first_name`, `last_name`, `email`, `phone_number`, `content`, `category`, `organization`, `status`) VALUES
+(1, 'John', 'Doe', 'johndoe@example.com', '', 'text-uploads\\1729326336542-622398277.txt', 'contact_us', 'inovation', 'new'),
+(2, 'John', 'Doe', 'johndoem@example.com', '123-456-7890', 'text-uploads\\1729326835805-763685425.txt', 'contact_us', 'inovation', 'new'),
+(3, 'John', 'Doe', 'johndoem@example.com', '123-456-7890', 'hi its a me mario', 'contact_us', 'inovation', 'new'),
+(4, 'Fadel', 'hmd', 'fadel@gmail.com', '71491613', 'hola commo estas ', 'contact_us', NULL, 'new'),
+(5, 'chadi', 'haidar', 'chadi@gmail.com', '916325452', 'text-uploads\\1729329003731-763174617.txt', 'contact_us', 'none', 'new'),
+(6, 'daily', 'looks', 'dailylooks@gmail.com', '71452325', 'text-uploads\\1729329590511-37149390.txt', 'contact_us', NULL, 'new'),
+(7, 'loke', 'loke', 'loke@gmail.com', '523852266', 'hello im just here for fun', 'contact_us', NULL, 'new');
 
 -- --------------------------------------------------------
 
@@ -190,7 +195,9 @@ INSERT INTO `information_contacts` (`id`, `image`, `title`, `description`, `valu
 (4, NULL, 'Intsagram', 'connect with us on Instagram', 'https://Instagram.com/company/empowerher', 'social_link'),
 (5, NULL, '+961 71 123456', 'connect with via phone number', '+961 71 123456', 'phone_number'),
 (6, NULL, '+961 70 123456', 'connect with via phone number', '+961 70 123456', 'phone_number'),
-(7, NULL, 'Locations', 'where are we located', 'maps', 'location');
+(7, NULL, 'Locations', 'where are we located', 'maps', 'location'),
+(8, 'http://localhost:8080/uploads/image-1729259024769-512847797.png', 'Talk to Our Team', 'Want to learn more about joining EmpowerHer.Energy? Call us today to speak with our team and discover how you can make an impact.', '+961 123 456', 'phone_number'),
+(9, 'http://localhost:8080/uploads/image-1729259210201-692917306.png', 'Contact Customer Support', ' Have a question or need assistance? Reach out to us via email or visit our office. We’re here to support you every step of the way.', 'hello@empowerher.energy', 'email');
 
 -- --------------------------------------------------------
 
@@ -241,7 +248,9 @@ CREATE TABLE `nomination_types` (
 --
 
 INSERT INTO `nomination_types` (`id`, `title`, `is_active`, `createdAt`, `updatedAt`) VALUES
-(1, 'Outstanding Leadership', 1, '2024-09-30 08:10:01', '2024-09-30 08:10:01');
+(1, 'Outstanding Leadership', 1, '2024-09-30 08:10:01', '2024-09-30 08:10:01'),
+(2, 'Inovation', 1, '2024-10-19 07:35:25', '2024-10-19 07:35:25'),
+(3, 'Community Impact', 1, '2024-10-19 07:35:42', '2024-10-19 07:35:42');
 
 -- --------------------------------------------------------
 
@@ -309,7 +318,9 @@ CREATE TABLE `partnership_types` (
 --
 
 INSERT INTO `partnership_types` (`id`, `title`, `is_active`, `createdAt`, `updatedAt`) VALUES
-(1, 'Corporate Partnership', 1, '2024-09-30 08:09:49', '2024-09-30 08:09:49');
+(1, 'Corporate Partnership', 1, '2024-09-30 08:09:49', '2024-09-30 08:09:49'),
+(2, 'Event Partnership', 1, '2024-10-19 07:36:28', '2024-10-19 07:36:28'),
+(3, 'Content Colobartion', 1, '2024-10-19 07:37:00', '2024-10-19 07:37:00');
 
 -- --------------------------------------------------------
 
@@ -453,7 +464,7 @@ INSERT INTO `static_pages` (`id`, `key`, `image`, `title`, `description`, `butto
 (3, 'Programs & Initiatives', 'http://localhost:8080/uploads/image-1728386465323-970047489.png', 'Welcome to Empower Her', 'Empowering women through education and collaboration.', 'Programs & Initiatives', '/programs-initatives', '2024-10-08 11:21:05', '2024-10-08 11:21:05'),
 (4, 'Get Involved', 'http://localhost:8080/uploads/image-1729073032819-226735083.png', 'Get Involved', 'Together, women and men collaborate to break down\nbarriers, challenge stereotypes, and build a more equitable\nfuture for all. EmpowerHer.Energy serves as a catalyst for\nchange, inspiring individuals of all genders to come together,\nsupport one another, and create a world where everyone has\nthe opportunity to succeed.', 'Our Activities', '/our-activities', '2024-10-08 11:22:05', '2024-10-16 10:43:56'),
 (5, 'Discover Her', 'http://localhost:8080/uploads/image-1728386563689-212817928.png', 'Welcome to Empower Her', 'Empowering women through education and collaboration.', 'Discover Her', '/discover-her', '2024-10-08 11:22:43', '2024-10-08 11:22:43'),
-(6, 'Contact Us', 'http://localhost:8080/uploads/image-1728386603174-983749170.png', 'Welcome to Empower Her', 'Empowering women through education and collaboration.', 'Contact Us', '/contact-us', '2024-10-08 11:23:23', '2024-10-08 11:23:23'),
+(6, 'Contact Us', 'http://localhost:8080/uploads/image-1729235977769-335595358.png', 'Contact Us', 'We\'d love to hear from you! Whether you have a question about our services or just want to say\nhello, please don\'t hesitate to get in touch. You can reach us by phone, email, or through the\ncontact form below.\nWe\'re always happy to connect with fellow enthusiasts.', 'Contact Us', '/contact-us', '2024-10-08 11:23:23', '2024-10-18 07:19:37'),
 (7, 'home_header', 'http://localhost:8080/uploads/image-1728566660505-55084170.png', 'Be Part of the  Movement to Empower Women Worldwide!', 'no', 'Become A Member', '/become-a-member', '2024-10-10 13:24:20', '2024-10-10 13:24:20');
 
 -- --------------------------------------------------------
@@ -770,7 +781,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `forms`
 --
 ALTER TABLE `forms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `get_involved_programs`
@@ -782,7 +793,7 @@ ALTER TABLE `get_involved_programs`
 -- AUTO_INCREMENT for table `information_contacts`
 --
 ALTER TABLE `information_contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `memberships`
@@ -794,7 +805,7 @@ ALTER TABLE `memberships`
 -- AUTO_INCREMENT for table `nomination_types`
 --
 ALTER TABLE `nomination_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -812,7 +823,7 @@ ALTER TABLE `page_sections`
 -- AUTO_INCREMENT for table `partnership_types`
 --
 ALTER TABLE `partnership_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `permissions`

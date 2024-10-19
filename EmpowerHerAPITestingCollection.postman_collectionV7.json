@@ -139,7 +139,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI4NTYzNDkyLCJleHAiOjE3Mjg2NDk4OTJ9.x7eig24QewWg0TePFhN1te5OlP3xIudPwxCZp8ulGes",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI5MjM1NzgyLCJleHAiOjE3MjkzMjIxODJ9.myvI5PGyy_lnsk83vQo_wuqIamtLKeGjffU6OcuIELc",
 									"type": "string"
 								}
 							]
@@ -181,7 +181,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI5MDczMDEzLCJleHAiOjE3MjkxNTk0MTN9.XSccffqexDMGT5oIYO_ljeGVW5z_ymLYlHgBczBJx1g",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI5MjM1NzgyLCJleHAiOjE3MjkzMjIxODJ9.myvI5PGyy_lnsk83vQo_wuqIamtLKeGjffU6OcuIELc",
 									"type": "string"
 								}
 							]
@@ -206,35 +206,34 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/USER/Downloads/get-involved.png",
-									"disabled": true
+									"src": "/C:/Users/USER/Downloads/contact-us.png"
 								},
 								{
 									"key": "title",
-									"value": "Get Involved",
-									"type": "text",
-									"disabled": true
+									"value": "Contact Us",
+									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "Together, women and men collaborate to break down\nbarriers, challenge stereotypes, and build a more equitable\nfuture for all. EmpowerHer.Energy serves as a catalyst for\nchange, inspiring individuals of all genders to come together,\nsupport one another, and create a world where everyone has\nthe opportunity to succeed.",
-									"type": "text",
-									"disabled": true
+									"value": "We'd love to hear from you! Whether you have a question about our services or just want to say\nhello, please don't hesitate to get in touch. You can reach us by phone, email, or through the\ncontact form below.\nWe're always happy to connect with fellow enthusiasts.",
+									"type": "text"
 								},
 								{
 									"key": "button_link",
 									"value": "/our-activities",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "button_text",
 									"value": "Our Activities",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/content_static_pages/4",
+							"raw": "http://localhost:8080/api/content_static_pages/6",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -243,7 +242,7 @@
 							"path": [
 								"api",
 								"content_static_pages",
-								"4"
+								"6"
 							]
 						},
 						"description": "Update the details of an existing static page"
@@ -459,6 +458,28 @@
 								"api",
 								"combined_api_data_for_pages",
 								"home"
+							]
+						},
+						"description": "Retrieve details of a specific team member by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Data For Contact Us",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/combined_api_data_for_pages/contact-us",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"combined_api_data_for_pages",
+								"contact-us"
 							]
 						},
 						"description": "Retrieve details of a specific team member by ID"
@@ -3320,7 +3341,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"title\": \"Outstanding Leadership\",\n  \"is_active\": true\n}",
+							"raw": "{\n  \"title\": \"Community Impact\",\n  \"is_active\": true\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3426,7 +3447,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"title\": \"Corporate Partnership\",\n  \"is_active\": true\n}",
+							"raw": "{\n  \"title\": \"Content Colobartion\",\n  \"is_active\": true\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3526,18 +3547,54 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
+								"value": "multipart/form-data",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"email\": \"johndoe@example.com\",\n  \"phone_number\": \"123-456-7890\",\n  \"content\": \"I would like to inquire about partnership opportunities.\",\n  \"category\": \"contact_us\",\n  \"status\":\"new\"\n  //\"type\":\"sponsorship\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "John",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Doe",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "johndoe@example.com",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "123-456-7890",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"type": "file",
+									"src": "/C:/Users/USER/Desktop/contact-us.txt"
+								},
+								{
+									"key": "category",
+									"value": "contact_us",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "new",
+									"type": "text"
+								},
+								{
+									"key": "organization",
+									"value": "inovation",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/forms",
@@ -3641,29 +3698,28 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "Intsagram",
+									"value": "Contact Customer Support",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "connect with via phone number on Instagram",
+									"value": " Have a question or need assistance? Reach out to us via email or visit our office. We’re here to support you every step of the way.",
 									"type": "text"
 								},
 								{
 									"key": "value",
-									"value": "https://Instagram.com/company/empowerher",
+									"value": "hello@empowerher.energy",
 									"type": "text"
 								},
 								{
 									"key": "type",
-									"value": "social_link",
+									"value": "email",
 									"type": "text"
 								},
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/USER/Pictures/flag1.jpg",
-									"disabled": true
+									"src": "/C:/Users/USER/Downloads/email2.png"
 								}
 							]
 						},
