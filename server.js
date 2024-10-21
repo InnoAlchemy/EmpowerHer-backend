@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static('uploads'));
 
 
+
 const db = require("./app/models");
 
 db.sequelize
@@ -56,6 +57,8 @@ require("./app/routes/permission.routes")(app);
 require("./app/routes/role_permissions.routes")(app);
 require("./app/routes/tickets.routes")(app);
 require("./app/routes/combined_api_data_for_pages.routes")(app);
+require("./app/routes/nomination_form.routes")(app);
+require("./app/routes/partnership_form.routes")(app);
 
 
 

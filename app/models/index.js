@@ -38,6 +38,8 @@ db.role=require("./role.model")(sequelize, Sequelize);
 db.permission=require("./permission.model")(sequelize, Sequelize);
 db.role_permission=require("./role_permission.model.js")(sequelize, Sequelize);
 db.tickets=require("./tickets.model")(sequelize, Sequelize);
+db.nomination_form = require("./nomination_form_model")(sequelize, Sequelize);
+db.partnership_form = require("./partnership_form.model")(sequelize, Sequelize);
 
 // Associations
 
@@ -88,5 +90,14 @@ db.page_sections.belongsTo(db.page, { foreignKey: "page_id" });
 // DiscoverHerContent - UserTool association
 db.discover_her_content.hasMany(db.user_tools, { foreignKey: "discover_her_id", onDelete: "CASCADE" });
 db.user_tools.belongsTo(db.discover_her_content, { foreignKey: "discover_her_id" });
+
+// Nomination_Form - nomination_types association
+db.nomination_types.hasMany(db.nomination_form, { foreignKey: "nomination_type_id", onDelete: "CASCADE" });
+db.nomination_form.belongsTo(db.nomination_types, { foreignKey: "nomination_type_id" });
+
+// PartnershipType - PartnershipForm association
+db.partnership_types.hasMany(db.partnership_form, { foreignKey: "partnership_type_id", onDelete: "CASCADE" });
+db.partnership_form.belongsTo(db.partnership_types, { foreignKey: "partnership_type_id", });
+
 
 module.exports = db;

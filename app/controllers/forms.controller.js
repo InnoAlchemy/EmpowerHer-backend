@@ -31,7 +31,7 @@ exports.submitForm = async (req, res) => {
       email,
       phone_number,
       content,
-      category,
+      category: category || 'contact_us', 
       organization,
       status,
     });
