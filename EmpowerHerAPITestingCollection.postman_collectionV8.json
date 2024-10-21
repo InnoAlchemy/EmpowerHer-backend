@@ -3556,17 +3556,17 @@
 							"formdata": [
 								{
 									"key": "first_name",
-									"value": "John",
+									"value": "John2",
 									"type": "text"
 								},
 								{
 									"key": "last_name",
-									"value": "Doe",
+									"value": "Doe2",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "johndoe@example.com",
+									"value": "johndoe2m@example.com",
 									"type": "text"
 								},
 								{
@@ -3577,7 +3577,7 @@
 								{
 									"key": "content",
 									"type": "file",
-									"src": "/C:/Users/USER/Desktop/contact-us.txt"
+									"src": "/C:/Users/USER/Pictures/messaging.png"
 								},
 								{
 									"key": "category",
@@ -3591,7 +3591,7 @@
 								},
 								{
 									"key": "organization",
-									"value": "inovation",
+									"value": "inovation2",
 									"type": "text"
 								}
 							]
@@ -3650,6 +3650,282 @@
 								"api",
 								"forms",
 								"{{id}}"
+							]
+						},
+						"description": "Delete a specific form submission by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nomination Forms",
+			"item": [
+				{
+					"name": "Get All Nomination forms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/nomination_forms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"nomination_forms"
+							]
+						},
+						"description": "Retrieve a list of all forms"
+					},
+					"response": []
+				},
+				{
+					"name": "Create forms",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nomination_type_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "nominator_full_name",
+									"value": "Johnny1",
+									"type": "text"
+								},
+								{
+									"key": "nominee_full_name",
+									"value": "Bravo1",
+									"type": "text"
+								},
+								{
+									"key": "nominator_email",
+									"value": "johnnyBravo1@example.com",
+									"type": "text"
+								},
+								{
+									"key": "nominee_email",
+									"value": "6969658",
+									"type": "text"
+								},
+								{
+									"key": "reason_for_nomination",
+									"type": "file",
+									"src": "/C:/Users/USER/Desktop/nomination-form.txt"
+								},
+								{
+									"key": "category",
+									"value": "nomination_type",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/nomination_forms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"nomination_forms"
+							]
+						},
+						"description": "Add a new form submission"
+					},
+					"response": []
+				},
+				{
+					"name": "Get forms By{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/nomination_forms/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"nomination_forms",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific form by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete forms By{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/nomination_forms/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"nomination_forms",
+								"3"
+							]
+						},
+						"description": "Delete a specific form submission by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Partnership Forms",
+			"item": [
+				{
+					"name": "Get All Partnership forms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/partnership_forms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"partnership_forms"
+							]
+						},
+						"description": "Retrieve a list of all forms"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Partnership forms",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "partnership_type_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "organization_name",
+									"value": "Johnny3",
+									"type": "text"
+								},
+								{
+									"key": "contact_person_full_name",
+									"value": "Bravo3",
+									"type": "text"
+								},
+								{
+									"key": "contact_person_email",
+									"value": "johnnyBravo3@example.com",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "7895855",
+									"type": "text"
+								},
+								{
+									"key": "description_of_proposal",
+									"type": "file",
+									"src": "/C:/Users/USER/Desktop/hola.docx"
+								},
+								{
+									"key": "category",
+									"value": "partnership_type",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/partnership_forms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"partnership_forms"
+							]
+						},
+						"description": "Add a new form submission"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Partnership  forms By{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/partnership_forms/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"partnership_forms",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific form by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Partnership  forms By{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/partnership_forms/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"partnership_forms",
+								"3"
 							]
 						},
 						"description": "Delete a specific form submission by ID"

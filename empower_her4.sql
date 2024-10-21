@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2024 at 12:30 PM
+-- Generation Time: Oct 21, 2024 at 03:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -137,7 +137,10 @@ INSERT INTO `forms` (`id`, `first_name`, `last_name`, `email`, `phone_number`, `
 (4, 'Fadel', 'hmd', 'fadel@gmail.com', '71491613', 'hola commo estas ', 'contact_us', NULL, 'new'),
 (5, 'chadi', 'haidar', 'chadi@gmail.com', '916325452', 'text-uploads\\1729329003731-763174617.txt', 'contact_us', 'none', 'new'),
 (6, 'daily', 'looks', 'dailylooks@gmail.com', '71452325', 'text-uploads\\1729329590511-37149390.txt', 'contact_us', NULL, 'new'),
-(7, 'loke', 'loke', 'loke@gmail.com', '523852266', 'hello im just here for fun', 'contact_us', NULL, 'new');
+(7, 'loke', 'loke', 'loke@gmail.com', '523852266', 'hello im just here for fun', 'contact_us', NULL, 'new'),
+(8, 'John', 'Doe', 'johndoem@example.com', '123-456-7890', 'text-uploads\\1729505851949-106815299.txt', 'contact_us', 'inovation', 'new'),
+(9, 'John2', 'Doe2', 'johndoe2m@example.com', '123-456-7890', 'uploads\\1729517155007-9152086.png', 'contact_us', 'inovation2', 'new'),
+(10, 'fadel', 'hmd', 'fadel.hmd@inovationalchemy.com', '71491613', 'text-uploads\\1729517761533-986386141.jpg', 'contact_us', NULL, 'new');
 
 -- --------------------------------------------------------
 
@@ -232,6 +235,35 @@ INSERT INTO `memberships` (`id`, `title`, `description`, `type`, `start_date`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `nomination_forms`
+--
+
+CREATE TABLE `nomination_forms` (
+  `id` int(11) NOT NULL,
+  `nomination_type_id` int(11) NOT NULL,
+  `nominator_full_name` varchar(255) NOT NULL,
+  `nominee_full_name` varchar(255) NOT NULL,
+  `nominator_email` varchar(255) NOT NULL,
+  `nominee_email` varchar(255) NOT NULL,
+  `reason_for_nomination` text NOT NULL,
+  `category` enum('contact_us','nomination_type','partnership_type') NOT NULL DEFAULT 'nomination_type',
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `nomination_forms`
+--
+
+INSERT INTO `nomination_forms` (`id`, `nomination_type_id`, `nominator_full_name`, `nominee_full_name`, `nominator_email`, `nominee_email`, `reason_for_nomination`, `category`, `createdAt`, `updatedAt`) VALUES
+(1, 1, 'Johnny', 'Bravo', 'johnnyBravo@example.com', '96325874', 'hey its a me jhonny', 'nomination_type', '2024-10-21 09:08:46', '2024-10-21 09:08:46'),
+(2, 1, 'Johnny1', 'Bravo1', 'johnnyBravo1@example.com', '6969658', 'text-uploads\\1729505486024-42649414.txt', 'nomination_type', '2024-10-21 10:11:26', '2024-10-21 10:11:26'),
+(4, 2, 'senior raul', 'eva deva', 'raul@gmail.com', 'eva@hotmail.com', 'shes super duber', 'nomination_type', '2024-10-21 11:40:43', '2024-10-21 11:40:43'),
+(5, 3, 'mister poppo', 'son goku', 'poppo@hotmail.com', 'goku@gmail.com', 'text-uploads\\1729512158178-76733509.txt', 'nomination_type', '2024-10-21 12:02:38', '2024-10-21 12:02:38');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `nomination_types`
 --
 
@@ -298,6 +330,35 @@ CREATE TABLE `page_sections` (
 
 INSERT INTO `page_sections` (`id`, `page_id`, `title`, `description`, `image`, `position`, `type`, `createdAt`, `updatedAt`) VALUES
 (1, 1, 'Event Objective', 'The objective of the event is to empower women in the energy sector', 'http://localhost:8080/uploads/image-1727685266525-837291244.mp4', 'left', 'content_box', '2024-09-30 08:34:26', '2024-09-30 08:34:26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `partnership_forms`
+--
+
+CREATE TABLE `partnership_forms` (
+  `id` int(11) NOT NULL,
+  `partnership_type_id` int(11) NOT NULL,
+  `organization_name` varchar(255) NOT NULL,
+  `contact_person_full_name` varchar(255) NOT NULL,
+  `contact_person_email` varchar(255) NOT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
+  `description_of_proposal` text NOT NULL,
+  `category` enum('contact_us','nomination_type','partnership_type') NOT NULL DEFAULT 'partnership_type',
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `partnership_forms`
+--
+
+INSERT INTO `partnership_forms` (`id`, `partnership_type_id`, `organization_name`, `contact_person_full_name`, `contact_person_email`, `phone_number`, `description_of_proposal`, `category`, `createdAt`, `updatedAt`) VALUES
+(1, 2, 'Johnny2', 'Bravo2', 'johnnyBravo2@example.com', '6999999999', 'hey', 'partnership_type', '2024-10-21 10:37:33', '2024-10-21 10:37:33'),
+(2, 2, 'Johnny2', 'Bravo2', 'johnnyBravo2@example.com', '6999999999', 'text-uploads\\1729507097507-251896.txt', 'partnership_type', '2024-10-21 10:38:17', '2024-10-21 10:38:17'),
+(3, 3, 'inovation Alchemy', 'youssef', 'youssef@invoationAlchemy.com', '71523489', 'text-uploads\\1729513216508-640288.txt', 'partnership_type', '2024-10-21 12:20:16', '2024-10-21 12:20:16'),
+(4, 3, 'Johnny3', 'Bravo3', 'johnnyBravo3@example.com', '7895855', 'text-uploads\\1729517485425-739376.docx', 'partnership_type', '2024-10-21 13:31:25', '2024-10-21 13:31:25');
 
 -- --------------------------------------------------------
 
@@ -662,6 +723,12 @@ ALTER TABLE `memberships`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `nomination_forms`
+--
+ALTER TABLE `nomination_forms`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `nomination_types`
 --
 ALTER TABLE `nomination_types`
@@ -679,6 +746,12 @@ ALTER TABLE `pages`
 ALTER TABLE `page_sections`
   ADD PRIMARY KEY (`id`),
   ADD KEY `page_id` (`page_id`);
+
+--
+-- Indexes for table `partnership_forms`
+--
+ALTER TABLE `partnership_forms`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `partnership_types`
@@ -781,7 +854,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `forms`
 --
 ALTER TABLE `forms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `get_involved_programs`
@@ -802,6 +875,12 @@ ALTER TABLE `memberships`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `nomination_forms`
+--
+ALTER TABLE `nomination_forms`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `nomination_types`
 --
 ALTER TABLE `nomination_types`
@@ -818,6 +897,12 @@ ALTER TABLE `pages`
 --
 ALTER TABLE `page_sections`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `partnership_forms`
+--
+ALTER TABLE `partnership_forms`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `partnership_types`
