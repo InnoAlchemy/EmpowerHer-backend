@@ -31,7 +31,7 @@ exports.getAllEvents = async (req, res) => {
 // Add a new event
 exports.addEvent = async (req, res) => {
   const {
-    user_id, title, description, date, start_time, end_time, location, type, category, price, status, ticket_amount
+    user_id, title, description, date, start_time, end_time, location, type, category, price, status, ticket_amount,instructor
   } = req.body;
 
   // Validate user_id
@@ -77,6 +77,7 @@ exports.addEvent = async (req, res) => {
       category,
       status,
       price,
+      instructor
     });
 
     // Array to hold all created tickets
@@ -192,7 +193,7 @@ exports.getEventById = async (req, res) => {
 exports.updateEvent = async (req, res) => {
   const { id } = req.params;
   const {
-    user_id, title, description, date, start_time, end_time, location, type, category, price, status,Languages, is_accepted
+    user_id, title, description, date, start_time, end_time, location, type, category, price, status,Languages, is_accepted,instructor
   } = req.body;
 
   try {
@@ -235,6 +236,7 @@ exports.updateEvent = async (req, res) => {
     event.status = status !== undefined ? status : event.status;
     event.Languages = Languages!== undefined? Languages : event.Languages;
     event.is_accepted = is_accepted !== undefined ? is_accepted : event.is_accepted;
+    event.instructor = instructor!== undefined? instructor : event.instructor;
 
     await event.save();
     res.status(200).json(event);

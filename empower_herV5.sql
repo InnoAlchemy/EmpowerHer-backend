@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2024 at 03:40 PM
+-- Generation Time: Oct 22, 2024 at 06:01 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -95,18 +95,24 @@ CREATE TABLE `events` (
   `price` double NOT NULL,
   `is_accepted` tinyint(1) DEFAULT 0,
   `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL
+  `updatedAt` datetime NOT NULL,
+  `instructor` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`id`, `user_id`, `image`, `title`, `description`, `date`, `start_time`, `end_time`, `location`, `type`, `category`, `status`, `Languages`, `price`, `is_accepted`, `createdAt`, `updatedAt`) VALUES
-(1, 1, 'http://localhost:8080/uploads/image-1727683659935-266221386.jpg', 'trying automatic ticket creation', 'Alha ystur yarab nasrak', '2024-09-17', '09:00:00', '04:00:00', '27 Main St, City', 'both', 'workshop', 'upcoming', 'english', 37.77, 0, '2024-09-30 08:07:39', '2024-09-30 08:07:39'),
-(2, 1, 'http://localhost:8080/uploads/image-1728563509906-518129981.png', 'MEET & GREET', 'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nsed do eiusmod tempor\nincididunt ut labore et\ndolore', '2024-09-17', '09:00:00', '04:00:00', '27 Main St, City', 'both', 'workshop', 'upcoming', 'english', 37.77, 0, '2024-10-10 12:31:49', '2024-10-10 12:31:49'),
-(3, 1, 'http://localhost:8080/uploads/image-1728563526915-408590506.png', 'MEET & GREET', 'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nsed do eiusmod tempor\nincididunt ut labore et\ndolore', '2024-09-12', '09:00:00', '02:00:00', '27 Main St, City', 'both', 'workshop', 'upcoming', 'english', 37.77, 0, '2024-10-10 12:32:06', '2024-10-10 12:32:06'),
-(4, 1, 'http://localhost:8080/uploads/image-1728563549670-937494518.png', 'MEET & GREET', 'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nsed do eiusmod tempor\nincididunt ut labore et\ndolore', '2024-10-25', '09:00:00', '06:00:00', '27 Main St, City', 'both', 'workshop', 'upcoming', 'english', 37.77, 0, '2024-10-10 12:32:29', '2024-10-10 12:32:29');
+INSERT INTO `events` (`id`, `user_id`, `image`, `title`, `description`, `date`, `start_time`, `end_time`, `location`, `type`, `category`, `status`, `Languages`, `price`, `is_accepted`, `createdAt`, `updatedAt`, `instructor`) VALUES
+(1, 1, 'http://localhost:8080/uploads/image-1727683659935-266221386.jpg', 'trying automatic ticket creation', 'Alha ystur yarab nasrak', '2024-09-17', '09:00:00', '04:00:00', '27 Main St, City', 'both', 'workshop', 'upcoming', 'english', 37.77, 0, '2024-09-30 08:07:39', '2024-09-30 08:07:39', 'Elena Roberts'),
+(2, 1, 'http://localhost:8080/uploads/image-1728563509906-518129981.png', 'MEET & GREET', 'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nsed do eiusmod tempor\nincididunt ut labore et\ndolore', '2024-09-17', '09:00:00', '04:00:00', '27 Main St, City', 'both', 'workshop', 'upcoming', 'english', 37.77, 0, '2024-10-10 12:31:49', '2024-10-10 12:31:49', 'Haily Eminem'),
+(3, 1, 'http://localhost:8080/uploads/image-1728563526915-408590506.png', 'MEET & GREET', 'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nsed do eiusmod tempor\nincididunt ut labore et\ndolore', '2024-09-12', '09:00:00', '02:00:00', '27 Main St, City', 'both', 'workshop', 'upcoming', 'english', 37.77, 0, '2024-10-10 12:32:06', '2024-10-10 12:32:06', 'Lilian sam'),
+(4, 1, 'http://localhost:8080/uploads/image-1728563549670-937494518.png', 'MEET & GREET', 'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nsed do eiusmod tempor\nincididunt ut labore et\ndolore', '2024-10-25', '09:00:00', '06:00:00', '27 Main St, City', 'both', 'workshop', 'upcoming', 'english', 37.77, 0, '2024-10-10 12:32:29', '2024-10-10 12:32:29', 'Violet Scar'),
+(5, 1, 'http://localhost:8080/uploads/image-1729609954008-711429642.png', 'Leading Change: Empowering men as\nallies for women in leadership', 'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nsed do eiusmod tempor\nincididunt ut labore et\ndolore', '2024-10-28', '09:00:00', '06:00:00', '29 Main St, City', 'both', 'event', 'upcoming', 'english', 27.77, 0, '2024-10-22 15:12:34', '2024-10-22 15:12:34', NULL),
+(6, 1, 'http://localhost:8080/uploads/image-1729609972041-578357933.png', 'Leading Change: Empowering men as\nallies for women in leadership', 'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nsed do eiusmod tempor\nincididunt ut labore et\ndolore', '2024-10-28', '09:00:00', '06:00:00', '29 Main St, City', 'both', 'event', 'upcoming', 'english', 19.77, 0, '2024-10-22 15:12:52', '2024-10-22 15:12:52', NULL),
+(7, 1, 'http://localhost:8080/uploads/image-1729610000160-675008960.png', 'Leading Change: Empowering men as\nallies for women in leadership', 'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nsed do eiusmod tempor\nincididunt ut labore et\ndolore', '2024-09-22', '09:00:00', '06:00:00', '29 Main St, City', 'both', 'event', 'upcoming', 'english', 19.99, 0, '2024-10-22 15:13:20', '2024-10-22 15:13:20', NULL),
+(8, 1, 'http://localhost:8080/uploads/image-1729610027727-164262542.png', 'Leading Change: Empowering men as\nallies for women in leadership', 'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nsed do eiusmod tempor\nincididunt ut labore et\ndolore', '2024-09-26', '09:00:00', '06:00:00', '21 Main St, City', 'both', 'event', 'upcoming', 'english', 49.99, 0, '2024-10-22 15:13:47', '2024-10-22 15:13:47', NULL),
+(9, 1, 'http://localhost:8080/uploads/image-1729610037705-972642600.png', 'Leading Change: Empowering men as\nallies for women in leadership', 'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nsed do eiusmod tempor\nincididunt ut labore et\ndolore', '2024-09-26', '09:00:00', '06:00:00', '21 Main St, City', 'both', 'event', 'upcoming', 'english', 99.99, 0, '2024-10-22 15:13:57', '2024-10-22 15:13:57', NULL);
 
 -- --------------------------------------------------------
 
@@ -615,7 +621,37 @@ INSERT INTO `tickets` (`id`, `event_id`, `is_used`, `qrcode`, `amount`, `created
 (37, 4, 0, 'ticket-4-200fa221-7264-43e8-bd62-427777927ff2', 1, '2024-10-10 12:32:29', '2024-10-10 12:32:29', NULL),
 (38, 4, 0, 'ticket-4-dfd4029c-5306-4b49-b2d3-e961aa9ebfd9', 1, '2024-10-10 12:32:29', '2024-10-10 12:32:29', NULL),
 (39, 4, 0, 'ticket-4-1932c42e-82cf-49f3-86fa-4a37285f50a5', 1, '2024-10-10 12:32:29', '2024-10-10 12:32:29', NULL),
-(40, 4, 0, 'ticket-4-566a36f3-4bd9-4008-9263-a2d953f9d393', 1, '2024-10-10 12:32:29', '2024-10-10 12:32:29', NULL);
+(40, 4, 0, 'ticket-4-566a36f3-4bd9-4008-9263-a2d953f9d393', 1, '2024-10-10 12:32:29', '2024-10-10 12:32:29', NULL),
+(41, 5, 0, 'ticket-5-81d69df9-4be2-4c72-b7d4-b64de7290963', 1, '2024-10-22 15:12:34', '2024-10-22 15:12:34', NULL),
+(42, 5, 0, 'ticket-5-6a60c4e2-943f-4bbb-94c3-099385f38d87', 1, '2024-10-22 15:12:34', '2024-10-22 15:12:34', NULL),
+(43, 5, 0, 'ticket-5-7d19e03f-783b-435d-ac3d-3a83784215cb', 1, '2024-10-22 15:12:34', '2024-10-22 15:12:34', NULL),
+(44, 5, 0, 'ticket-5-08400201-87ed-41f3-8b4a-69c09caa26a7', 1, '2024-10-22 15:12:34', '2024-10-22 15:12:34', NULL),
+(45, 5, 0, 'ticket-5-f4269dfd-7de2-4529-8baf-3f8bba32bcbe', 1, '2024-10-22 15:12:34', '2024-10-22 15:12:34', NULL),
+(46, 5, 0, 'ticket-5-11272bcc-3674-4eda-a715-878e09b981ac', 1, '2024-10-22 15:12:34', '2024-10-22 15:12:34', NULL),
+(47, 5, 0, 'ticket-5-17bddbd8-a9b4-4c66-98fb-c9014f4e23fa', 1, '2024-10-22 15:12:34', '2024-10-22 15:12:34', NULL),
+(48, 5, 0, 'ticket-5-069bc70b-96c8-4ab7-b5de-29afd1d3c1d3', 1, '2024-10-22 15:12:34', '2024-10-22 15:12:34', NULL),
+(49, 5, 0, 'ticket-5-5ae2630a-6b67-47bf-925e-231acad355d0', 1, '2024-10-22 15:12:34', '2024-10-22 15:12:34', NULL),
+(50, 5, 0, 'ticket-5-6f15f43b-b7ec-4897-b651-297ac33ca879', 1, '2024-10-22 15:12:34', '2024-10-22 15:12:34', NULL),
+(51, 6, 0, 'ticket-6-19e0fd15-7d65-4e6a-871d-77d8f7b8fe1c', 1, '2024-10-22 15:12:52', '2024-10-22 15:12:52', NULL),
+(52, 6, 0, 'ticket-6-bd893c08-32d6-4a0f-9d0f-ddbc4eafae51', 1, '2024-10-22 15:12:52', '2024-10-22 15:12:52', NULL),
+(53, 6, 0, 'ticket-6-621a4b79-e77c-4f55-a2dc-8f9db9d468dd', 1, '2024-10-22 15:12:52', '2024-10-22 15:12:52', NULL),
+(54, 6, 0, 'ticket-6-54e31e28-817e-4682-b6ed-25f0d5769a92', 1, '2024-10-22 15:12:52', '2024-10-22 15:12:52', NULL),
+(55, 6, 0, 'ticket-6-b0468ed8-a876-4ae3-a6f4-0163a68b28d8', 1, '2024-10-22 15:12:52', '2024-10-22 15:12:52', NULL),
+(56, 7, 0, 'ticket-7-06962dcf-24d8-49aa-a530-72d8c2e0848c', 1, '2024-10-22 15:13:20', '2024-10-22 15:13:20', NULL),
+(57, 7, 0, 'ticket-7-2d6fb99f-83a7-4f9d-a108-696e5d817c4f', 1, '2024-10-22 15:13:20', '2024-10-22 15:13:20', NULL),
+(58, 7, 0, 'ticket-7-9f064402-2fd4-452b-a007-3d024d2ab638', 1, '2024-10-22 15:13:20', '2024-10-22 15:13:20', NULL),
+(59, 7, 0, 'ticket-7-1c0b9fa3-7dde-4366-8f23-7343f3fdac81', 1, '2024-10-22 15:13:20', '2024-10-22 15:13:20', NULL),
+(60, 7, 0, 'ticket-7-a9329355-4f98-482c-a5f8-98c279437475', 1, '2024-10-22 15:13:20', '2024-10-22 15:13:20', NULL),
+(61, 8, 0, 'ticket-8-e43762fc-6891-424a-aa65-a2923fe53e41', 1, '2024-10-22 15:13:47', '2024-10-22 15:13:47', NULL),
+(62, 8, 0, 'ticket-8-0f386af7-4e2c-4b93-bb77-ab13e6e07d01', 1, '2024-10-22 15:13:47', '2024-10-22 15:13:47', NULL),
+(63, 8, 0, 'ticket-8-f801ac09-1fe8-4539-9fc8-f4ef5fda1ca5', 1, '2024-10-22 15:13:47', '2024-10-22 15:13:47', NULL),
+(64, 8, 0, 'ticket-8-23b4ac91-4934-402e-9907-03024a0adbd6', 1, '2024-10-22 15:13:47', '2024-10-22 15:13:47', NULL),
+(65, 8, 0, 'ticket-8-e29e6bd3-31c6-4c39-9cc0-a46a0ae31b03', 1, '2024-10-22 15:13:47', '2024-10-22 15:13:47', NULL),
+(66, 9, 0, 'ticket-9-09b08b61-3c95-44a6-b44a-82497164241f', 1, '2024-10-22 15:13:57', '2024-10-22 15:13:57', NULL),
+(67, 9, 0, 'ticket-9-569af5e2-b12b-41a1-b4de-84a900e76d33', 1, '2024-10-22 15:13:57', '2024-10-22 15:13:57', NULL),
+(68, 9, 0, 'ticket-9-98b810c1-479a-4caf-9efe-38ea1070988b', 1, '2024-10-22 15:13:57', '2024-10-22 15:13:57', NULL),
+(69, 9, 0, 'ticket-9-64543f51-81a5-4653-8dc4-bbbd003484ed', 1, '2024-10-22 15:13:57', '2024-10-22 15:13:57', NULL),
+(70, 9, 0, 'ticket-9-cbf9b80f-0c7d-40f5-9644-5c379ab59e5b', 1, '2024-10-22 15:13:57', '2024-10-22 15:13:57', NULL);
 
 -- --------------------------------------------------------
 
@@ -848,7 +884,7 @@ ALTER TABLE `discover_her_contents`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `forms`
@@ -950,7 +986,7 @@ ALTER TABLE `team_members`
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `users`
