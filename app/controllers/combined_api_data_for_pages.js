@@ -261,7 +261,11 @@ const UpcomingWorkshops = await upcomingEvents.findAll({
           location: event.location,
           price: event.price,
           date: event.date,
-          image:event.image
+          image:event.image,
+          start_time:event.start_time,
+          end_time:event.end_time,
+          type: event.type,
+          Languages: event.Languages
    
         })),
         upcomingWorkshops: UpcomingWorkshops.map(workshop => ({ 
@@ -271,7 +275,11 @@ const UpcomingWorkshops = await upcomingEvents.findAll({
           price: workshop.price,
           date: workshop.date,
           instructor: workshop.instructor,
-          image: workshop.image
+          image: workshop.image,
+          start_time:workshop.start_time,
+          end_time:workshop.end_time,
+          type:workshop.type,
+          Languages:workshop.Languages
       
         })),
       },
