@@ -16,6 +16,9 @@ router.post('/users', usersController.addUser);
 // Get user by ID
 router.get('/users/:id', usersController.getUserById);
 
+// Get user by Email
+router.get('/users/email/:email', usersController.getUserByEmail);
+
 // Update user details by ID
 router.put('/users/:id',authenticateJWT,Admin, usersController.updateUser);
 

@@ -295,3 +295,61 @@ const UpcomingWorkshops = await upcomingEvents.findAll({
     });
   }
 };
+
+exports.getDiscoverHerPageData = async (req, res) => {
+  try {
+    // Fetch all static pages where key contains 'Discover Her'
+    const staticPages = await StaticPage.findAll({
+      where: {
+        key: {
+          [Op.like]: '%Discover Her%', // Fetch any key that contains 'Discover Her'
+        },
+      },
+    });
+
+  // Fetch All trending articles (category = 'article')
+  const trendingArticles = await DiscoverHerContent.findAll({
+    where: { category: 'article', is_active: true },
+    
+  });
+
+  // Fetch All trending video (category = 'vedio')
+  const trendingVideo= await DiscoverHerContent.findAll({
+    where: { category: 'video', is_active: true },
+    
+  });
+    // Combine the data into one response
+    const responseData = {
+      staticPages: staticPages.map(page => ({
+        key: page.key,
+        title: page.title,
+        image: page.image,
+        description: page.description,
+        button_link: page.button_link,
+        button_text: page.button_text,
+      })),
+      trendingArticles: trendingArticles.map(article => ({
+        category: article.category,
+        title: article.title,
+        description: article.description,
+        date: article.date,
+        header_file: article.header_file,
+      })),
+      trendingVideos: trendingVideo.map(article => ({
+        category: article.category,
+        title: article.title,
+        description: article.description,
+        date: article.date,
+        header_file: article.header_file,
+      })),
+    };
+
+    // Send the response data
+    res.status(200).json(responseData);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error retrieving get involved page data",
+      error: error.message,
+    });
+  }
+};

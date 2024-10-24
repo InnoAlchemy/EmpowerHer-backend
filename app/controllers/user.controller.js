@@ -437,4 +437,36 @@ exports.getRegistrationStats = async (req, res) =>  {
     res.status(500).json({ message: 'Error fetching users', error: error.message });
   }
 };
+// Get user by email
+exports.getUserByEmail = async (req, res) => {
+  try {
+    const { email } = req.params; // Assuming email is passed as a URL parameter
+
+    // Validate email format
+    if (!validateEmail(email)) {
+      return res.status(400).json({ message: 'Invalid email format.' });
+    }
+
+    // Find the user by email
+    const user = await User.findOne({
+      where: { email },
+      include: [{
+        model: Role,
+        include: [{
+          model: Permission,  // Include associated permissions
+          through: { model: RolePermission },  // Include the RolePermission junction table
+        }],
+      }]
+    });
+
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    console.error('Error fetching user by email:', error);
+    res.status(500).json({ message: 'Error fetching user by email', error: error.message });
+  }
+};
 

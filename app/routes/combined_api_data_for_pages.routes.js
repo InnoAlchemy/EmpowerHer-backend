@@ -11,6 +11,8 @@ module.exports = (app) => {
     router.get('/contact-us', ApiForPagesController.getContactUsPageData);
      // Get Programs and Initiatives page data
      router.get('/programs-and-initiatives', ApiForPagesController.getProgramsAndInitiativesPageData);
+       // Get Dicover Her page data
+       router.get('/discover-her', ApiForPagesController.getDiscoverHerPageData);
   
     app.use("/api/combined_api_data_for_pages", router);
   };
