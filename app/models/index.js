@@ -47,6 +47,10 @@ db.partnership_form = require("./partnership_form.model")(sequelize, Sequelize);
 db.users.hasMany(db.user_tools, { foreignKey: "user_id", onDelete: "CASCADE" });
 db.user_tools.belongsTo(db.users, { foreignKey: "user_id" });
 
+// User - UserTool association
+db.memberships.hasMany(db.users, { foreignKey: "membership_role_id", onDelete: "CASCADE" });
+db.users.belongsTo(db.memberships, { foreignKey: "membership_role_id" });
+
 // User - Role association (A user has one role)
 db.users.belongsTo(db.role, { foreignKey: "role_id", onDelete: "CASCADE" });
 db.role.hasMany(db.users, { foreignKey: "role_id", onDelete: "CASCADE" });

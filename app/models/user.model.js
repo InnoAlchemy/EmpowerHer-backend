@@ -13,6 +13,16 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         defaultValue: 1,
       },
+      membership_role_id: {
+        type: Sequelize.INTEGER,
+        foreignKey: true,
+        allowNull: true,
+        defaultValue: 1,
+      },
+      membership_updated_at: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
       first_name: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -30,14 +40,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
-      membership_role_id: {
-        type: Sequelize.STRING,
-        defaultValue: "basic",
-      },
-      membership_updated_at: {
-        type: Sequelize.DATE,
-        allowNull: true,
-      },
+      
       password: {
         type: Sequelize.STRING,
         allowNull: false,

@@ -5,6 +5,7 @@ const User = db.users;
 const Role=db.role;
 const Permission = db.permission;  // Include the Permission model
 const RolePermission = db.role_permission;  // Include the RolePermission model
+const Membership = db.memberships;
 const Op = db.Sequelize.Op;
 const calculateComparisonPercentage = require('../Helper-Functions/helper_functions');
 const jwt = require('jsonwebtoken');
@@ -447,17 +448,24 @@ exports.getUserByEmail = async (req, res) => {
       return res.status(400).json({ message: 'Invalid email format.' });
     }
 
-    // Find the user by email
     const user = await User.findOne({
       where: { email },
-      include: [{
-        model: Role,
-        include: [{
-          model: Permission,  // Include associated permissions
-          through: { model: RolePermission },  // Include the RolePermission junction table
-        }],
-      }]
+      include: [
+        {
+          model: Role,
+          include: [
+            {
+              model: Permission,
+              through: { model: RolePermission },
+            },
+          ],
+        },
+        {
+          model: Membership,
+        },
+      ],
     });
+    
 
     if (user) {
       res.status(200).json(user);
