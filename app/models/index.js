@@ -40,7 +40,13 @@ db.role_permission=require("./role_permission.model.js")(sequelize, Sequelize);
 db.tickets=require("./tickets.model")(sequelize, Sequelize);
 db.nomination_form = require("./nomination_form_model")(sequelize, Sequelize);
 db.partnership_form = require("./partnership_form.model")(sequelize, Sequelize);
-
+db.chats = require("./chat.model")(sequelize, Sequelize);
+db.notifications = require("./notifications.model")(sequelize, Sequelize);
+db.posts = require("./post.model")(sequelize, Sequelize);
+db.comments = require("./comment.model")(sequelize, Sequelize);
+db.likes = require("./like.model")(sequelize, Sequelize);
+db.shares = require("./share.model")(sequelize, Sequelize);
+db.viewed = require("./viewed.model")(sequelize, Sequelize);
 // Associations
 
 // User - UserTool association
@@ -103,5 +109,57 @@ db.nomination_form.belongsTo(db.nomination_types, { foreignKey: "nomination_type
 db.partnership_types.hasMany(db.partnership_form, { foreignKey: "partnership_type_id", onDelete: "CASCADE" });
 db.partnership_form.belongsTo(db.partnership_types, { foreignKey: "partnership_type_id", });
 
+
+
+
+// User - Chat association (User can send and receive many chats)
+db.users.hasMany(db.chats, { foreignKey: "sender_id", as: "sentChats", onDelete: "CASCADE" });
+db.users.hasMany(db.chats, { foreignKey: "receiver_id", as: "receivedChats", onDelete: "CASCADE" });
+db.chats.belongsTo(db.users, { foreignKey: "sender_id", as: "sender" });
+db.chats.belongsTo(db.users, { foreignKey: "receiver_id", as: "receiver" });
+
+// User - Notification association (User has many notifications)
+db.users.hasMany(db.notifications, { foreignKey: "user_id", onDelete: "CASCADE" });
+db.notifications.belongsTo(db.users, { foreignKey: "user_id" });
+
+// Posts - Notification association (Posts has many notifications)
+db.posts.hasMany(db.notifications, { foreignKey: "post_id", onDelete: "CASCADE" });
+db.notifications.belongsTo(db.posts, { foreignKey: "post_id" });
+
+// User - Post association (User creates many posts)
+db.users.hasMany(db.posts, { foreignKey: "user_id", onDelete: "CASCADE" });
+db.posts.belongsTo(db.users, { foreignKey: "user_id" });
+
+// Post - Comment association (Post has many comments)
+db.posts.hasMany(db.comments, { foreignKey: "post_id", onDelete: "CASCADE" });
+db.comments.belongsTo(db.posts, { foreignKey: "post_id" });
+
+// User - Comment association (User can create many comments)
+db.users.hasMany(db.comments, { foreignKey: "user_id", onDelete: "CASCADE" });
+db.comments.belongsTo(db.users, { foreignKey: "user_id" });
+
+// Post - Like association (Post can have many likes)
+db.posts.hasMany(db.likes, { foreignKey: "post_id", onDelete: "CASCADE" });
+db.likes.belongsTo(db.posts, { foreignKey: "post_id" });
+
+// User - Like association (User can like many posts)
+db.users.hasMany(db.likes, { foreignKey: "user_id", onDelete: "CASCADE" });
+db.likes.belongsTo(db.users, { foreignKey: "user_id" });
+
+// User - Share association (User shares many posts)
+db.users.hasMany(db.shares, { foreignKey: "user_id", onDelete: "CASCADE" });
+db.shares.belongsTo(db.users, { foreignKey: "user_id" });
+
+// Post - Share association (Post can be shared many times)
+db.posts.hasMany(db.shares, { foreignKey: "post_id", onDelete: "CASCADE" });
+db.shares.belongsTo(db.posts, { foreignKey: "post_id" });
+
+// Post - Viewed association (Track users who viewed a post)
+db.posts.hasMany(db.viewed, { foreignKey: "post_id", onDelete: "CASCADE" });
+db.viewed.belongsTo(db.posts, { foreignKey: "post_id" });
+
+// User - Viewed association (User can view many posts)
+db.users.hasMany(db.viewed, { foreignKey: "user_id", onDelete: "CASCADE" });
+db.viewed.belongsTo(db.users, { foreignKey: "user_id" });
 
 module.exports = db;

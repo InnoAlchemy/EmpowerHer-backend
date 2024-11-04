@@ -31,10 +31,19 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      job_title: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        default:'none'
+      },
       email: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
+      },
+      phone_number: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       newsletter_subscribed: {
         type: Sequelize.BOOLEAN,
@@ -61,6 +70,15 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.INTEGER,
         allowNull: true, // Store OTP temporarily
       },
+      profile_picture:{
+        type: Sequelize.STRING,
+        allowNull: true, 
+      },
+      country:{
+        type: Sequelize.ENUM('lebanon', 'usa', 'united kingdom','japan','australia',),
+        defaultValue: 'lebanon' ,
+        allowNull: true,
+      }
     },
     {
       timestamps: true,

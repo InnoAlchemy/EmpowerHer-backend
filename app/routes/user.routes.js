@@ -1,59 +1,59 @@
-
 module.exports = (app) => {
   const usersController = require("../controllers/user.controller");
   const AuthController = require("../controllers/authentication.controller");
   const authenticateJWT = require('../middleware/Jwt_middleware'); 
-  const Admin= require('../middleware/Admin_middleware');
+  const Admin = require('../middleware/Admin_middleware');
   const hasPermission = require('../middleware/Role_Permissions_middleware');
+  const upload = require('../middleware/uploadMiddleware'); // Import the upload middleware
   var router = require("express").Router();
-  
- // Get all users
-router.get('/users',authenticateJWT,hasPermission('read_user'), usersController.getAllUsers);
 
-// Add a new user
-router.post('/users', usersController.addUser);
+  // Get all users
+  router.get('/users', authenticateJWT, hasPermission('read_user'), usersController.getAllUsers);
 
-// Get user by ID
-router.get('/users/:id', usersController.getUserById);
+  // Add a new user with profile picture upload
+  router.post('/users', upload.single('profile_picture'), usersController.addUser);
 
-// Get user by Email
-router.get('/users/email/:email', usersController.getUserByEmail);
+  // Get user by ID
+  router.get('/users/:id', usersController.getUserById);
 
-// Update user details by ID
-router.put('/users/:id',authenticateJWT,Admin, usersController.updateUser);
+  // Get user by Email
+  router.get('/users/email/:email', usersController.getUserByEmail);
 
-// Accept user account by admin (after OTP verification)
-router.put('/users/accept/:id',authenticateJWT,Admin, usersController.acceptUserAccount);
+  // Update user details by ID with profile picture upload
+  router.put('/users/:id', authenticateJWT, Admin, upload.single('profile_picture'), usersController.updateUser);
 
-// Delete user by ID
-router.delete('/users/:id',authenticateJWT,Admin, usersController.deleteUser);
+  // Accept user account by admin (after OTP verification)
+  router.put('/users/accept/:id', authenticateJWT, Admin, usersController.acceptUserAccount);
 
-// User Signup
-router.post('/auth/register', AuthController.Signup);
+  // Delete user by ID
+  router.delete('/users/:id', authenticateJWT, Admin, usersController.deleteUser);
 
-// User Signin
-router.post('/auth/login', AuthController.Signin);
+  // User Signup
+  router.post('/auth/register', AuthController.Signup);
 
-// Request OTP
-router.post('/auth/request-otp', AuthController.requestOTP);
+  // User Signin
+  router.post('/auth/login', AuthController.Signin);
 
-// Verify OTP
-router.post('/auth/verify-otp', AuthController.verifyOTP);
- 
-// Request OTP for Password Reset
-router.post('/auth/forgot-password', AuthController.requestPasswordReset); 
+  // Request OTP
+  router.post('/auth/request-otp', AuthController.requestOTP);
 
- // Reset Password
-router.post('/auth/reset-password', AuthController.resetPassword);
+  // Verify OTP
+  router.post('/auth/verify-otp', AuthController.verifyOTP);
 
-// Get the total number of active users and a monthly comparison percentage
-router.get('/active-users/monthly-comparison', usersController.getActiveUsersComparison);
+  // Request OTP for Password Reset
+  router.post('/auth/forgot-password', AuthController.requestPasswordReset); 
 
-// Get the total number of pending users and a monthly comparison percentage
-router.get('/pending-users/monthly-comparison', usersController.getPendingUsersComparison);
+  // Reset Password
+  router.post('/auth/reset-password', AuthController.resetPassword);
 
-// get new signups and compare them monthly
-router.get('/newly-registered-users-total-comparison', usersController.getRegistrationStats);
+  // Get the total number of active users and a monthly comparison percentage
+  router.get('/active-users/monthly-comparison', usersController.getActiveUsersComparison);
 
-app.use("/api", router);
+  // Get the total number of pending users and a monthly comparison percentage
+  router.get('/pending-users/monthly-comparison', usersController.getPendingUsersComparison);
+
+  // Get new signups and compare them monthly
+  router.get('/newly-registered-users-total-comparison', usersController.getRegistrationStats);
+
+  app.use("/api", router);
 };

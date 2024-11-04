@@ -1,3 +1,4 @@
+// server.js
 const express = require("express");
 const cors = require("cors");
 const http = require("http");
@@ -11,8 +12,6 @@ app.use(cors());
 // Parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static('uploads'));
-
-
 
 const db = require("./app/models");
 
@@ -30,6 +29,31 @@ db.sequelize
 
 const server = http.createServer(app);
 
+// Initialize Socket.io
+const { Server } = require("socket.io");
+const io = new Server(server, {
+  cors: {
+    origin: "*", // Update this to your client's origin in production
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  },
+});
+
+// Handle Socket.io connections
+io.on("connection", (socket) => {
+  console.log("A user connected:", socket.id);
+
+  // Listen for user joining their room
+  socket.on("joinRoom", (user_id) => {
+    socket.join(`user_${user_id}`);
+    console.log(`User ${user_id} joined room user_${user_id}`);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("User disconnected:", socket.id);
+  });
+});
+// Make io accessible to controllers via app locals
+app.locals.io = io;
 // Simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to EmpowerHer Website." });
@@ -59,10 +83,13 @@ require("./app/routes/tickets.routes")(app);
 require("./app/routes/combined_api_data_for_pages.routes")(app);
 require("./app/routes/nomination_form.routes")(app);
 require("./app/routes/partnership_form.routes")(app);
-
-
-
-
+require("./app/routes/post.routes")(app);
+require("./app/routes/chat.routes")(app);
+require("./app/routes/notification.routes")(app);
+require("./app/routes/likes.routes")(app);
+require("./app/routes/comment.routes")(app);
+require("./app/routes/share.routes")(app);
+require("./app/routes/viewes.routes")(app);
 // Set port and listen for requests
 const PORT = process.env.PORT || 8080; // Default to 8080 if PORT is not set
 server.listen(PORT, () => {

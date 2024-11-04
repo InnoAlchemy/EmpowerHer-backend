@@ -70,11 +70,21 @@ exports.addUser = async (req, res) => {
       return res.status(400).json({ message: 'Email is already in use.' });
     }
 
+    // Check if profile picture file is uploaded
+    if (!req.file) {
+      return res.status(400).json({ message: "Profile picture is required." });
+    }
+
+    // Construct the profile_picture URL based on the environment
+    const profile_picture = process.env.NODE_ENV === 'production' 
+      ? `https://empowerher/${req.file.path.replace(/\\/g, '/')}`
+      : `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`;
+
     // Hash the password before saving it
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Generate OTP
-    const otp = crypto.randomInt(100000, 999999).toString(); // Generate 6-digit OTP
+    const otp = crypto.randomInt(100000, 999999).toString();
 
     // Create the new user
     const newUser = await User.create({
@@ -88,9 +98,10 @@ exports.addUser = async (req, res) => {
       otp,
       status,
       password: hashedPassword, // Store hashed password
+      profile_picture, // Save profile picture URL
     });
 
-    // Generate a JWT token (but user still needs to verify OTP)
+    // Generate a JWT token (user still needs to verify OTP)
     const token = jwt.sign({ id: newUser.id, role: newUser.role }, JWT_SECRET, {
       expiresIn: '24h', // Token expires in 24 hours
     });
@@ -103,7 +114,7 @@ exports.addUser = async (req, res) => {
       text: `Hello ${newUser.first_name},\n\nYour OTP for verifying your account is: ${otp}.\n\nBest regards,\nYour Team`,
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
+    transporter.sendMail(mailOptions, (error) => {
       if (error) {
         console.error('Error sending OTP email:', error);
         return res.status(500).json({ message: 'User created, but error sending OTP email.', error: error.message });
@@ -115,12 +126,12 @@ exports.addUser = async (req, res) => {
         token, // JWT token
       });
     });
-
   } catch (error) {
     console.error('Error adding user:', error);
     res.status(500).json({ message: 'Error adding user', error: error.message });
   }
 };
+
 
 // Get user by ID
 exports.getUserById = async (req, res) => {
@@ -198,7 +209,7 @@ exports.updateUser = async (req, res) => {
     if (newsletter_subscribed !== undefined) user.newsletter_subscribed = newsletter_subscribed;
     if (membership_role_id !== undefined) user.membership_role_id = membership_role_id;
     if (membership_updated_at !== undefined) user.membership_updated_at = membership_updated_at;
-    if(status!==undefined) user.status = status;
+    if (status !== undefined) user.status = status;
     if (password !== undefined) {
       // Hash the new password before saving
       user.password = await bcrypt.hash(password, 10);
@@ -208,6 +219,13 @@ exports.updateUser = async (req, res) => {
     if (is_accepted !== undefined) user.is_accepted = is_accepted;
     if (otp !== undefined) user.otp = otp;
 
+    // Update profile picture URL if a new one is uploaded
+    if (req.file) {
+      user.profile_picture = process.env.NODE_ENV === 'production'
+        ? `https://empowerher/${req.file.path.replace(/\\/g, '/')}`
+        : `http://localhost:8080/${req.file.path.replace(/\\/g, '/')}`;
+    }
+
     // Save the updated user
     await user.save();
     res.status(200).json(user);
@@ -216,6 +234,7 @@ exports.updateUser = async (req, res) => {
     res.status(500).json({ message: "Error updating user", error: error.message });
   }
 };
+
 
 
 // Accept User Account by Admin

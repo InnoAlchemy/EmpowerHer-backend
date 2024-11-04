@@ -1,6 +1,7 @@
 const db = require("../models");
 const UserTool = db.user_tools;
-
+const User = db.users;
+const DiscoverHer =db.discover_her_content;
 // Get all user tools
 exports.getAllUserTools = async (req, res) => {
   try {
@@ -52,5 +53,33 @@ exports.deleteUserTool = async (req, res) => {
     res.status(200).json({ message: "Tool removed from user successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting user-tool relation" });
+  }
+};
+
+
+// Get all tools linked to a specific user by user_id
+exports.getUserToolsByUserId = async (req, res) => {
+  const { user_id } = req.params;
+  try {
+    const userTools = await UserTool.findAll({
+      where: { user_id },
+      include: [
+        {
+          model: User,
+          
+        },
+        {
+          model: DiscoverHer,
+          
+        }
+      ],
+    });
+
+    if (!userTools.length) {
+      return res.status(404).json({ message: "No tools found for this user" });
+    }
+    res.status(200).json(userTools);
+  } catch (error) {
+    res.status(500).json({ message: "Error retrieving user tools by user ID" });
   }
 };
