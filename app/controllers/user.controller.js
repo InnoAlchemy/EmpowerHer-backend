@@ -6,6 +6,7 @@ const Role=db.role;
 const Permission = db.permission;  // Include the Permission model
 const RolePermission = db.role_permission;  // Include the RolePermission model
 const Membership = db.memberships;
+const Chats = db.chats;
 const Op = db.Sequelize.Op;
 const calculateComparisonPercentage = require('../Helper-Functions/helper_functions');
 const jwt = require('jsonwebtoken');
@@ -175,7 +176,10 @@ exports.updateUser = async (req, res) => {
       is_verified,
       is_accepted,
       status,
-      otp
+      otp,
+      phone_number,
+      job_title,
+      country
     } = req.body;
 
     // Retrieve the existing user
@@ -218,6 +222,10 @@ exports.updateUser = async (req, res) => {
     if (is_verified !== undefined) user.is_verified = is_verified;
     if (is_accepted !== undefined) user.is_accepted = is_accepted;
     if (otp !== undefined) user.otp = otp;
+    if (phone_number!== undefined) user.phone_number = phone_number;
+    if (job_title!== undefined) user.job_title = job_title;
+    if (country!== undefined) user.country = country;
+
 
     // Update profile picture URL if a new one is uploaded
     if (req.file) {
@@ -497,3 +505,44 @@ exports.getUserByEmail = async (req, res) => {
   }
 };
 
+// Search users by first name or last name
+exports.searchUsersByName = async (req, res) => {
+  const { name } = req.query; 
+
+  if (!name) {
+    return res.status(400).send({
+      message: "Search name is required!",
+    });
+  }
+
+  try {
+    const users = await User.findAll({
+      where: {
+        [Op.or]: [
+          { first_name: { [Op.like]: `${name}%` } },
+          { last_name: { [Op.like]: `${name}%` } },
+          Sequelize.where(
+            Sequelize.fn('concat', Sequelize.col('first_name'), ' ', Sequelize.col('last_name')),
+            {
+              [Op.like]: `%${name}%` 
+            }
+          )
+        ]
+      },
+      
+    });
+
+    if (users.length === 0) {
+      return res.status(404).send({
+        message: `No users found with name starting with: ${name}`,
+      });
+    }
+
+    res.send(users); 
+  } catch (error) {
+    console.error("Error searching users:", error);
+    res.status(500).send({
+      message: `Error occurred while searching for users with name starting with: ${name}`,
+    });
+  }
+};

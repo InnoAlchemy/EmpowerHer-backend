@@ -10,6 +10,9 @@ module.exports = (app) => {
   // Get all users
   router.get('/users', authenticateJWT, hasPermission('read_user'), usersController.getAllUsers);
 
+    // seacrh for users by username (first name + last name)
+    router.get('/users/search', usersController.searchUsersByName);
+
   // Add a new user with profile picture upload
   router.post('/users', upload.single('profile_picture'), usersController.addUser);
 
@@ -54,6 +57,8 @@ module.exports = (app) => {
 
   // Get new signups and compare them monthly
   router.get('/newly-registered-users-total-comparison', usersController.getRegistrationStats);
+
+
 
   app.use("/api", router);
 };

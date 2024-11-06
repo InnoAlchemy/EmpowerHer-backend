@@ -55,6 +55,7 @@ exports.getUserNotifications = async (req, res) => {
         model: db.users, // Ensure this matches your User model name
         attributes: [
           'id',
+          'profile_picture',
           // Use Sequelize.fn to concatenate first_name and last_name
           [Sequelize.fn('CONCAT', Sequelize.col('first_name'), ' ', Sequelize.col('last_name')), 'username']
         ],

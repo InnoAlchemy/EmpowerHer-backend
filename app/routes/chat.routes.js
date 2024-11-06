@@ -15,14 +15,24 @@ module.exports = (app) => {
     "/chat/connect/respond",
     chatController.respondToConnectionRequest
   );
+  
 
-   // Route to get all messages between two users
-   router.get(
+  // Route to get all messages between two users
+  router.get(
     "/chat/messages/:sender_id/:receiver_id",
-    chatController.getMessages
+    chatController.sendMessage
   );
+
+   // Route to get all messages for user from all senders
+   router.get(
+    "/chat/all-messages/:user_id", chatController.getAllMessagesForUser
+  );
+
+ // Route to check connection status between two users
+router.post("/chat/status", chatController.getConnectionStatus);
+
   // Route to search users and check connection status
- // router.get("/chat/search", chatController.searchUserAndConnectionStatus);
+  // router.get("/chat/search", chatController.searchUserAndConnectionStatus);
 
   app.use("/api", router);
 };

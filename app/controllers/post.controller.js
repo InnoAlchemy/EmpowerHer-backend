@@ -53,34 +53,20 @@ exports.addPost = async (req, res) => {
       status,
     });
 
-    // Fetch all users except the post creator
-    const usersToNotify = await User.findAll({
-      where: {
-        id: {
-          [Sequelize.Op.ne]: user_id, // Not equal to post creator's ID
-        },
-      },
-    });
-
-    // Prepare notifications data
-    const notificationsData = usersToNotify.map(user => ({
+    // Create a notification for the post creator
+    const notification = await Notification.create({
       user_id: user.id,
       type: "posts",
-      message: `${user.username} has created a new post titled "${title}".`,
+      message: `You created a new post titled "${title}".`,
       date_time: new Date(),
-    }));
-
-    // Bulk create notifications
-    const notifications = await Notification.bulkCreate(notificationsData);
-
-    // Emit real-time notifications to each user
-    const io = req.app.locals.io;
-    notifications.forEach(notification => {
-      io.to(`user_${notification.user_id}`).emit("newNotification", notification);
     });
 
-    // Emit real-time event for new post
-    io.emit("newPost", newPost); // Broadcast to all connected clients
+    // Emit real-time notification to the post creator
+    const io = req.app.locals.io;
+    io.to(`user_${notification.user_id}`).emit("newNotification", notification);
+
+    // Emit real-time event for new post (optional, if you need this)
+    // io.emit("newPost", newPost); // Broadcast to all connected clients
 
     res.status(201).json(newPost);
   } catch (error) {
@@ -88,7 +74,6 @@ exports.addPost = async (req, res) => {
     res.status(500).json({ message: "Error adding post", error: error.message });
   }
 };
-
 // Get a post by ID
 exports.getPostById = async (req, res) => {
   const { id } = req.params;
@@ -139,34 +124,20 @@ exports.updatePost = async (req, res) => {
     // Save the updated post
     await post.save();
 
-    // Fetch all users except the post updater
-    const usersToNotify = await User.findAll({
-      where: {
-        id: {
-          [Sequelize.Op.ne]: post.user_id, // Not equal to post owner's ID
-        },
-      },
-    });
-
-    // Prepare notifications data
-    const notificationsData = usersToNotify.map(user => ({
-      user_id: user.id,
+    // Create a notification for the post creator
+    const notification = await Notification.create({
+      user_id: post.user_id,
       type: "posts",
-      message: `Post titled "${post.title}" has been updated.`,
+      message: `You updated your post titled "${post.title}".`,
       date_time: new Date(),
-    }));
-
-    // Bulk create notifications
-    const notifications = await Notification.bulkCreate(notificationsData);
-
-    // Emit real-time notifications to each user
-    const io = req.app.locals.io;
-    notifications.forEach(notification => {
-      io.to(`user_${notification.user_id}`).emit("newNotification", notification);
     });
 
-    // Emit real-time event for updated post
-    io.emit("updatePost", post); // Broadcast to all connected clients
+    // Emit real-time notification to the post creator
+    const io = req.app.locals.io;
+    io.to(`user_${notification.user_id}`).emit("newNotification", notification);
+
+    // Emit real-time event for updated post (optional, if you need this)
+    // io.emit("updatePost", post); // Broadcast to all connected clients
 
     res.status(200).json(post);
   } catch (error) {

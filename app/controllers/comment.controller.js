@@ -52,13 +52,17 @@ exports.addComment = async (req, res) => {
       content,
     });
 
-    // Create a notification for the post owner
+    // Fetch post owner information
     const postOwner = await User.findByPk(post.user_id);
-    if (postOwner) {
-      const notification = await Notification.create({
+
+    // Create a notification for the post owner if the commenter is not the post owner
+    let notification = null;
+    if (postOwner && postOwner.id !== user_id) { // Prevent notifying self
+      notification = await Notification.create({
         user_id: postOwner.id, // The user to notify
-        type: "comments",
-        message: `${commenter.first_name} commented on your post "${post.title}".`,
+        post_id: post.id, // Reference to the post
+        type: "comment",
+        message: `${commenter.first_name} ${commenter.last_name} commented on your post "${post.title}".`,
       });
 
       // Emit real-time event for new notification to the post owner
@@ -66,11 +70,11 @@ exports.addComment = async (req, res) => {
       io.to(`user_${postOwner.id}`).emit("newNotification", notification);
     }
 
-    // Emit real-time event for new comment
+    // Emit real-time event for new comment to relevant users
     const io = req.app.locals.io;
-    io.emit("newComment", newComment); // Broadcast to all connected clients
+    io.to(`post_${post_id}`).emit("newComment", newComment); // Emit to the post's room
 
-    res.status(201).json(newComment);
+    res.status(201).json({ newComment, notification });
   } catch (error) {
     console.error("Error adding comment:", error);
     res.status(500).json({ message: "Error adding comment", error: error.message });
@@ -140,9 +144,11 @@ exports.getCommentsByUserId = async (req, res) => {
 };
 
 // Update a comment by ID
+
 exports.updateComment = async (req, res) => {
   const { id } = req.params;
   const { content } = req.body;
+  const { user_id } = req.body; // Assuming the user performing the update is sent in the request
 
   // Check if content is provided
   if (!content) {
@@ -150,9 +156,14 @@ exports.updateComment = async (req, res) => {
   }
 
   try {
-    const comment = await Comment.findOne({ where: { id } });
+    const comment = await Comment.findOne({ where: { id }, include: [{ model: Post }] });
     if (!comment) {
       return res.status(404).json({ message: "Comment not found." });
+    }
+
+    // Optionally, verify that the user has permission to update the comment
+    if (comment.user_id !== user_id) {
+      return res.status(403).json({ message: "You do not have permission to update this comment." });
     }
 
     // Update the content
@@ -161,17 +172,35 @@ exports.updateComment = async (req, res) => {
     // Save the updated comment
     await comment.save();
 
-    // Emit real-time event for updated comment
-    const io = req.app.locals.io;
-    io.emit("updateComment", comment); // Broadcast to all connected clients
+    // Fetch commenter and post owner information
+    const commenter = await User.findByPk(comment.user_id);
+    const postOwner = await User.findByPk(comment.Post.user_id);
 
-    res.status(200).json(comment);
+    // Create a notification for the post owner if the commenter is not the post owner
+    let notification = null;
+    if (postOwner && postOwner.id !== comment.user_id) { // Prevent notifying self
+      notification = await Notification.create({
+        user_id: postOwner.id, // The user to notify
+        post_id: comment.post_id, // Reference to the post
+        type: "comment_update",
+        message: `${commenter.first_name} ${commenter.last_name} updated a comment on your post "${comment.Post.title}".`,
+      });
+
+      // Emit real-time event for updated notification to the post owner
+      const io = req.app.locals.io;
+      io.to(`user_${postOwner.id}`).emit("newNotification", notification);
+    }
+
+    // Emit real-time event for updated comment to relevant users
+    const io = req.app.locals.io;
+    io.to(`post_${comment.post_id}`).emit("updateComment", comment); // Emit to the post's room
+
+    res.status(200).json({ comment, notification });
   } catch (error) {
     console.error("Error updating comment:", error);
     res.status(500).json({ message: "Error updating comment", error: error.message });
   }
 };
-
 // Delete a comment by ID
 exports.deleteComment = async (req, res) => {
   const { id } = req.params;

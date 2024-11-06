@@ -47,7 +47,13 @@ db.comments = require("./comment.model")(sequelize, Sequelize);
 db.likes = require("./like.model")(sequelize, Sequelize);
 db.shares = require("./share.model")(sequelize, Sequelize);
 db.viewed = require("./viewed.model")(sequelize, Sequelize);
+db.organization = require("./organization.model")(sequelize, Sequelize);
 // Associations
+
+//User - Organization association
+
+db.users.hasMany(db.organization, { foreignKey: "user_id", onDelete: "CASCADE" });
+db.organization.belongsTo(db.users, { foreignKey: "user_id" });
 
 // User - UserTool association
 db.users.hasMany(db.user_tools, { foreignKey: "user_id", onDelete: "CASCADE" });

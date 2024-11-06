@@ -39,21 +39,46 @@ const io = new Server(server, {
 });
 
 // Handle Socket.io connections
-io.on("connection", (socket) => {
-  console.log("A user connected:", socket.id);
+io.on('connection', (socket) => {
+  console.log('A user connected:', socket.id);
 
-  // Listen for user joining their room
-  socket.on("joinRoom", (user_id) => {
-    socket.join(`user_${user_id}`);
-    console.log(`User ${user_id} joined room user_${user_id}`);
+  // Listen for the user to join their specific user room
+  socket.on('joinUserRoom', (userId) => {
+    const userRoom = `user_${userId}`;
+    socket.join(userRoom);
+    console.log(`User ${userId} joined room: ${userRoom}`);
   });
 
-  socket.on("disconnect", () => {
-    console.log("User disconnected:", socket.id);
+  // Listen for the user to leave their user room
+  socket.on('leaveUserRoom', (userId) => {
+    const userRoom = `user_${userId}`;
+    socket.leave(userRoom);
+    console.log(`User ${userId} left room: ${userRoom}`);
+  });
+
+  // Listen for the user to join post rooms they are viewing
+  socket.on('joinPostRoom', (postId) => {
+    const postRoom = `post_${postId}`;
+    socket.join(postRoom);
+    console.log(`Joined post room: ${postRoom}`);
+  });
+
+  // Listen for the user to leave post rooms they are no longer viewing
+  socket.on('leavePostRoom', (postId) => {
+    const postRoom = `post_${postId}`;
+    socket.leave(postRoom);
+    console.log(`Left post room: ${postRoom}`);
+  });
+
+  // Handle user disconnection
+  socket.on('disconnect', () => {
+    console.log('A user disconnected:', socket.id);
   });
 });
-// Make io accessible to controllers via app locals
+
+// Make io accessible to your controllers
 app.locals.io = io;
+
 // Simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to EmpowerHer Website." });
@@ -90,6 +115,7 @@ require("./app/routes/likes.routes")(app);
 require("./app/routes/comment.routes")(app);
 require("./app/routes/share.routes")(app);
 require("./app/routes/viewes.routes")(app);
+require("./app/routes/organization.routes")(app);
 // Set port and listen for requests
 const PORT = process.env.PORT || 8080; // Default to 8080 if PORT is not set
 server.listen(PORT, () => {
