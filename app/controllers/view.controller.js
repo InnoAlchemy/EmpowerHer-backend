@@ -207,3 +207,31 @@ exports.deleteView = async (req, res) => {
     res.status(500).json({ message: "Error deleting view record", error: error.message });
   }
 };
+
+// Count all views for a specific post
+exports.getViewsCountByPostId = async (req, res) => {
+  const { post_id } = req.params;
+
+  // Validate the post_id
+  if (!post_id) {
+    return res.status(400).json({ message: "Post ID is required." });
+  }
+
+  try {
+    // Check if the post exists
+    const post = await Post.findByPk(post_id);
+    if (!post) {
+      return res.status(404).json({ message: "Post not found." });
+    }
+
+    // Count the number of views for the post
+    const viewCount = await Viewed.count({
+      where: { post_id },
+    });
+
+    res.status(200).json({ post_id, viewCount });
+  } catch (error) {
+    console.error("Error counting views:", error);
+    res.status(500).json({ message: "Error counting views", error: error.message });
+  }
+};

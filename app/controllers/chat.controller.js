@@ -301,12 +301,12 @@ exports.getAllMessagesForUser = async (req, res) => {
         {
           model: User,
           as: "sender",
-          attributes: ["id", "first_name", "last_name", "profile_picture"],
+          attributes: ["id", "first_name", "last_name", "profile_picture","email"],
         },
         {
           model: User,
           as: "receiver",
-          attributes: ["id", "first_name", "last_name", "profile_picture"],
+          attributes: ["id", "first_name", "last_name", "profile_picture","email"],
         },
       ],
     });

@@ -177,3 +177,36 @@ exports.removeLike = async (req, res) => {
     res.status(500).json({ message: "Error removing like", error: error.message });
   }
 };
+
+// Get likes by Post ID along with the count
+exports.getLikesCountByPostId = async (req, res) => {
+  const { post_id } = req.params;
+  try {
+    const post = await Post.findByPk(post_id);
+    if (!post) {
+      return res.status(404).json({ message: "Post not found." });
+    }
+
+    const likes = await Like.findAll({
+      where: { post_id },
+      include: [
+        { 
+          model: User, 
+          attributes: ['id', [Sequelize.literal("CONCAT(first_name, ' ', last_name)"), 'username']],
+        },
+        { model: Post, attributes: ['id', 'title'] },
+      ],
+      order: [['createdAt', 'DESC']],
+    });
+
+    const likeCount = await Like.count({ where: { post_id } });
+
+    if (likes.length === 0) {
+      return res.status(404).json({ message: "No likes found for this post.", likeCount });
+    }
+
+    res.status(200).json({ likeCount, likes });
+  } catch (error) {
+    res.status(500).json({ message: "Error retrieving likes for the post.", error: error.message });
+  }
+};

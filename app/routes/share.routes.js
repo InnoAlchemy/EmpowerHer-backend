@@ -20,6 +20,9 @@ router.get('/shares/by-post/:post_id', shareController.getSharesByPostId);
 // Get shares by User ID
 router.get('/shares/by-user/:user_id', shareController.getSharesByUserId);
 
+// Get shares Count By Post ID
+router.get('/shares/share-count/:post_id', shareController.getSharesCountByPostId);
+
 // Delete a share by ID
 router.delete('/shares/:id', shareController.deleteShare);
 

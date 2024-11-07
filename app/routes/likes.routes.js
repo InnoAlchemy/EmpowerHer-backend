@@ -18,6 +18,9 @@ module.exports = (app) => {
   
     // Get likes by user ID
     router.get('/likes/by-user/:user_id', likeController.getLikesByUserId);
+
+    // Get Likes Count By Post ID
+    router.get('/likes/likes-count/:post_id', likeController.getLikesCountByPostId);
   
     app.use("/api", router);
   };

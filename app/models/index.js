@@ -52,7 +52,7 @@ db.organization = require("./organization.model")(sequelize, Sequelize);
 
 //User - Organization association
 
-db.users.hasMany(db.organization, { foreignKey: "user_id", onDelete: "CASCADE" });
+db.users.hasOne(db.organization, { foreignKey: "user_id", onDelete: "CASCADE" });
 db.organization.belongsTo(db.users, { foreignKey: "user_id" });
 
 // User - UserTool association

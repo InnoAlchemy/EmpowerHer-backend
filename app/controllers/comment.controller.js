@@ -222,3 +222,31 @@ exports.deleteComment = async (req, res) => {
     res.status(500).json({ message: "Error deleting comment", error: error.message });
   }
 };
+
+// **New Method:** Count all comments for a specific post
+exports.countCommentsForPost = async (req, res) => {
+  const { post_id } = req.params;
+
+  // Validate the post_id
+  if (!post_id) {
+    return res.status(400).json({ message: "Post ID is required." });
+  }
+
+  try {
+    // Check if the post exists
+    const post = await Post.findByPk(post_id);
+    if (!post) {
+      return res.status(404).json({ message: "Post not found." });
+    }
+
+    // Count the number of comments for the post
+    const commentCount = await Comment.count({
+      where: { post_id },
+    });
+
+    res.status(200).json({ post_id, commentCount });
+  } catch (error) {
+    console.error("Error counting comments:", error);
+    res.status(500).json({ message: "Error counting comments", error: error.message });
+  }
+};

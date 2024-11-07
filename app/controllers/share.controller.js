@@ -226,3 +226,43 @@ exports.deleteShare = async (req, res) => {
     res.status(500).json({ message: "Error deleting share record", error: error.message });
   }
 };
+
+// Get shares by Post ID along with the count
+exports.getSharesCountByPostId = async (req, res) => {
+  const { post_id } = req.params;
+  try {
+    const post = await Post.findByPk(post_id);
+    if (!post) {
+      return res.status(404).json({ message: "Post not found." });
+    }
+
+    const shares = await Share.findAll({
+      where: { post_id },
+      include: [
+        {
+          model: User,
+          attributes: [
+            'id',
+            [Sequelize.literal("CONCAT(first_name, ' ', last_name)"), 'username'],
+          ],
+        },
+        {
+          model: Post,
+          attributes: ['id', 'title'],
+        },
+      ],
+      order: [['sharedAt', 'DESC']],
+    });
+
+    const shareCount = await Share.count({ where: { post_id } });
+
+    if (shares.length === 0) {
+      return res.status(404).json({ message: "No shares found for this post.", shareCount });
+    }
+
+    res.status(200).json({ shareCount, shares });
+  } catch (error) {
+    console.error("Error retrieving shares for the post:", error);
+    res.status(500).json({ message: "Error retrieving shares for the post.", error: error.message });
+  }
+};

@@ -139,7 +139,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI5MjM1NzgyLCJleHAiOjE3MjkzMjIxODJ9.myvI5PGyy_lnsk83vQo_wuqIamtLKeGjffU6OcuIELc",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI5NzU1ODUwLCJleHAiOjE3Mjk4NDIyNTB9.gltRyX5L_eKK-b1m59A6thSeMpg2EAQZBuizHxF5Dlk",
 									"type": "string"
 								}
 							]
@@ -487,6 +487,28 @@
 					"response": []
 				},
 				{
+					"name": "Get Data For Programs&Intiatives",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/combined_api_data_for_pages/programs-and-initiatives",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"combined_api_data_for_pages",
+								"programs-and-initiatives"
+							]
+						},
+						"description": "Retrieve details of a specific team member by ID"
+					},
+					"response": []
+				},
+				{
 					"name": "Get Data For Get Involved Page Copy",
 					"request": {
 						"method": "GET",
@@ -502,6 +524,28 @@
 								"api",
 								"combined_api_data_for_pages",
 								"get-involved"
+							]
+						},
+						"description": "Retrieve details of a specific team member by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Data For Discover Her Page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/combined_api_data_for_pages/discover-her",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"combined_api_data_for_pages",
+								"discover-her"
 							]
 						},
 						"description": "Retrieve details of a specific team member by ID"
@@ -1108,13 +1152,13 @@
 							"formdata": [
 								{
 									"key": "category",
-									"value": "article",
+									"value": "video",
 									"type": "text"
 								},
 								{
 									"key": "header_file",
 									"type": "file",
-									"src": "/C:/Users/USER/Downloads/During.png"
+									"src": "/C:/Users/USER/Downloads/855289-hd_1920_1080_25fps.mp4"
 								},
 								{
 									"key": "title",
@@ -1133,7 +1177,7 @@
 								},
 								{
 									"key": "date",
-									"value": "2024-10-09",
+									"value": "2024-12-20",
 									"type": "text"
 								}
 							]
@@ -1429,6 +1473,1488 @@
 			]
 		},
 		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Get All posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts"
+							]
+						},
+						"description": "Retrieve a list of all pages"
+					},
+					"response": []
+				},
+				{
+					"name": "create posts",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "media_url",
+									"type": "file",
+									"src": "/C:/Users/USER/Downloads/posts-image.png"
+								},
+								{
+									"key": "title",
+									"value": "Innovation",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Professional business leader engaged in a virtual meeting, showcasing dedication to growth and collaboration.",
+									"type": "text"
+								},
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "investors",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts"
+							]
+						},
+						"description": "Add a new page"
+					},
+					"response": []
+				},
+				{
+					"name": "get posts by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/posts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "get posts by user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/posts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "update posts",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "content",
+									"value": "Professional business leader engaged in a virtual meeting, showcasing dedication to growth and collaboration.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/posts/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts",
+								"2"
+							]
+						},
+						"description": "Update the details of an existing page"
+					},
+					"response": []
+				},
+				{
+					"name": "delete posts by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/posts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts",
+								"1"
+							]
+						},
+						"description": "Delete a specific page by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "organization",
+			"item": [
+				{
+					"name": "Get All organization",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/organizations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"organizations"
+							]
+						},
+						"description": "Retrieve a list of all pages"
+					},
+					"response": []
+				},
+				{
+					"name": "create organization",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "logo",
+									"type": "file",
+									"src": "/C:/Users/USER/Pictures/w2.jpg"
+								},
+								{
+									"key": "products_services",
+									"type": "file",
+									"src": "/C:/Users/USER/Pictures/spaceball.jpg"
+								},
+								{
+									"key": "organization_name",
+									"value": "ino alchem",
+									"type": "text"
+								},
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "organization_type",
+									"value": "Startup",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ino@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "website",
+									"value": "ino@al.com",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "71491815",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "lets try this",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "lebanon",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "beirut",
+									"type": "text"
+								},
+								{
+									"key": "sector",
+									"value": "Tech",
+									"type": "text"
+								},
+								{
+									"key": "linkedin",
+									"value": "in@linkedin",
+									"type": "text"
+								},
+								{
+									"key": "instagram",
+									"value": "ino@instagram",
+									"type": "text"
+								},
+								{
+									"key": "facebook",
+									"value": "ino@fb",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/organizations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"organizations"
+							]
+						},
+						"description": "Add a new page"
+					},
+					"response": []
+				},
+				{
+					"name": "get organization by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/organizations/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"organizations",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "get organization by user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/organizations/by-user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"organizations",
+								"by-user",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "update organization",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "content",
+									"value": "Professional business leader engaged in a virtual meeting, showcasing dedication to growth and collaboration.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/organizations/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"organizations",
+								"2"
+							]
+						},
+						"description": "Update the details of an existing page"
+					},
+					"response": []
+				},
+				{
+					"name": "delete organization by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/organizations/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"organizations",
+								"1"
+							]
+						},
+						"description": "Delete a specific page by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chats",
+			"item": [
+				{
+					"name": "create chat (send a message)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"content\": \" Im good ,Hello, how are you?\",\r\n  \"sender_id\": 2,\r\n  \"receiver_id\": 1\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/chat/send",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"chat",
+								"send"
+							]
+						},
+						"description": "Add a new page"
+					},
+					"response": []
+				},
+				{
+					"name": "connect-request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"sender_id\": 3,\r\n  \"receiver_id\": 1\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/chat/connect/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"chat",
+								"connect",
+								"request"
+							]
+						},
+						"description": "Add a new page"
+					},
+					"response": []
+				},
+				{
+					"name": "connect-respond",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"sender_id\": 1,\r\n  \"receiver_id\": 2,\r\n  \"action\": \"accept\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/chat/connect/respond",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"chat",
+								"connect",
+								"respond"
+							]
+						},
+						"description": "Add a new page"
+					},
+					"response": []
+				},
+				{
+					"name": "get All chats between 2 users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/chat/messages/1/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"chat",
+								"messages",
+								"1",
+								"2"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "get all messages for by user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/chat/all-messages/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"chat",
+								"all-messages",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "check for user status between 2 users",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"sender_id\": 3,\r\n  \"receiver_id\": 2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/chat/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"chat",
+								"status"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "delete chats by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/posts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts",
+								"1"
+							]
+						},
+						"description": "Delete a specific page by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notification",
+			"item": [
+				{
+					"name": "create notifcation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": 1,\r\n  \"type\": \"requests\",\r\n  \"message\": \"You have a new connection request.\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/notifications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"notifications"
+							]
+						},
+						"description": "Add a new page"
+					},
+					"response": []
+				},
+				{
+					"name": "get notifcation by user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/notifications/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"notifications",
+								"user",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "get notification by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/notifications/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"notifications",
+								"2"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "update notifcation by  id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"is_read\": true\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/notifications/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"notifications",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete notification by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/notifications/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"notifications",
+								"2"
+							]
+						},
+						"description": "Delete a specific page by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Likes",
+			"item": [
+				{
+					"name": "create a like",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": 2,\r\n  \"post_id\": 1\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/likes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"likes"
+							]
+						},
+						"description": "Add a new page"
+					},
+					"response": []
+				},
+				{
+					"name": "get like by user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/likes/by-user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"likes",
+								"by-user",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "get like count by post id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/likes/likes-count/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"likes",
+								"likes-count",
+								"2"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Likes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/likes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"likes"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "get like by post id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/likes/by-post/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"likes",
+								"by-post",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "delete like by post id and user id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": 2,\r\n  \"post_id\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/likes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"likes"
+							]
+						},
+						"description": "Delete a specific page by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "create a comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": 2,\r\n  \"post_id\": 1,\r\n  \"content\":\"my first comment\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments"
+							]
+						},
+						"description": "Add a new page"
+					},
+					"response": []
+				},
+				{
+					"name": "update comment by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/comments/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"1"
+							]
+						},
+						"description": "Delete a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "get comment by user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/comments/by-user/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"by-user",
+								"2"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "get comment count for post id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/comments/comment-count/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"comment-count",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "get comment by  id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/comments/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "get comment by post id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/comments/by-post/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"by-post",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "delete comment by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": 2,\r\n  \"post_id\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/comments/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"1"
+							]
+						},
+						"description": "Delete a specific page by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Views",
+			"item": [
+				{
+					"name": "create a view",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": 2,\r\n  \"post_id\": 1\r\n  \r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/views",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"views"
+							]
+						},
+						"description": "Add a new page"
+					},
+					"response": []
+				},
+				{
+					"name": "get view by user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/views/by-user/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"views",
+								"by-user",
+								"2"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get view count by post id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/views/views-count/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"views",
+								"views-count",
+								"2"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "get view by  id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/views/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"views",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All view",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/views",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"views"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "get view by post id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/views/by-post/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"views",
+								"by-post",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "delete view by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": 2,\r\n  \"post_id\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/views/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"views",
+								"1"
+							]
+						},
+						"description": "Delete a specific page by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Shares",
+			"item": [
+				{
+					"name": "create a share",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": 2,\r\n  \"post_id\": 1\r\n  \r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/shares",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"shares"
+							]
+						},
+						"description": "Add a new page"
+					},
+					"response": []
+				},
+				{
+					"name": "get share by user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/shares/by-user/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"shares",
+								"by-user",
+								"2"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "get share count by post id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/shares/share-count/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"shares",
+								"share-count",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "get share by  id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/shares/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"shares",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All share",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/shares",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"shares"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "get share by post id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/shares/by-post/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"shares",
+								"by-post",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific page by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "delete share by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": 2,\r\n  \"post_id\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/shares/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"shares",
+								"1"
+							]
+						},
+						"description": "Delete a specific page by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Page Sections",
 			"item": [
 				{
@@ -1650,7 +3176,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI4NTYzNDkyLCJleHAiOjE3Mjg2NDk4OTJ9.x7eig24QewWg0TePFhN1te5OlP3xIudPwxCZp8ulGes",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI5NjAyNTQ3LCJleHAiOjE3Mjk2ODg5NDd9.e8bfMCJ70HuO-T0wuJhU2HbX_OGHlouTaXNIaME8t3I",
 									"type": "string"
 								}
 							]
@@ -1764,7 +3290,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI4NTYzNDkyLCJleHAiOjE3Mjg2NDk4OTJ9.x7eig24QewWg0TePFhN1te5OlP3xIudPwxCZp8ulGes",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI5NjAyNTQ3LCJleHAiOjE3Mjk2ODg5NDd9.e8bfMCJ70HuO-T0wuJhU2HbX_OGHlouTaXNIaME8t3I",
 									"type": "string"
 								}
 							]
@@ -1788,11 +3314,11 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/USER/Downloads/upcoming.png"
+									"src": "/C:/Users/USER/Downloads/leadingchange.png"
 								},
 								{
 									"key": "title",
-									"value": "MEET & GREET",
+									"value": "Leading Change: Empowering men as\nallies for women in leadership",
 									"type": "text"
 								},
 								{
@@ -1802,7 +3328,7 @@
 								},
 								{
 									"key": "date",
-									"value": "2024-10-25",
+									"value": "2024-9-26",
 									"type": "text"
 								},
 								{
@@ -1817,7 +3343,7 @@
 								},
 								{
 									"key": "location",
-									"value": "27 Main St, City",
+									"value": "21 Main St, City",
 									"type": "text"
 								},
 								{
@@ -1827,18 +3353,24 @@
 								},
 								{
 									"key": "category",
-									"value": "workshop",
+									"value": "event",
 									"type": "text"
 								},
 								{
 									"key": "price",
-									"value": "37.77",
+									"value": "99.99",
 									"type": "text"
 								},
 								{
 									"key": "ticket_amount",
-									"value": "10",
+									"value": "5",
 									"type": "text"
+								},
+								{
+									"key": "instructor",
+									"value": "Abed lo",
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
@@ -2806,18 +4338,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
+								"value": "multipart/form-data",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"first_name\": \"fadel\",\n  \"last_name\": \"hmd\",\n  \"email\": \"fadel.ahammoud@gmail.com\",\n  //\"newsletter_subscribed\": false,\n  //\"membership_role_id\": \"basic\",\n  //\"membership_updated_at\": \"2024-09-17T10:00:00Z\",\n  \"password\": \"Raul777\",\n  \"role_id\":1\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "profile_picture",
+									"type": "file",
+									"src": []
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:8080/api/users",
@@ -2858,27 +4391,12 @@
 					"response": []
 				},
 				{
-					"name": "update user",
+					"name": "get user by email",
 					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"first_name\": \"Jane\",\n  \"last_name\": \"Doe\",\n  \"email\": \"jane.doe@example.com\",\n  \"newsletter_subscribed\": false,\n  \"membership_role_id\": \"basic\",\n  \"membership_updated_at\": \"2024-09-15T10:00:00Z\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
+						"method": "GET",
+						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/users/5",
+							"raw": "http://localhost:8080/api/users/email/fadel.ahammoud@gmail.com",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2887,7 +4405,84 @@
 							"path": [
 								"api",
 								"users",
-								"5"
+								"email",
+								"fadel.ahammoud@gmail.com"
+							]
+						},
+						"description": "Retrieve details of a specific user by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "search for user by username",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/search?name=fadel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "fadel"
+								}
+							]
+						},
+						"description": "Retrieve details of a specific user by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzMwMjkwOTU2LCJleHAiOjE3MzAzNzczNTZ9.n_Y0hkoYpw5dfVWk8ZHGA0B7V9qZi3Id-EizKFyc9oM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "profile_picture",
+									"type": "file",
+									"src": "/C:/Users/USER/Pictures/hkw.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"1"
 							]
 						},
 						"description": "Update the details of an existing user"
@@ -3235,7 +4830,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n   \"user_id\": 1,\n  \"discover_her_id\": 1\n}",
+							"raw": "{\n   \"user_id\": 1,\n  \"discover_her_id\": 6\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3273,6 +4868,29 @@
 							"path": [
 								"api",
 								"user_tools",
+								"1"
+							]
+						},
+						"description": "Retrieve details of a specific tool by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Tool By User  ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/user-tools/byuser/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user-tools",
+								"byuser",
 								"1"
 							]
 						},

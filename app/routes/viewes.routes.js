@@ -22,6 +22,9 @@ router.get('/views/by-user/:user_id', viewedController.getViewsByUserId);
 // Delete a view record by ID
 router.delete('/views/:id',viewedController.deleteView);
 
+ // Get Likes Count By Post ID
+ router.get('/views/views-count/:post_id', viewedController.getViewsCountByPostId);
+
 
   app.use("/api", router);
 };

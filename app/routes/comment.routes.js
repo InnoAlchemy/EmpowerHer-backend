@@ -18,6 +18,9 @@ module.exports = (app) => {
   
     // Get comments by User ID
     router.get('/comments/by-user/:user_id', commentController.getCommentsByUserId);
+
+    // Get comments Count By Post ID
+    router.get('/comments/comment-count/:post_id', commentController.countCommentsForPost);
   
     // Update a comment by ID
     router.put('/comments/:id', commentController.updateComment);
